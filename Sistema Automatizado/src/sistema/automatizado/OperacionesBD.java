@@ -51,7 +51,7 @@ public class OperacionesBD {
     
     public static ArrayList<Asignatura> getAsignaturas(String usuario, String clave){
         
-        ArrayList<Asignatura> asiganturas = new  ArrayList<Asignatura>();
+        ArrayList<Asignatura> asignaturas = new  ArrayList<Asignatura>();
         
         try {
             ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
@@ -67,11 +67,11 @@ public class OperacionesBD {
   
                 Asignatura objAsignatura = new Asignatura(rs.getInt("nivel"), rs.getInt("cod_asignatura"), rs.getInt("uc"), rs.getInt("horas_sem"), rs.getString(2), rs.getString(9), rs.getString(11));
                 
-                asiganturas.add(objAsignatura);
+                asignaturas.add(objAsignatura);
                 
             }
            
-            return asiganturas;
+            return asignaturas;
             
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());

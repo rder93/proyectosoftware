@@ -27,7 +27,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
     String [] secciones = new String [20]; 
     int posicion = 0;
     int indiceFilaEditar = 0; //Ubicación de la fila que se desea editar
-    ArrayList<Asignatura> asiganturas = new  ArrayList<Asignatura>();
+    ArrayList<Asignatura> asignaturas = new  ArrayList<Asignatura>();
     
     public Ventana padre;
     /**
@@ -278,8 +278,6 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
         
          //Aqui se almacena toda la informacion de las asignaturas
         
-        ArrayList<Asignatura> asiganturas = new  ArrayList<Asignatura>();
-        
         try {
             ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
             Connection cn = conexion.conectar();
@@ -295,7 +293,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
                 
                 Asignatura objAsignatura = new Asignatura(rs.getInt("nivel"), rs.getInt("cod_asignatura"), rs.getInt("uc"), rs.getInt("horas_sem"), rs.getString(2), rs.getString(9), rs.getString(11));
                 
-                asiganturas.add(objAsignatura);
+                asignaturas.add(objAsignatura);
                 
                 
                 
@@ -370,8 +368,8 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
     }
     
     public int BuscarMateria(String auxMateria){
-        for (int i = 0; i < asiganturas.size(); i++) {
-            if( asiganturas.get(i).getNombre().equals(auxMateria) ){
+        for (int i = 0; i < asignaturas.size(); i++) {
+            if( asignaturas.get(i).getNombre().equals(auxMateria) ){
                 System.out.println("holi");
                 return i;   
             }
@@ -392,7 +390,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
        nroProfesores = Integer.parseInt((String) jComboBox2.getSelectedItem());
        int auxSecciones = Integer.parseInt(jTextField1.getText());
        int elemento = BuscarMateria(auxAsignatura);
-       String auxCod = asiganturas.get(elemento).getCodigo()+"";
+       String auxCod = asignaturas.get(elemento).getCodigo()+"";
        System.out.println(""+elemento);
        if( validarMateria(auxAsignatura)==true ){
             //Nuevo objeto para insertar en la lista Oferta
@@ -566,7 +564,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
                 int auxSecciones = Integer.parseInt(jTextField1.getText());
                 int auxProfesor = Integer.parseInt((String) jComboBox2.getSelectedItem());
                 String auxAsignatura = (String) jComboBox1.getSelectedItem();
-                String auxCod = asiganturas.get(BuscarMateria(auxAsignatura)).getCodigo()+"";
+                String auxCod = asignaturas.get(BuscarMateria(auxAsignatura)).getCodigo()+"";
                 //Se crea nuevo objeto oferta 
                 Oferta auxOferta = new Oferta(auxAsignatura,auxProfesor,auxSecciones);
 
