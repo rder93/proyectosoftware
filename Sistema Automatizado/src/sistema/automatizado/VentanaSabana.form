@@ -415,7 +415,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="NOMBRE USUARIO"/>
+        <Property name="text" type="java.lang.String" value="NOMBRE USUARIO "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">

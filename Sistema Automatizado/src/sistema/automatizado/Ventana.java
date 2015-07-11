@@ -405,8 +405,8 @@ public class Ventana extends javax.swing.JFrame{
 
     private void btnSabanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSabanaActionPerformed
         //jButton3.setToolTipText("Informacion");
-        
-        ventanasabana.cargar(usuario.getNombre(), usuario.getClave());
+        ventanasabana.cargarInfo(usuario.getNombre(), usuario.getClave());
+        ventanasabana.cargarAsig(usuario.getNombre(), usuario.getClave());
         ventanasabana.setVisible(true);
     }//GEN-LAST:event_btnSabanaActionPerformed
    

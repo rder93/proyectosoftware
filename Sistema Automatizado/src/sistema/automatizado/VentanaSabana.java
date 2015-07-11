@@ -176,7 +176,7 @@ public class VentanaSabana extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("NOMBRE USUARIO");
+        jLabel3.setText("NOMBRE USUARIO ");
 
         jLabel5.setText("CARRERA");
 
@@ -350,16 +350,40 @@ public class VentanaSabana extends javax.swing.JFrame {
         //cargarJTable(); //Para que la tabla se ajuste dependiendo de cada cambio
     }
     
-    
-    public void cargar(String usuario, String clave){
+    public void cargarInfo(String usuario, String clave){
         
-        /**
-         * Esta funcion debe cargar la lista de materias en una lista de strings
-         * con el fin de que cuando se seleccione en la ventana se elimine de la lista
-         * y tambien del jComboBox1
-         * Por lso momentos todo eso lo "medio hace"
-         */
+        jLabel3.setText(usuario);
+        
+        try {
+            ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
+            Connection cn = conexion.conectar();
+            Connection cn2 = conexion.conectar();
+            Statement st = cn.createStatement();
+            Statement st2 = cn2.createStatement();
+            
+            String sql = "SELECT * FROM carreras";
+            String sql2 = "SELECT * FROM sabana";
+            ResultSet rs = st.executeQuery(sql);
+            ResultSet rs2 = st2.executeQuery(sql2);
+            
+            rs.next();
+            jLabel5.setText(rs.getString("nombre"));
+            rs2.next();
+            jLabel6.setText(rs2.getString("lapso"));
+                
+                
+               
+
+           
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        } 
+
+    }
     
+    
+    public void cargarAsig(String usuario, String clave){
         
         //Aqui se almacena toda la informacion de las asignaturas
         try {
@@ -369,6 +393,7 @@ public class VentanaSabana extends javax.swing.JFrame {
             String sql = "SELECT * "
                        + "FROM (asignaturas AS a LEFT OUTER JOIN departamentos AS d ON  a.departamento=d.cod_departamento) LEFT OUTER JOIN carreras AS c ON a.carrera=c.cod_carrera "
                        + "ORDER BY (nivel,cod_asignatura)";
+            
             ResultSet rs = st.executeQuery(sql);
             
             while (rs.next()) {
