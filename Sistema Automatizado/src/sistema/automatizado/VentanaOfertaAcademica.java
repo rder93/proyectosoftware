@@ -278,17 +278,26 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
         
          //Aqui se almacena toda la informacion de las asignaturas
         
+        ArrayList<Asignatura> asiganturas = new  ArrayList<Asignatura>();
         
         try {
             ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
             Connection cn = conexion.conectar();
             Statement st = cn.createStatement();
-            String sql = "SELECT * FROM asignaturas";
+            String sql = "SELECT * "
+                       + "FROM (asignaturas AS a LEFT OUTER JOIN departamentos AS d ON  a.departamento=d.cod_departamento) LEFT OUTER JOIN carreras AS c ON a.carrera=c.cod_carrera "
+                       + "ORDER BY (nivel,cod_asignatura)";
             ResultSet rs = st.executeQuery(sql);
             
             while (rs.next()) {
                 
-                jComboBox1.addItem(rs.getString("nombre"));
+                jComboBox1.addItem(rs.getString(2));
+                
+                Asignatura objAsignatura = new Asignatura(rs.getInt("nivel"), rs.getInt("cod_asignatura"), rs.getInt("uc"), rs.getInt("horas_sem"), rs.getString(2), rs.getString(9), rs.getString(11));
+                
+                asiganturas.add(objAsignatura);
+                
+                
                 
             }
             
