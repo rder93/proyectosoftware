@@ -353,6 +353,19 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
     
     }
     
+    
+     public boolean validarMateria(String auxMateria){
+    
+        for (int i = 0; i < padre.listaOferta.size(); i++) {
+            
+            if( padre.listaOferta.get(i).getAsignatura().equals(auxMateria) ){
+                return false;
+            }   
+        }
+        return true;
+    }
+    
+    
     /**
      * Captura el número de profesores indicado en el jComboBox2
      * y lo almacena en la estructura.
@@ -360,41 +373,45 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
     
     public void capturarNumeroprofesores(){
        
-        //Variables auxiliares para rellenar el nuevo objeto
+         //Variables auxiliares para rellenar el nuevo objeto
        String auxMateria = (String) jComboBox1.getSelectedItem();
        nroProfesores = Integer.parseInt((String) jComboBox2.getSelectedItem());
        int auxSecciones = Integer.parseInt(jTextField1.getText());
        
-        //Nuevo objeto para insertar en la lista Oferta
-       Oferta auxOferta = new Oferta(auxMateria,nroProfesores,auxSecciones);
-       
-        //Variable auxiliar para crear cadena de secciones
-        //Se considera que existe un maximo de 14 secciones por x materia
-        Seccion [] auxCadenaSecciones = new Seccion[14]; 
+       if( validarMateria(auxMateria)==true ){
+            //Nuevo objeto para insertar en la lista Oferta
+           Oferta auxOferta = new Oferta(auxMateria,nroProfesores,auxSecciones);
 
-        for (int i = 0; i < 14; i++) {
-            
-            if(i< auxSecciones ){
-                    System.out.println(""+i);
-                    //True= de ser parte de las secciones que escogio
-                    auxCadenaSecciones[i]=new Seccion(true,"Por asignar");
-            }else{
-                    System.out.println("false");
-                    //False = de no ser parte de las secciones que escogio
-                    auxCadenaSecciones[i]=new Seccion(false,"");
+            //Variable auxiliar para crear cadena de secciones
+            //Se considera que existe un maximo de 14 secciones por x materia
+            Seccion [] auxCadenaSecciones = new Seccion[14]; 
+
+            for (int i = 0; i < 14; i++) {
+
+                if(i< auxSecciones ){
+                        System.out.println(""+i);
+                        //True= de ser parte de las secciones que escogio
+                        auxCadenaSecciones[i]=new Seccion(true,"Por asignar");
+                }else{
+                        System.out.println("false");
+                        //False = de no ser parte de las secciones que escogio
+                        auxCadenaSecciones[i]=new Seccion(false,"");
+                }
+                /**
+                 * Ejemplo: Si escoge 4
+                 * Los primeros 4 son true
+                 * Los siguientes 10 son false
+                 **/
             }
-            /**
-             * Ejemplo: Si escoge 4
-             * Los primeros 4 son true
-             * Los siguientes 10 son false
-             **/
-        }
-       
-        //Modificar el array secciones
-        auxOferta.setSecciones(auxCadenaSecciones);
-        
-        //Insertar nuevo nodo objeto oferta
-        padre.listaOferta.add(auxOferta);
+
+            //Modificar el array secciones
+            auxOferta.setSecciones(auxCadenaSecciones);
+
+            //Insertar nuevo nodo objeto oferta
+            padre.listaOferta.add(auxOferta);
+        }else{
+           JOptionPane.showMessageDialog(rootPane,"Esta materia ya fue registrada", "ADVERTENCIA", 0);
+       }  
           
     }
     
