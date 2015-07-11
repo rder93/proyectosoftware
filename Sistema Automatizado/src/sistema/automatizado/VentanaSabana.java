@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import static sistema.automatizado.Ventana.usuario;
 
 /**
  *
@@ -25,6 +26,8 @@ public class VentanaSabana extends javax.swing.JFrame {
     /**
      * Creates new form VentanaDistribucion
      */
+    
+    public Ventana padre;
     
     ArrayList dias = new ArrayList();
     ArrayList<Asignatura> asignaturas = new  ArrayList<Asignatura>();
@@ -182,9 +185,19 @@ public class VentanaSabana extends javax.swing.JFrame {
         jMenuBar1.add(jMenu4);
 
         jMenu1.setText("Asignaturas");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Aulas/Lab");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -279,6 +292,34 @@ public class VentanaSabana extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        // TODO add your handling code here:
+        
+        padre.listaAsignaturas = OperacionesBD.getAsignaturas(usuario.getNombre(), usuario.getClave());
+        
+        if(padre.listaAsignaturas!=null){
+            
+            padre.ventanaAsignaturas.cargar();
+            padre.ventanaAsignaturas.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        // TODO add your handling code here:
+        
+        padre.listaPlantaFisica = OperacionesBD.getAulas(usuario.getNombre(), usuario.getClave());
+        
+        if (padre.listaPlantaFisica!=null) {
+            
+            padre.ventanaplantafisica.cargar();
+            padre.ventanaplantafisica.setVisible(true);
+            
+        }
+        
+        
+    }//GEN-LAST:event_jMenu2MouseClicked
 
     
     public void limpiar(){
