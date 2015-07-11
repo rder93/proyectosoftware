@@ -291,7 +291,13 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
                 
                 jComboBox1.addItem(rs.getString(2));
                 
-                Asignatura objAsignatura = new Asignatura(rs.getInt("nivel"), rs.getInt("cod_asignatura"), rs.getInt("uc"), rs.getInt("horas_sem"), rs.getString(2), rs.getString(9), rs.getString(11));
+                Asignatura objAsignatura = new Asignatura(rs.getInt("nivel"), 
+                                                          rs.getInt("cod_asignatura"), 
+                                                          rs.getInt("uc"), 
+                                                          rs.getInt("horas_sem"), 
+                                                          rs.getString(2), 
+                                                          rs.getString(9), 
+                                                          rs.getString(11));
                 
                 asignaturas.add(objAsignatura);
                 
@@ -370,7 +376,6 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
     public int BuscarMateria(String auxMateria){
         for (int i = 0; i < asignaturas.size(); i++) {
             if( asignaturas.get(i).getNombre().equals(auxMateria) ){
-                System.out.println("holi");
                 return i;   
             }
         }
@@ -391,7 +396,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
        int auxSecciones = Integer.parseInt(jTextField1.getText());
        int elemento = BuscarMateria(auxAsignatura);
        String auxCod = asignaturas.get(elemento).getCodigo()+"";
-       System.out.println(""+elemento);
+       
        if( validarMateria(auxAsignatura)==true ){
             //Nuevo objeto para insertar en la lista Oferta
            Oferta auxOferta = new Oferta(auxAsignatura,nroProfesores,auxSecciones);
