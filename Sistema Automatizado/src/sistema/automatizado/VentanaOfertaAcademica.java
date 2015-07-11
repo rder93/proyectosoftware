@@ -27,6 +27,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
     String [] secciones = new String [20]; 
     int posicion = 0;
     int indiceFilaEditar = 0; //Ubicación de la fila que se desea editar
+    ArrayList<Asignatura> asiganturas = new  ArrayList<Asignatura>();
     
     public Ventana padre;
     /**
@@ -275,16 +276,8 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
     
     public void cargar(String usuario, String clave){
         
-        /**
-         * Esta funcion debe cargar la lista de materias en una lista de strings
-         * con el fin de que cuando se seleccione en la ventana se elimine de la lista
-         * y tambien del jComboBox1
-         * Por lso momentos todo eso lo "medio hace"
-         */
-    
+         //Aqui se almacena toda la informacion de las asignaturas
         
-        //Aqui se almacena toda la informacion de las asignaturas
-        ArrayList<Asignatura> asiganturas = new  ArrayList<Asignatura>();
         
         try {
             ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
@@ -367,6 +360,16 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
         return true; //No ha sido registrada
     }
     
+    public int BuscarMateria(String auxMateria){
+        for (int i = 0; i < asiganturas.size(); i++) {
+            if( asiganturas.get(i).getNombre().equals(auxMateria) ){
+                System.out.println("holi");
+                return i;   
+            }
+        }
+        return -1;
+    }
+    
     
     /**
      * Captura el número de profesores indicado en el jComboBox2
@@ -376,13 +379,15 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
     public void capturarNumeroprofesores(){
        
          //Variables auxiliares para rellenar el nuevo objeto
-       String auxMateria = (String) jComboBox1.getSelectedItem();
+       String auxAsignatura = (String) jComboBox1.getSelectedItem();
        nroProfesores = Integer.parseInt((String) jComboBox2.getSelectedItem());
        int auxSecciones = Integer.parseInt(jTextField1.getText());
-       
-       if( validarMateria(auxMateria)==true ){
+       int elemento = BuscarMateria(auxAsignatura);
+       String auxCod = asiganturas.get(elemento).getCodigo()+"";
+       System.out.println(""+elemento);
+       if( validarMateria(auxAsignatura)==true ){
             //Nuevo objeto para insertar en la lista Oferta
-           Oferta auxOferta = new Oferta(auxMateria,nroProfesores,auxSecciones);
+           Oferta auxOferta = new Oferta(auxAsignatura,nroProfesores,auxSecciones);
 
             //Variable auxiliar para crear cadena de secciones
             //Se considera que existe un maximo de 14 secciones por x materia
@@ -391,13 +396,12 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
             for (int i = 0; i < 14; i++) {
 
                 if(i< auxSecciones ){
-                        System.out.println(""+i);
+                        
                         //True= de ser parte de las secciones que escogio
-                        auxCadenaSecciones[i]=new Seccion(true,"Por asignar");
+                        auxCadenaSecciones[i]=new Seccion(true,"Por asignar",auxCod);
                 }else{
-                        System.out.println("false");
                         //False = de no ser parte de las secciones que escogio
-                        auxCadenaSecciones[i]=new Seccion(false,"");
+                        auxCadenaSecciones[i]=new Seccion(false,"","");
                 }
                 /**
                  * Ejemplo: Si escoge 4
@@ -553,7 +557,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
                 int auxSecciones = Integer.parseInt(jTextField1.getText());
                 int auxProfesor = Integer.parseInt((String) jComboBox2.getSelectedItem());
                 String auxAsignatura = (String) jComboBox1.getSelectedItem();
-
+                String auxCod = asiganturas.get(BuscarMateria(auxAsignatura)).getCodigo()+"";
                 //Se crea nuevo objeto oferta 
                 Oferta auxOferta = new Oferta(auxAsignatura,auxProfesor,auxSecciones);
 
@@ -566,11 +570,11 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
                 if(i< auxSecciones ){
                     
                     //True= de ser parte de las secciones que escogio
-                    auxCadenaSecciones[i]=new Seccion(true,"Por asignar");
+                    auxCadenaSecciones[i]=new Seccion(true,"Por asignar",auxCod);
                 }else{
 
                     //False = de no ser parte de las secciones que escogio
-                    auxCadenaSecciones[i]=new Seccion(false,"");
+                    auxCadenaSecciones[i]=new Seccion(false,"","");
                 }
                 /**
                  * Ejemplo: Si escoge 4

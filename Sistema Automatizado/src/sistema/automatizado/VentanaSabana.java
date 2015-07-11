@@ -29,11 +29,12 @@ public class VentanaSabana extends javax.swing.JFrame {
     
     public Ventana padre;
     
-    ArrayList dias = new ArrayList();
     ArrayList<Asignatura> asignaturas = new  ArrayList<Asignatura>();
-    ArrayList<Sabana> distribucion = new  ArrayList<Sabana>();
+    ArrayList<DistribucionSabana> distribucionSabana = new  ArrayList<DistribucionSabana>();
     DefaultTableModel modelo = new DefaultTableModel();
     int posicionDia = 0;
+    
+    public VentanaConfirmacionDatos ventanaConfirmacionDatos = new VentanaConfirmacionDatos(this);
     
     public VentanaSabana() {
         initComponents();
@@ -53,7 +54,7 @@ public class VentanaSabana extends javax.swing.JFrame {
         jButton6.setBorderPainted(false);
         
         cargarDias();
-        jLabel2.setText((String) dias.get(posicionDia));
+        jLabel2.setText((String) distribucionSabana.get(posicionDia).getDia());
     }
 
     /**
@@ -152,6 +153,11 @@ public class VentanaSabana extends javax.swing.JFrame {
                 "Hora", "Aula 1", "Aula 2", "Aula 3", "Aula 4", "Aula 5", "Aula 6", "Aula 7", "Aula 8", "Aula 9", "Aula 10", "Aula 11", "Aula 12", "Aula 13", "Aula 14", "Aula 15"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTable1MouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -281,14 +287,14 @@ public class VentanaSabana extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         movimientoDia(true);
-        jLabel2.setText((String) dias.get(posicionDia));
+        jLabel2.setText((String) distribucionSabana.get(posicionDia).getDia());
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
 
         movimientoDia(false);
-        jLabel2.setText((String) dias.get(posicionDia));
+        jLabel2.setText((String) distribucionSabana.get(posicionDia).getDia());
 
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -340,6 +346,11 @@ public class VentanaSabana extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jMenu2MouseClicked
+
+    private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
+        
+        ventanaConfirmacionDatos.setVisible(true);
+    }//GEN-LAST:event_jTable1MouseReleased
 
     
     public void limpiar(){
@@ -416,12 +427,13 @@ public class VentanaSabana extends javax.swing.JFrame {
     
     private void cargarDias(){
     
-        dias.add("LUNES");
-        dias.add("MARTES");
-        dias.add("MIERCOLES");
-        dias.add("JUEVES");
-        dias.add("VIERENES");
-        dias.add("SABADO");
+        distribucionSabana.add(new DistribucionSabana("LUNES"));
+        distribucionSabana.add(new DistribucionSabana("MARTES"));
+        distribucionSabana.add(new DistribucionSabana("MIERCOLES"));
+        distribucionSabana.add(new DistribucionSabana("JUEVES"));
+        distribucionSabana.add(new DistribucionSabana("VIERNES"));
+        distribucionSabana.add(new DistribucionSabana("SABADO"));
+ 
     }
     
     public void movimientoDia(boolean sentido){

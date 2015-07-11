@@ -14,10 +14,17 @@ public class Seccion {
     
     private boolean indicador;
     private String profesor;
+    private String cod_asignatura;        
 
     public Seccion(boolean indicador, String profesor) {
         this.indicador = indicador;
         this.profesor = profesor;
+    }
+
+    public Seccion(boolean indicador, String profesor, String cod_asignatura) {
+        this.indicador = indicador;
+        this.profesor = profesor;
+        this.cod_asignatura = cod_asignatura;
     }
     
     public Seccion() {
@@ -31,6 +38,14 @@ public class Seccion {
 
     public void setIndicador(boolean indicador) {
         this.indicador = indicador;
+    }
+
+    public String getCod_asignatura() {
+        return cod_asignatura;
+    }
+
+    public void setCod_asignatura(String cod_asignatura) {
+        this.cod_asignatura = cod_asignatura;
     }
 
     public String getProfesor() {
