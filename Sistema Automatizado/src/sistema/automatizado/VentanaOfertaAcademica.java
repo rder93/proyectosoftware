@@ -353,16 +353,18 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
     
     }
     
-    
-     public boolean validarMateria(String auxMateria){
+    /**
+     * Valida las materias que ya han sido registradas
+     */
+    public boolean validarMateria(String auxMateria){
     
         for (int i = 0; i < padre.listaOferta.size(); i++) {
             
             if( padre.listaOferta.get(i).getAsignatura().equals(auxMateria) ){
-                return false;
+                return false; //Ya fue registrada
             }   
         }
-        return true;
+        return true; //No ha sido registrada
     }
     
     
