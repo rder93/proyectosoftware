@@ -382,10 +382,6 @@ public class VentanaSabana extends javax.swing.JFrame {
             rs2.next();
             jLabel6.setText(rs2.getString("lapso"));
                 
-                
-               
-
-           
             
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -435,6 +431,9 @@ public class VentanaSabana extends javax.swing.JFrame {
         distribucionSabana.add(new DistribucionSabana("SABADO"));
  
     }
+    /**
+     * Realiza movimiento envolvente de los dias en la lista
+     */
     
     public void movimientoDia(boolean sentido){
     
