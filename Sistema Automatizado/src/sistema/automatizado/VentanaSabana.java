@@ -28,6 +28,7 @@ public class VentanaSabana extends javax.swing.JFrame {
      */
     
     public Ventana padre;
+    public static Usuario usuario;
     
     ArrayList<Asignatura> asignaturas = new  ArrayList<Asignatura>();
     ArrayList<DistribucionSabana> distribucionSabana = new  ArrayList<DistribucionSabana>();
@@ -36,8 +37,9 @@ public class VentanaSabana extends javax.swing.JFrame {
     
     public VentanaConfirmacionDatos ventanaConfirmacionDatos = new VentanaConfirmacionDatos(this);
     
-    public VentanaSabana() {
+    public VentanaSabana(Ventana padre) {
         initComponents();
+        this.padre = padre;
         Image icono = Toolkit.getDefaultToolkit().getImage("logo.png");
         this.setIconImage(icono);
         this.setTitle("Crear Sabana");
@@ -57,6 +59,10 @@ public class VentanaSabana extends javax.swing.JFrame {
         
         cargarDias();
         jLabel2.setText((String) distribucionSabana.get(posicionDia).getDia());
+    }
+
+    private VentanaSabana() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -323,12 +329,15 @@ public class VentanaSabana extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
         
         for (int i = 0; i < this.asignaturas.size(); i++) {
             if (this.asignaturas.get(i).getNombre().equals(this.jComboBox1.getSelectedItem().toString()) ){
-                if (padre.listaOferta.get(i).getAsignatura().equals(this.asignaturas.get(i).getCodigo())) {
+               // if (padre.listaOferta.get(i).getAsignatura().equals(this.asignaturas.get(i).getCodigo())) {
                     
-                    jComboBox2.setSelectedItem(asignaturas.get(i).getCodigo());
+                    
+                
+                    jComboBox2.addItem(padre.listaOferta.get(i).getNroSecciones());
                     this.modelo = (DefaultTableModel) this.jTable2.getModel();
                     this.modelo.setNumRows(0);
                     modelo.addRow(new Object[]{
@@ -338,7 +347,7 @@ public class VentanaSabana extends javax.swing.JFrame {
                         this.asignaturas.get(i).getHoras()+""
                     });
                 break;   
-                }
+               // }
                 
                 
             } else {

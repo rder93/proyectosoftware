@@ -37,7 +37,7 @@ public class Ventana extends javax.swing.JFrame{
     
     public static Usuario usuario;
     public VentanaOfertaAcademica ventanaofertaacademica = new VentanaOfertaAcademica(this);
-    public VentanaSabana ventanasabana = new VentanaSabana();
+    public VentanaSabana ventanasabana = new VentanaSabana(this);
     public VentanaPlantaFisica ventanaplantafisica = new VentanaPlantaFisica(this);
     public VentanaAsignatura ventanaAsignaturas = new VentanaAsignatura(this);
     public VentanaDocente ventanadocente = new VentanaDocente(this);
@@ -388,6 +388,7 @@ public class Ventana extends javax.swing.JFrame{
         
         // obtener la lista oferta para cargarla en la tabla, el problema es que no se a la hora de poner cuantas secciones y eso
         listaOferta = OperacionesBD.getOferta(usuario.getNombre(), usuario.getClave());
+       
         
         if(listaAsignaturas!=null){
             
@@ -412,9 +413,19 @@ public class Ventana extends javax.swing.JFrame{
 
     private void btnSabanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSabanaActionPerformed
         //jButton3.setToolTipText("Informacion");
-        ventanasabana.cargarInfo(usuario.getNombre(), usuario.getClave());
-        ventanasabana.cargarAsig(usuario.getNombre(), usuario.getClave());
-        ventanasabana.setVisible(true);
+        
+        listaOferta = OperacionesBD.getOferta(usuario.getNombre(), usuario.getClave());
+        
+        JOptionPane.showMessageDialog(this, listaOferta.get(0).getAsignatura());
+        
+        if(listaOferta!=null){
+            ventanasabana.usuario = new Usuario();      
+            ventanasabana.usuario.setNombre(usuario.getNombre());
+            ventanasabana.usuario.setClave(usuario.getClave());
+            ventanasabana.cargarInfo(usuario.getNombre(), usuario.getClave());
+            ventanasabana.cargarAsig(usuario.getNombre(), usuario.getClave());
+            ventanasabana.setVisible(true);
+        }
     }//GEN-LAST:event_btnSabanaActionPerformed
    
     private void menuPlantaFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPlantaFisicaActionPerformed
