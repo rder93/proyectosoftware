@@ -24,12 +24,15 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
     int nroProfesores = 0; //Número de profesores
     boolean condicion = false; //variable control
     DefaultTableModel modelo = new DefaultTableModel();
-    String [] secciones = new String [20]; 
+    String [] secciones = new String [20];
+    String auxAsignatura = "";
+    String auxCod = "";
     int posicion = 0;
     int indiceFilaEditar = 0; //Ubicación de la fila que se desea editar
     ArrayList<Asignatura> asignaturas = new  ArrayList<Asignatura>();
     
     public Ventana padre;
+    public static Usuario usuario;
     /**
      * Creates new form VentanaCargaData
      */
@@ -310,7 +313,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
         } 
     
     }
-    
+      
     /**
      * Carga la lista de item en el jComboBox2
      * @param aux número de secciones indicadas por el usuario
@@ -515,14 +518,16 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
       
+        auxAsignatura = (String) jComboBox1.getSelectedItem();
+        auxCod = asignaturas.get(BuscarMateria(auxAsignatura)).getCodigo()+"";
+        
+        OperacionesBD.addOferta(auxCod,Integer.parseInt(jTextField1.getText()),usuario.getNombre(),usuario.getClave());
+        
         capturarNumeroprofesores();
-        
-        
-        //Esta linea no sirve por los momentos porque la lsita siempre se recarga cuando se llama limpiar
-        //dado que estoy cargando todo estaticamente
-       // jComboBox1.removeItemAt(jComboBox1.getSelectedIndex());
-        
+       
         generarColumnas();
+        
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -568,8 +573,8 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
                 //Auxiliares para crear nuevo objeto Oferta
                 int auxSecciones = Integer.parseInt(jTextField1.getText());
                 int auxProfesor = Integer.parseInt((String) jComboBox2.getSelectedItem());
-                String auxAsignatura = (String) jComboBox1.getSelectedItem();
-                String auxCod = asignaturas.get(BuscarMateria(auxAsignatura)).getCodigo()+"";
+                auxAsignatura = (String) jComboBox1.getSelectedItem();
+                auxCod = asignaturas.get(BuscarMateria(auxAsignatura)).getCodigo()+"";
                 //Se crea nuevo objeto oferta 
                 Oferta auxOferta = new Oferta(auxAsignatura,auxProfesor,auxSecciones);
 
@@ -604,6 +609,8 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
                 padre.listaOferta.set(indiceFilaEditar, auxOferta);
                 capturarNumeroSecciones();
                 generarColumnas();
+                OperacionesBD.setOferta(auxCod, nroSecciones, usuario.getNombre(), usuario.getClave());
+                
             }
             
              

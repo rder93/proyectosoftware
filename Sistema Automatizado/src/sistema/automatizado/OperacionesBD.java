@@ -48,6 +48,34 @@ public class OperacionesBD {
         return null;
     }
     
+    public static ArrayList<Oferta> getOferta(String usuario, String clave){
+        
+        ArrayList<Oferta> oferta = new  ArrayList<Oferta>();
+        
+        try {
+            ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
+            Connection cn = conexion.conectar();
+            Statement st = cn.createStatement();
+            String sql = "SELECT * FROM oferta_academica";
+            ResultSet rs = st.executeQuery(sql);
+            
+            while (rs.next()) {
+                
+                Oferta objOferta = new Oferta(rs.getString("cod_asignatura"),"2015-01", rs.getInt("cant_secciones"));
+                
+                oferta.add(objOferta);
+                
+            }
+           
+            return oferta;
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        
+        return null;
+    }
+    
     
     public static ArrayList<Asignatura> getAsignaturas(String usuario, String clave){
         
@@ -111,8 +139,22 @@ public class OperacionesBD {
         return null;
     }
     
-    
-    
+    public static void addOferta(String codigo, int nSecciones, String usuario, String clave){
+        
+        try {
+                ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
+                Connection cn = conexion.conectar();
+                Statement st = cn.createStatement();
+                String sql = "INSERT "
+                           + "INTO oferta_academica values('"+codigo+"','2015-01',"+nSecciones+")";
+
+                st.executeUpdate(sql);
+                
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+
+            }
+    }
     
     public static boolean addAsignatura(int codigo, int uc, int hora, String nombre, String carrera, String departamento, int nivel, String usuario, String clave ){
         
@@ -131,6 +173,29 @@ public class OperacionesBD {
             return false;
         }
     }
+    
+    
+    public static void setOferta(String codigo, int nSecciones, String usuario, String clave ){
+        
+        
+        
+        try {
+            ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
+            Connection cn = conexion.conectar();
+            Statement st = cn.createStatement();
+            String sql = "UPDATE asignaturas "
+                       + " SET lapso = '2015-01',"
+                       + " cant_secciones = "+nSecciones+","
+                       + "WHERE cod_asignatura = '"+codigo+"'";
+  
+            st.executeUpdate(sql);
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        
+        }
+    }
+    
     
     
     public static boolean setAsignatura(int codigo, int uc, int hora, String nombre, String carrera, String departamento, int nivel, String usuario, String clave ){

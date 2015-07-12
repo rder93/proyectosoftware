@@ -389,10 +389,15 @@ public class Ventana extends javax.swing.JFrame{
         
         if(listaAsignaturas!=null){
             
+            ventanaofertaacademica.usuario = new Usuario();      
+            ventanaofertaacademica.usuario.setNombre(usuario.getNombre());
+            ventanaofertaacademica.usuario.setClave(usuario.getClave());
             ventanaofertaacademica.limpiarInicio();
             ventanaofertaacademica.cargar(usuario.getNombre(), usuario.getClave()); 
             ventanaofertaacademica.limpiar();
             ventanaofertaacademica.setVisible(true);
+            
+            //ok recuerda q siempre para todas las ventanas debes hacer lo usuario osea esto y esto
             
         }
         
