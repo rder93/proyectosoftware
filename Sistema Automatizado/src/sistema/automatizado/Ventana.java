@@ -385,7 +385,9 @@ public class Ventana extends javax.swing.JFrame{
     private void btnOfertaAcademicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOfertaAcademicaActionPerformed
         // TODO add your handling code here:
         
-        //listaAsignaturas = OperacionesBD.getAsignaturas(usuario.getNombre(), usuario.getClave());
+        
+        // obtener la lista oferta para cargarla en la tabla, el problema es que no se a la hora de poner cuantas secciones y eso
+       // listaOferta = OperacionesBD.getOferta(usuario.getNombre(), usuario.getClave());
         
         if(listaAsignaturas!=null){
             

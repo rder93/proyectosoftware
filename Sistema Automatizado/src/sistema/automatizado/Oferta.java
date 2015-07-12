@@ -25,7 +25,15 @@ public class Oferta {
         this.profesor = profesores;
         this.nroSecciones = nroSecciones;
     }
-   
+
+    public Oferta(String asignatura, String lapso, int profesor, int nroSecciones) {}{
+        this.secciones = new Seccion [14];
+        this.asignatura = asignatura;
+        this.lapso = lapso;
+        this.profesor = profesor;
+        this.nroSecciones = nroSecciones;
+    }
+    
     public Oferta(String asignatura, String lapso, int nroSecciones){
         this.secciones = new Seccion [14];
         this.asignatura = asignatura;
