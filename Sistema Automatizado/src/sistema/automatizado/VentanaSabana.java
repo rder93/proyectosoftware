@@ -33,7 +33,7 @@ public class VentanaSabana extends javax.swing.JFrame {
     ArrayList<Asignatura> asignaturas = new  ArrayList<Asignatura>();
     ArrayList<DistribucionSabana> distribucionSabana = new  ArrayList<DistribucionSabana>();
     DefaultTableModel modelo = new DefaultTableModel();
-    int posicionDia = 0; //Posicion del dia seleccionado
+    int posicionDia = 0; //Posicion del dia selccionado
     
     public VentanaConfirmacionDatos ventanaConfirmacionDatos = new VentanaConfirmacionDatos(this);
     
