@@ -456,6 +456,9 @@ public class VentanaSabana extends javax.swing.JFrame {
     
     }
     
+    /**
+     * Cargar por defecto dias de la semana
+     */
     
     private void cargarDias(){
     
