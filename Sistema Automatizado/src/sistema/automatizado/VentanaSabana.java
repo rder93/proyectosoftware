@@ -309,94 +309,15 @@ public class VentanaSabana extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        movimientoDia(true);
-        jLabel2.setText((String) distribucionSabana.get(posicionDia).getDia());
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-
-        movimientoDia(false);
-        jLabel2.setText((String) distribucionSabana.get(posicionDia).getDia());
-
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        
-        for (int i = 0; i < this.asignaturas.size(); i++) {
-            if (this.asignaturas.get(i).getNombre().equals(this.jComboBox1.getSelectedItem().toString()) ){
-               // if (padre.listaOferta.get(i).getAsignatura().equals(this.asignaturas.get(i).getCodigo())) {
-                    
-                    
-                
-                    jComboBox2.addItem(padre.listaOferta.get(i).getNroSecciones());
-                    this.modelo = (DefaultTableModel) this.jTable2.getModel();
-                    this.modelo.setNumRows(0);
-                    modelo.addRow(new Object[]{
-                        this.asignaturas.get(i).getNivel()+"",
-                        this.asignaturas.get(i).getCodigo()+"",
-                        this.asignaturas.get(i).getUc()+"",
-                        this.asignaturas.get(i).getHoras()+""
-                    });
-                break;   
-               // }
-                
-                
-            } else {
-            }
+    /**
+     * Carga el combobox con las secciones que se han creado para esa materia
+     */
+    public void cargarjComboBox2(int tamano){
+        jComboBox2.removeAllItems();
+        for (int i = 0; i < tamano; i++) {
+            jComboBox2.addItem(i+1);
         }
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-        // TODO add your handling code here:
-        
-        padre.listaAsignaturas = OperacionesBD.getAsignaturas(usuario.getNombre(), usuario.getClave());
-        
-        if(padre.listaAsignaturas!=null){
-            
-            padre.ventanaAsignaturas.cargar();
-            padre.ventanaAsignaturas.setVisible(true);
-        }
-        
-    }//GEN-LAST:event_jMenu1MouseClicked
-
-    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
-        // TODO add your handling code here:
-        
-        padre.listaPlantaFisica = OperacionesBD.getAulas(usuario.getNombre(), usuario.getClave());
-        
-        if (padre.listaPlantaFisica!=null) {
-            
-            padre.ventanaplantafisica.cargar();
-            padre.ventanaplantafisica.setVisible(true);
-            
-        }
-        
-        
-    }//GEN-LAST:event_jMenu2MouseClicked
-
-    private void jButton2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseReleased
-        // TODO add your handling code here:
-        int rows[] = this.jTable1.getSelectedRows();
-        int columns[] = this.jTable1.getSelectedColumns();
-        
-        if ( (rows.length != 0) && (columns.length != 0) )
-        {
-            for ( int i=rows[0]; i<=rows[rows.length-1]; i++ )
-                for ( int j=columns[0]; j<=columns[columns.length-1]; j++ )
-                    this.jTable1.setValueAt("HOLA", i, j);
-        }
-    }//GEN-LAST:event_jButton2MouseReleased
-
+    }
     
     public void limpiar(){
         
@@ -498,6 +419,98 @@ public class VentanaSabana extends javax.swing.JFrame {
             }
         }
    }
+    
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        movimientoDia(true);
+        jLabel2.setText((String) distribucionSabana.get(posicionDia).getDia());
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+
+        movimientoDia(false);
+        jLabel2.setText((String) distribucionSabana.get(posicionDia).getDia());
+
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        
+        for (int i = 0; i < this.asignaturas.size(); i++) {
+            if (this.asignaturas.get(i).getNombre().equals(this.jComboBox1.getSelectedItem().toString()) ){
+               // if (padre.listaOferta.get(i).getAsignatura().equals(this.asignaturas.get(i).getCodigo())) {
+                    
+                    
+                    
+                    
+                    cargarjComboBox2( padre.listaOferta.get(i).getNroSecciones());
+                    this.modelo = (DefaultTableModel) this.jTable2.getModel();
+                    this.modelo.setNumRows(0);
+                    modelo.addRow(new Object[]{
+                        this.asignaturas.get(i).getNivel()+"",
+                        this.asignaturas.get(i).getCodigo()+"",
+                        this.asignaturas.get(i).getUc()+"",
+                        this.asignaturas.get(i).getHoras()+""
+                    });
+                break;   
+               // }
+                
+                
+            } else {
+            }
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        // TODO add your handling code here:
+        
+        padre.listaAsignaturas = OperacionesBD.getAsignaturas(usuario.getNombre(), usuario.getClave());
+        
+        if(padre.listaAsignaturas!=null){
+            
+            padre.ventanaAsignaturas.cargar();
+            padre.ventanaAsignaturas.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        // TODO add your handling code here:
+        
+        padre.listaPlantaFisica = OperacionesBD.getAulas(usuario.getNombre(), usuario.getClave());
+        
+        if (padre.listaPlantaFisica!=null) {
+            
+            padre.ventanaplantafisica.cargar();
+            padre.ventanaplantafisica.setVisible(true);
+            
+        }
+        
+        
+    }//GEN-LAST:event_jMenu2MouseClicked
+
+    private void jButton2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseReleased
+        // TODO add your handling code here:
+        int rows[] = this.jTable1.getSelectedRows();
+        int columns[] = this.jTable1.getSelectedColumns();
+        
+        if ( (rows.length != 0) && (columns.length != 0) )
+        {
+            for ( int i=rows[0]; i<=rows[rows.length-1]; i++ )
+                for ( int j=columns[0]; j<=columns[columns.length-1]; j++ )
+                    this.jTable1.setValueAt("HOLA", i, j);
+        }
+    }//GEN-LAST:event_jButton2MouseReleased
+
+    
+    
     /**
      * @param args the command line arguments
      */
