@@ -84,6 +84,8 @@ public class VentanaSabana extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jComboBox2 = new javax.swing.JComboBox();
+        jLabel7 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -135,28 +137,27 @@ public class VentanaSabana extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"7:00 a 7:50", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {"7:50 a 8:40", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {"8:45 a 9:35", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {"9:35 a 10:25", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {"10:30 a 11:20", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {"11:20 a 12:10  ", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {"1:10 a 2:00", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {"2:00 a 2:50", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {"2:55 a 3:45", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {"3:45 a 4:35", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {"4:40 a 5:30", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {"5:30 a 6:20", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {"6:20 a 7:10", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {"7:15 a 8:05", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {"8:05 a 8:55", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {"8:55 a 9:45", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {"7:00 a 7:50", null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {"7:50 a 8:40", null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {"8:45 a 9:35", null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {"9:35 a 10:25", null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {"10:30 a 11:20", null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {"11:20 a 12:10  ", null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {"1:10 a 2:00", null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {"2:00 a 2:50", null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {"2:55 a 3:45", null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {"3:45 a 4:35", null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {"4:40 a 5:30", null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {"5:30 a 6:20", null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {"6:20 a 7:10", null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {"7:15 a 8:05", null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {"8:05 a 8:55", null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {"8:55 a 9:45", null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Hora", "Aula 1", "Aula 2", "Aula 3", "Aula 4", "Aula 5", "Aula 6", "Aula 7", "Aula 8", "Aula 9", "Aula 10", "Aula 11", "Aula 12", "Aula 13", "Aula 14", "Aula 15"
+                "Hora", "Aula 1", "Aula 2", "Aula 3", "Aula 4", "Aula 5", "Aula 6", "Aula 9", "Aula 10", "Aula 11", "Aula 12", "Aula 13", "Aula 14", "Aula 15"
             }
         ));
-        jTable1.setCellSelectionEnabled(true);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -193,6 +194,10 @@ public class VentanaSabana extends javax.swing.JFrame {
                 jButton2MouseReleased(evt);
             }
         });
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel7.setText("Nro. secciones:");
 
         jMenu4.setText("Archivo");
 
@@ -236,19 +241,24 @@ public class VentanaSabana extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, 0, 318, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jComboBox1, 0, 318, Short.MAX_VALUE))))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(76, 76, 76))
@@ -277,7 +287,10 @@ public class VentanaSabana extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
@@ -285,8 +298,8 @@ public class VentanaSabana extends javax.swing.JFrame {
                         .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE))
         );
 
         pack();
@@ -508,12 +521,14 @@ public class VentanaSabana extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
