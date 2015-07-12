@@ -195,8 +195,6 @@ public class VentanaSabana extends javax.swing.JFrame {
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel7.setText("Nro. secciones:");
 
         jMenu4.setText("Archivo");
@@ -325,19 +323,28 @@ public class VentanaSabana extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
         for (int i = 0; i < this.asignaturas.size(); i++) {
-            if ( this.asignaturas.get(i).getNombre().equals(this.jComboBox1.getSelectedItem().toString()) ) {
-                this.modelo = (DefaultTableModel) this.jTable2.getModel();
-                this.modelo.setNumRows(0);
-                modelo.addRow(new Object[]{
-                    this.asignaturas.get(i).getNivel()+"",
-                    this.asignaturas.get(i).getCodigo()+"",
-                    this.asignaturas.get(i).getUc()+"",
-                    this.asignaturas.get(i).getHoras()+""
-                });
-                break;
+            if (this.asignaturas.get(i).getNombre().equals(this.jComboBox1.getSelectedItem().toString()) ){
+                if (padre.listaOferta.get(i).getAsignatura().equals(this.asignaturas.get(i).getCodigo())) {
+                    
+                    jComboBox2.setSelectedItem(asignaturas.get(i).getCodigo());
+                    this.modelo = (DefaultTableModel) this.jTable2.getModel();
+                    this.modelo.setNumRows(0);
+                    modelo.addRow(new Object[]{
+                        this.asignaturas.get(i).getNivel()+"",
+                        this.asignaturas.get(i).getCodigo()+"",
+                        this.asignaturas.get(i).getUc()+"",
+                        this.asignaturas.get(i).getHoras()+""
+                    });
+                break;   
+                }
+                
+                
+            } else {
             }
         }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
@@ -403,6 +410,7 @@ public class VentanaSabana extends javax.swing.JFrame {
             
             String sql = "SELECT * FROM carreras";
             String sql2 = "SELECT * FROM sabana";
+            
             ResultSet rs = st.executeQuery(sql);
             ResultSet rs2 = st2.executeQuery(sql2);
             
@@ -436,8 +444,7 @@ public class VentanaSabana extends javax.swing.JFrame {
                 
                 jComboBox1.addItem(rs.getString(2));
                 
-                Asignatura objAsignatura = new Asignatura(rs.getInt("nivel"), rs.getInt("cod_asignatura"), rs.getInt("uc"), rs.getInt("horas_sem"), rs.getString(2), rs.getString(9), rs.getString(11));
-                
+                Asignatura objAsignatura = new Asignatura(rs.getInt("nivel"), rs.getString("cod_asignatura"), rs.getInt("uc"), rs.getInt("horas_sem"), rs.getString(2), rs.getString(9), rs.getString(11));
                 this.asignaturas.add(objAsignatura);
                 
                 

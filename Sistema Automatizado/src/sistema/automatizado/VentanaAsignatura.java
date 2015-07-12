@@ -312,11 +312,11 @@ public class VentanaAsignatura extends javax.swing.JFrame {
 
         //Se procede a ejecutar el método encargado de agregar un nuevo registro
         //tomando como parámetros l@s String de los campos de texto
-        if(OperacionesBD.addAsignatura(Integer.parseInt(txtCodigo.getText()), Integer.parseInt(txtUC.getText()),
+        if(OperacionesBD.addAsignatura(txtCodigo.getText(), Integer.parseInt(txtUC.getText()),
                                     Integer.parseInt(txtHoras.getText()), txtNombre.getText(),txtCarrera.getText(),
                                     txtDepartamento.getText(), Integer.parseInt(txtNivel.getText()), usuario.getNombre(), usuario.getClave()))
         
-            asignatura.agregar(Integer.parseInt(txtCodigo.getText()), Integer.parseInt(txtUC.getText()), 
+            asignatura.agregar(txtCodigo.getText(), Integer.parseInt(txtUC.getText()), 
                                Integer.parseInt(txtHoras.getText()), txtNombre.getText(), Integer.parseInt(txtNivel.getText()),
                                txtDepartamento.getText(), txtCarrera.getText());
         limpiarCampos();
@@ -333,11 +333,11 @@ public class VentanaAsignatura extends javax.swing.JFrame {
             
             txtCodigo.setText(tblAsignatura.getModel().getValueAt(tblAsignatura.getSelectedRow(), 1).toString());
             
-            if(OperacionesBD.setAsignatura(Integer.parseInt(txtCodigo.getText()), Integer.parseInt(txtUC.getText()),
+            if(OperacionesBD.setAsignatura(txtCodigo.getText(), Integer.parseInt(txtUC.getText()),
                                            Integer.parseInt(txtHoras.getText()), txtNombre.getText(),txtCarrera.getText(),
                                            txtDepartamento.getText(), Integer.parseInt(txtNivel.getText()), usuario.getNombre(), usuario.getClave()))
         
-                asignatura.modificar(Integer.parseInt(txtCodigo.getText()), Integer.parseInt(txtUC.getText()), 
+                asignatura.modificar(txtCodigo.getText(), Integer.parseInt(txtUC.getText()), 
                                      Integer.parseInt(txtHoras.getText()), txtNombre.getText(), tblAsignatura.getSelectedRow(), 
                                      Integer.parseInt(txtNivel.getText()),txtDepartamento.getText(), txtCarrera.getText());
         }
@@ -355,7 +355,7 @@ public class VentanaAsignatura extends javax.swing.JFrame {
             //Si se confirma la eliminación del registro se procede a ejecutar la operación
             if(opcion==0){
                 
-                if(OperacionesBD.deleteAsignatura(Integer.parseInt(txtCodigo.getText()), 
+                if(OperacionesBD.deleteAsignatura(txtCodigo.getText(), 
                                                     usuario.getNombre(), 
                                                     usuario.getClave())){
                     

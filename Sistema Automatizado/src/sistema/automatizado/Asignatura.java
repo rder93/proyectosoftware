@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Asignatura {
     
-    private int codigo;
+    private String codigo;
     private int uc;
     private int horas;
     private String nombre;
@@ -26,7 +26,7 @@ public class Asignatura {
     private JTable tblCargaData;
     private DefaultTableModel modeloDeTabla;
 
-    public Asignatura(int nivel, int codigo, int uc, int horas, String nombre, String departamento, String carrera) {
+    public Asignatura(int nivel, String codigo, int uc, int horas, String nombre, String departamento, String carrera) {
         this.codigo = codigo;
         this.uc = uc;
         this.horas = horas;
@@ -41,7 +41,7 @@ public class Asignatura {
    
     public Asignatura(JTable tblAsignatura) {
         this.tblCargaData = tblAsignatura;
-        this.codigo = 0;
+        this.codigo = "";
         this.uc = 0;
         this.horas = 0;
         this.nombre = "";
@@ -102,11 +102,11 @@ public class Asignatura {
         this.uc = uc;
     }
     
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
@@ -144,7 +144,7 @@ public class Asignatura {
     
     
     
-    public boolean agregar(int codigo, int uc, int hora, String nombre, int nivel, String departamento, String carrera){
+    public boolean agregar(String codigo, int uc, int hora, String nombre, int nivel, String departamento, String carrera){
         
         //Se obtiene la cantidad registros que se encuentran actualmente en la tabla
         int numFilas = tblCargaData.getRowCount();
@@ -172,7 +172,7 @@ public class Asignatura {
     
     */
     
-    public boolean modificar(int codigo, int uc, int hora, String nombre, int numFila, int nivel, String departamento, String carrera){
+    public boolean modificar(String codigo, int uc, int hora, String nombre, int numFila, int nivel, String departamento, String carrera){
         
         //Se actualizan los valores de los campos de la fila que se va a modificar
         //específicando el nuevo valor, el numero de la fila y el numero de la columna

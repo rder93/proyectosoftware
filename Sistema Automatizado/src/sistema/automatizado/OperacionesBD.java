@@ -93,7 +93,7 @@ public class OperacionesBD {
             while (rs.next()) {
                 
   
-                Asignatura objAsignatura = new Asignatura(rs.getInt("nivel"), rs.getInt("cod_asignatura"), rs.getInt("uc"), rs.getInt("horas_sem"), rs.getString(2), rs.getString(9), rs.getString(11));
+                Asignatura objAsignatura = new Asignatura(rs.getInt("nivel"), rs.getString("cod_asignatura"), rs.getInt("uc"), rs.getInt("horas_sem"), rs.getString(2), rs.getString(9), rs.getString(11));
                 
                 asignaturas.add(objAsignatura);
                 
@@ -156,7 +156,7 @@ public class OperacionesBD {
             }
     }
     
-    public static boolean addAsignatura(int codigo, int uc, int hora, String nombre, String carrera, String departamento, int nivel, String usuario, String clave ){
+    public static boolean addAsignatura(String codigo, int uc, int hora, String nombre, String carrera, String departamento, int nivel, String usuario, String clave ){
         
         try {
             ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
@@ -198,7 +198,7 @@ public class OperacionesBD {
     
     
     
-    public static boolean setAsignatura(int codigo, int uc, int hora, String nombre, String carrera, String departamento, int nivel, String usuario, String clave ){
+    public static boolean setAsignatura(String codigo, int uc, int hora, String nombre, String carrera, String departamento, int nivel, String usuario, String clave ){
         
         
         
@@ -224,7 +224,7 @@ public class OperacionesBD {
         }
     }
     
-    public static boolean deleteAsignatura(int codigo, String usuario, String clave ){
+    public static boolean deleteAsignatura(String codigo, String usuario, String clave ){
         
         try {
             ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);

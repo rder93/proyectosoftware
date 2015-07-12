@@ -295,7 +295,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
                 jComboBox1.addItem(rs.getString(2));
                 
                 Asignatura objAsignatura = new Asignatura(rs.getInt("nivel"), 
-                                                          rs.getInt("cod_asignatura"), 
+                                                          rs.getString("cod_asignatura"), 
                                                           rs.getInt("uc"), 
                                                           rs.getInt("horas_sem"), 
                                                           rs.getString(2), 
