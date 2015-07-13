@@ -429,12 +429,7 @@ public class Ventana extends javax.swing.JFrame{
     }//GEN-LAST:event_btnSabanaActionPerformed
    
     private void menuPlantaFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPlantaFisicaActionPerformed
-        // TODO add your handling code here:
-       
-        //auxPlantaFisica.setTodo(1, 2, "aula"); //Variable auxiliar 
-        
-        /*Esta deberá ser la lista de aulas y laboratorios disponibles*/
-        //listaPlantaFisica.add(auxPlantaFisica);
+
         
         listaPlantaFisica = OperacionesBD.getAulas(usuario.getNombre(), usuario.getClave());
         
@@ -508,7 +503,7 @@ public class Ventana extends javax.swing.JFrame{
     private void btnOfertaAcademicaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOfertaAcademicaMouseEntered
         // TODO add your handling code here:
         panelAyuda.setVisible(true);
-        txtAyuda.setText("Se basa en organizar las asignaturas por semestre. Dichas asignaturas poseen sus respectivos profesores, y los semestres sus respectivas      secciones, todo esto viene determinado por la demanda estudiantil para el periodo indicado.");
+        txtAyuda.setText("Se basa en organizar las asignaturas por semestre. Dichas asignaturas poseen sus respectivos profesores, y los semestres sus respectivas \n secciones, todo esto viene determinado por la demanda estudiantil para el periodo indicado.");
     }//GEN-LAST:event_btnOfertaAcademicaMouseEntered
 
     private void btnOfertaAcademicaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOfertaAcademicaMouseExited
