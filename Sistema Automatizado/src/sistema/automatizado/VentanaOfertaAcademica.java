@@ -390,12 +390,11 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
     }
          
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
         capturarNumeroSecciones();
         auxAsignatura = (String) jComboBox1.getSelectedItem();
         auxCod = asignaturas.get(BuscarMateria(auxAsignatura)).getCodigo()+"";
-        
-        OperacionesBD.addOferta(auxCod,Integer.parseInt(jTextField1.getText()),usuario.getNombre(),usuario.getClave());
-       
+     
        
        int auxSecciones = Integer.parseInt(jTextField1.getText());
        int elemento = BuscarMateria(auxAsignatura);
@@ -432,6 +431,9 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
             //Insertar nuevo nodo objeto oferta
             padre.listaOferta.add(auxOferta);
             
+            //AQUI EL PARCHE hashdhas x.x
+            OperacionesBD.addOferta(auxCod,Integer.parseInt(jTextField1.getText()),usuario.getNombre(),usuario.getClave());
+            padre.listaOferta = OperacionesBD.getOferta(usuario.getNombre(), usuario.getClave());
             limpiar();
         }else{
            JOptionPane.showMessageDialog(rootPane,"Esta materia ya fue registrada", "ADVERTENCIA", 0);
