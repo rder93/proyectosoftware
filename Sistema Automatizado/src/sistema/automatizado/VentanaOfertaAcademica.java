@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import static sistema.automatizado.Ventana.usuario;
 
 
@@ -433,6 +432,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
 
             //Insertar nuevo nodo objeto oferta
             padre.listaOferta.add(auxOferta);
+            
             limpiar();
         }else{
            JOptionPane.showMessageDialog(rootPane,"Esta materia ya fue registrada", "ADVERTENCIA", 0);
