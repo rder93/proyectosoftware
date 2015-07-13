@@ -48,6 +48,38 @@ public class OperacionesBD {
         return null;
     }
     
+    public static ArrayList<Seccion> getSeccion(String usuario, String clave){
+        
+        ArrayList<Seccion> secciones = new  ArrayList<Seccion>();
+        
+        try {
+            ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
+            Connection cn = conexion.conectar();
+            Statement st = cn.createStatement();
+            String sql = "SELECT * FROM secciones";
+            ResultSet rs = st.executeQuery(sql);
+            
+            while (rs.next()) {
+                
+                Seccion objSeccion = new Seccion(rs.getString("profesor"), rs.getString("lapso"), 
+                                                rs.getString("modalidad"), rs.getString("status"), 
+                                                rs.getBoolean("publicado"), rs.getString("cod_asignatura"), 
+                                                rs.getInt("n_seccion"));
+                
+                secciones.add(objSeccion);
+                
+            }
+           
+            return secciones;
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        
+        return null;
+    }
+    
+    
     public static ArrayList<Oferta> getOferta(String usuario, String clave){
         
         ArrayList<Oferta> oferta = new  ArrayList<Oferta>();

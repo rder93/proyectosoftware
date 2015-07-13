@@ -20,11 +20,12 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
     
     boolean condicion = false; //variable control
     DefaultTableModel modelo = new DefaultTableModel();
-    String [] secciones = new String [20];
+    //String [] secciones = new String [20];
     String auxCod = "";
     int posicion = 0;
     int indiceFilaEditar = 0; //Ubicación de la fila que se desea editar
     ArrayList<Asignatura> asignaturas = new  ArrayList<Asignatura>();
+    ArrayList<Seccion> listaSeccion = new  ArrayList<Seccion>();
     
     
     
@@ -559,9 +560,11 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             
+            listaSeccion = OperacionesBD.getSeccion(usuario.getNombre(), usuario.getClave());
             Oferta oferta = padre.listaOferta.get(jTable1.getSelectedRow());
-            VentanaOfertaDetalle ventanaDetalle = new VentanaOfertaDetalle(oferta);
-            //ventanaDetalle.generarColumnas();
+            VentanaOfertaDetalle ventanaDetalle = new VentanaOfertaDetalle(oferta,listaSeccion);
+            System.out.println(""+listaSeccion.size());
+
             ventanaDetalle.setVisible(true);
             
         } catch (Exception e) {

@@ -13,24 +13,39 @@ package sistema.automatizado;
 public class Seccion {
     
     private String profesor;
+    private String lapso;
+    private String modalidad;
+    private String status;
+    private boolean publicado;
     private String cod_asignatura;
     private int nro;
 
-    public Seccion(String profesor, String cod_asignatura, int nro) {
+    public Seccion(String profesor, String lapso, String modalidad, String status, boolean publicado, String cod_asignatura, int nro) {
         this.profesor = profesor;
+        this.lapso = lapso;
+        this.modalidad = modalidad;
+        this.status = status;
+        this.publicado = publicado;
         this.cod_asignatura = cod_asignatura;
         this.nro = nro;
     }
 
+    public Seccion(String profesor,String cod_asignatura,int nro){
+        this.profesor = profesor;
+        this.cod_asignatura = cod_asignatura;
+        this.nro = nro;
+    }
+    
+    public Seccion(){
+        
+    }
+    
     public int getNro() {
         return nro;
     }
 
     public void setNro(int nro) {
         this.nro = nro;
-    }
-
-    public Seccion() {
     }
 
     public String getCod_asignatura() {
@@ -45,10 +60,8 @@ public class Seccion {
         return profesor;
     }
 
-    public void setProfesor(String profesor) {
-        this.profesor = profesor;
+    public void setProfesor(String id_profesor) {
+        this.profesor = id_profesor;
     }
-    
-    
     
 }

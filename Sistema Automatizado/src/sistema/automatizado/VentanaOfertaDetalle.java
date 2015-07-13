@@ -8,6 +8,7 @@ package sistema.automatizado;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -21,22 +22,24 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
      * Creates new form VentanaOfertaDetalle
      */
     public Oferta oferta;
+    public Ventana padre;
     DefaultTableModel modelo = new DefaultTableModel();
     String [] secciones = new String [20];
-    public VentanaOfertaDetalle(Oferta oferta) {
+    ArrayList<Seccion> listaSeccion = new  ArrayList<Seccion>();
+    
+    public VentanaOfertaDetalle(Oferta oferta, ArrayList<Seccion> listaSeccion) {
         initComponents();
-        this.oferta = oferta;
-        
-        
+        this.oferta = oferta; 
         Image icono = Toolkit.getDefaultToolkit().getImage("logo.png");
         this.setIconImage(icono);
         setTitle("Detalle asignatura");
         this.setLocationRelativeTo(null);
         getContentPane().setBackground(new java.awt.Color(255,255,255));
-        jLabel2.setText(""+oferta.getNroSecciones());
+        this.listaSeccion = listaSeccion;
+        jLabel2.setText(""+oferta.getCodigo());
         
         jTable1.setModel(modelo);
-       // modelo.addColumn("Secciones");
+        // modelo.addColumn("Secciones");
         generarColumnas();
         
     }
@@ -92,7 +95,7 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel2.setText("SECCIONES:");
+        jLabel2.setText("ASIGNATURA:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,22 +103,22 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 835, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addComponent(jLabel2)
-                .addContainerGap(673, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 825, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addGap(0, 146, Short.MAX_VALUE))
+                .addGap(9, 9, 9)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 202, Short.MAX_VALUE))
         );
 
         pack();
@@ -136,9 +139,50 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
             }
             
             jTable1.setModel(modelo);
-
+            cargar();
     }
-    
+     
+     public void cargar(){
+         
+         String [] aux = new String[14];
+         modelo = (DefaultTableModel) jTable1.getModel();
+         this.modelo.setNumRows(0);
+         
+         int posicion = 0;
+         
+         
+         for (int i = 0; i < listaSeccion.size()  ; i++) {
+             
+             if(oferta.getCodigo().equals(listaSeccion.get(i).getCod_asignatura())){
+                
+                 if(listaSeccion.get(i).getProfesor() == null)
+                     aux[posicion] = "Por Asignar";
+                 else
+                    aux[posicion] = listaSeccion.get(i).getProfesor()+"";
+                 posicion++;
+             }
+              
+             
+         }
+
+         modelo.addRow(new Object[]{aux[0],
+                                    aux[1],
+                                    aux[2],
+                                    aux[3],
+                                    aux[4],
+                                    aux[5],
+                                    aux[6],
+                                    aux[7],
+                                    aux[8],
+                                    aux[9],
+                                    aux[10],
+                                    aux[11],
+                                    aux[12],
+                                    aux[13]});
+         
+         
+     }
+
     /**
      * @param args the command line arguments
      */
