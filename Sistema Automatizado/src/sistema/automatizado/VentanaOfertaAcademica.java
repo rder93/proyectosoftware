@@ -21,7 +21,6 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
     boolean condicion = false; //variable control
     DefaultTableModel modelo = new DefaultTableModel();
     String [] secciones = new String [20];
-    String auxAsignatura = "";
     String auxCod = "";
     int posicion = 0;
     int indiceFilaEditar = 0; //Ubicación de la fila que se desea editar
@@ -397,7 +396,6 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
         capturarNumeroSecciones();
-        auxAsignatura = (String) jComboBox1.getSelectedItem();
         auxCod = asignaturas.get(jComboBox1.getSelectedIndex()).getCodigo();
      
        
@@ -406,7 +404,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
        if( validarMateria(auxCod)==true ){
            
             //Nuevo objeto para insertar en la lista Oferta
-           Oferta auxOferta = new Oferta(auxAsignatura,auxCod,auxSecciones);
+           Oferta auxOferta = new Oferta(auxCod,"2015-01",auxSecciones);
 
             //Variable auxiliar para crear cadena de secciones
             //Se considera que existe un maximo de 14 secciones por x materia
@@ -486,12 +484,12 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
             if("".equals(jTextField1.getText())){
                 JOptionPane.showMessageDialog(rootPane,"Ingresar secciones", "ADVERTENCIA", 0);
             }else{
+                
                 //Auxiliares para crear nuevo objeto Oferta
                 int auxSecciones = Integer.parseInt(jTextField1.getText());
-                auxAsignatura = (String) jComboBox1.getSelectedItem();
                 auxCod = asignaturas.get(jComboBox1.getSelectedIndex()).getCodigo();
                 //Se crea nuevo objeto oferta 
-                Oferta auxOferta = new Oferta(auxAsignatura,auxCod,auxSecciones);
+                Oferta auxOferta = new Oferta(auxCod,"2015-01",auxSecciones);
 
                 //Variable auxiliar para crear cadena de secciones
                 //Se considera que existe un maximo de 14 secciones por x materia
@@ -521,9 +519,9 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
                 
                 //Se inserta el nuevo objeto en la lista con el fin de reemplazar el anterior
                 padre.listaOferta.set(indiceFilaEditar, auxOferta);
-                capturarNumeroSecciones();
-                OperacionesBD.setOferta(auxCod, auxSecciones, usuario.getNombre(), usuario.getClave());
                 
+                OperacionesBD.setOferta(auxCod, auxSecciones, usuario.getNombre(), usuario.getClave());
+                limpiar(); 
             }
             
              
