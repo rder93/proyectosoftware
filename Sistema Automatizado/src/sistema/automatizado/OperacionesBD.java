@@ -188,6 +188,24 @@ public class OperacionesBD {
             }
     }
     
+    public static void addProfesor(int cedula, String nombre, int area_conocimiento, int dedicacion, String usuario, String clave ){
+        
+        try {
+            ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
+            Connection cn = conexion.conectar();
+            Statement st = cn.createStatement();
+            String sql = "INSERT "
+                       + "INTO profesores values("+cedula+",'"+nombre+"',"+area_conocimiento+","+dedicacion+");";
+            
+            st.executeUpdate(sql);
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+ 
+        }
+    }
+    
+    
     public static boolean addAsignatura(String codigo, int uc, int hora, String nombre, String carrera, String departamento, int nivel, String usuario, String clave ){
         
         try {

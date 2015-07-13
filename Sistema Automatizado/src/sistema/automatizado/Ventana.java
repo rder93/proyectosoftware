@@ -388,7 +388,7 @@ public class Ventana extends javax.swing.JFrame{
         
         // obtener la lista oferta para cargarla en la tabla, el problema es que no se a la hora de poner cuantas secciones y eso
         listaOferta = OperacionesBD.getOferta(usuario.getNombre(), usuario.getClave());
-       
+        listaAsignaturas = OperacionesBD.getAsignaturas(usuario.getNombre(), usuario.getClave());
         
         if(listaOferta!=null){
             
