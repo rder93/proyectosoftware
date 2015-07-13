@@ -14,31 +14,14 @@ public class Oferta {
     
     private String asignatura;
     private String lapso;
-    private int profesor;
+    private String codigo;
     private int nroSecciones;
     private Seccion [] secciones = new Seccion[14]; 
 
-    public Oferta(String asignatura, int profesores, int nroSecciones) {
-        this.secciones = new Seccion [14];
+    public Oferta(String asignatura, String codigo, int nroSecciones) {
         this.asignatura = asignatura;
         this.lapso = "2015-01";
-        this.profesor = profesores;
-        this.nroSecciones = nroSecciones;
-    }
-
-    public Oferta(String asignatura, String lapso, int profesor, int nroSecciones) {}{
-        this.secciones = new Seccion [14];
-        this.asignatura = asignatura;
-        this.lapso = lapso;
-        this.profesor = profesor;
-        this.nroSecciones = nroSecciones;
-    }
-    
-    public Oferta(String asignatura, String lapso, int nroSecciones){
-        this.secciones = new Seccion [14];
-        this.asignatura = asignatura;
-        this.lapso = lapso;
-        this.profesor = 0; //luego vemos esto...
+        this.codigo = codigo;
         this.nroSecciones = nroSecciones;
     }
     
@@ -46,7 +29,6 @@ public class Oferta {
         this.secciones = new Seccion [14];
         this.asignatura = "";
         this.lapso = "";
-        this.profesor = 0;
         this.nroSecciones = 0;
     }   
 
@@ -58,15 +40,7 @@ public class Oferta {
         this.nroSecciones = nroSecciones;
     }
     
-    public int getProfesor() {
-        return profesor;
-    }
-
-    public void setProfesor(int profesor) {
-        this.profesor = profesor;
-    }
-    
-    
+  
     public String getAsignatura() {
         return asignatura;
     }
@@ -91,4 +65,12 @@ public class Oferta {
         this.lapso = lapso;
     }
 
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+    
 }

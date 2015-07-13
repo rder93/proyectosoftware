@@ -6,10 +6,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import static sistema.automatizado.Ventana.usuario;
 
 
@@ -20,8 +18,6 @@ import static sistema.automatizado.Ventana.usuario;
  */
 public class VentanaOfertaAcademica extends javax.swing.JFrame {
     
-    int nroSecciones = 0; //nuermo maximo de secciones en la tabla
-    int nroProfesores = 0; //Número de profesores
     boolean condicion = false; //variable control
     DefaultTableModel modelo = new DefaultTableModel();
     String [] secciones = new String [20];
@@ -46,12 +42,11 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
         setTitle("Oferta academica");
         this.setLocationRelativeTo(null);
         getContentPane().setBackground(new java.awt.Color(255,255,255));
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-             
         
         jTable1.setModel(modelo);
+        modelo.addColumn("Código");
         modelo.addColumn("Asignatura");
-        modelo.addColumn("Profesor");
+        modelo.addColumn("Nro. Secciones");
 
     }
 
@@ -74,9 +69,6 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 =  new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -87,6 +79,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jToggleButton1 = new javax.swing.JToggleButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -106,7 +99,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1393, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 845, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,30 +110,21 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
 
         jLabel3.setText("Número de secciones:");
 
-        jLabel4.setText("Número de profesores");
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/refresh-32.png"))); // NOI18N
-        jButton1.setText("REFRESCAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Asignatura", "Profesor"
+                "Código", "Asignatura", "Nro. Secciones"
             }
         ));
         jScrollPane2.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/add.png"))); // NOI18N
         jButton2.setText("AGREGAR");
@@ -174,6 +158,8 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
             }
         });
 
+        jToggleButton1.setText("jToggleButton1");
+
         jMenu1.setText("Docentes");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -196,38 +182,34 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1393, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 845, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(86, 86, 86)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
                                 .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(3, 3, 3)
                                 .addComponent(jButton4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton5))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jToggleButton1)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -239,20 +221,19 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
                         .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5))
-                    .addComponent(jButton3))
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton3)
+                        .addComponent(jButton5)
+                        .addComponent(jToggleButton1)))
                 .addGap(40, 40, 40)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(122, Short.MAX_VALUE))
         );
 
         pack();
@@ -260,15 +241,10 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
 
     public void limpiarInicio(){
         jComboBox1.removeAllItems(); //Materias
-        jComboBox2.removeAllItems(); //Numero de profesores
-    
     }
     
     public void limpiar(){
         
-        jComboBox2.setVisible(false);//Ocultar combobox
-        jLabel4.setVisible(false); //ocultar label
-        jButton2.setVisible(false); //Ocultar boton agregar
         jButton3.setVisible(false);//Ocultar boton eliminar
         jButton4.setVisible(true); //Restaurar boton editar
         jButton5.setVisible(false);//Ocultar boton listo
@@ -312,22 +288,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         } 
     
-    }
-      
-    /**
-     * Carga la lista de item en el jComboBox2
-     * @param aux número de secciones indicadas por el usuario
-     */
-    
-    public void cargarComboProfesores(int aux){
-        jComboBox2.removeAllItems(); //Quitar la vieja lista de items
-        for (int i = 0; i < aux; i++) {
-            jComboBox2.addItem(""+(i+1)); //Cargar la nueva lista
-        }   
-        jLabel4.setVisible(true); //Mostrar su respectivo label
-        jComboBox2.setVisible(true); //Mostrar su respectivo combobobx
-    }
-    
+    }    
     /**
      * Captura el número de secciones indicadas en el jTextField1
      */
@@ -341,20 +302,11 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
           JOptionPane.showMessageDialog(rootPane,"Campo vacío", "ADVERTENCIA", 0);
       }else{
           try {
+              //Se toma el número de secciones indicado
               aux = Integer.parseInt (jTextField1.getText());
-              if(aux>0){
-                if(nroSecciones< aux){
-                    nroSecciones = aux;
-                    condicion = true;
-                }else{
-                    condicion = false;
-                }
-                jButton2.setVisible(true);
-
-                cargarComboProfesores(aux);
-            }else{
+              if(aux<0 || aux==0)
                 JOptionPane.showMessageDialog(rootPane,"Verifique número de secciones", "ADVERTENCIA", 0);
-            }
+
           } catch (Exception e) {
               JOptionPane.showMessageDialog(rootPane,"Error en el ingreso de secciones", "ADVERTENCIA", 0);
           }
@@ -386,23 +338,55 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
     }
     
     
+       
     /**
-     * Captura el número de profesores indicado en el jComboBox2
-     * y lo almacena en la estructura.
+     * Refleja en el jTable1 la estructura
+     */
+    public void cargarJTable() {
+        Seccion [] auxCadenaSecciones = new Seccion[14];
+        this.modelo = (DefaultTableModel) this.jTable1.getModel();
+        this.modelo.setNumRows(0);
+        for ( int i=0; i<this.padre.listaOferta.size(); i++ ){
+            auxCadenaSecciones = padre.listaOferta.get(i).getSecciones();
+            
+            modelo.addRow(new Object[]{
+                            this.padre.listaOferta.get(i).getCodigo(),
+                            this.padre.listaOferta.get(i).getAsignatura(),
+                            this.padre.listaOferta.get(i).getNroSecciones()
+
+            });
+        }
+    }
+    
+    /**
+     * Elimina la fila seleccionada con el mouse luego de hacer click en el boton jButton3
      */
     
-    public void capturarNumeroprofesores(){
+    public void eliminarSeleccion(){
+        
+        //Item seleccionado
+        int indiceFila = jTable1.getSelectedRow();
+        //Se borra en el jtable
+        this.modelo = (DefaultTableModel)jTable1.getModel();
+        this.modelo.removeRow(indiceFila);
+        //Se borra en la lista de objetos
+        this.padre.listaOferta.remove(indiceFila);
+    }
+         
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        capturarNumeroSecciones();
+        auxAsignatura = (String) jComboBox1.getSelectedItem();
+        auxCod = asignaturas.get(BuscarMateria(auxAsignatura)).getCodigo()+"";
+        
+        OperacionesBD.addOferta(auxCod,Integer.parseInt(jTextField1.getText()),usuario.getNombre(),usuario.getClave());
        
-         //Variables auxiliares para rellenar el nuevo objeto
-       String auxAsignatura = (String) jComboBox1.getSelectedItem();
-       nroProfesores = Integer.parseInt((String) jComboBox2.getSelectedItem());
+       
        int auxSecciones = Integer.parseInt(jTextField1.getText());
        int elemento = BuscarMateria(auxAsignatura);
-       String auxCod = asignaturas.get(elemento).getCodigo()+"";
        
        if( validarMateria(auxAsignatura)==true ){
             //Nuevo objeto para insertar en la lista Oferta
-           Oferta auxOferta = new Oferta(auxAsignatura,nroProfesores,auxSecciones);
+           Oferta auxOferta = new Oferta(auxAsignatura,auxCod,auxSecciones);
 
             //Variable auxiliar para crear cadena de secciones
             //Se considera que existe un maximo de 14 secciones por x materia
@@ -430,103 +414,11 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
 
             //Insertar nuevo nodo objeto oferta
             padre.listaOferta.add(auxOferta);
+            limpiar();
         }else{
            JOptionPane.showMessageDialog(rootPane,"Esta materia ya fue registrada", "ADVERTENCIA", 0);
        }  
-          
-    }
-    
-    /**
-     * Refleja en el jTable1 la estructura
-     */
-    public void cargarJTable() {
-        Seccion [] auxCadenaSecciones = new Seccion[14];
-        this.modelo = (DefaultTableModel) this.jTable1.getModel();
-        this.modelo.setNumRows(0);
-        for ( int i=0; i<this.padre.listaOferta.size(); i++ ){
-            auxCadenaSecciones = padre.listaOferta.get(i).getSecciones();
-            
-            modelo.addRow(new Object[]{
-                            this.padre.listaOferta.get(i).getAsignatura(),
-                            this.padre.listaOferta.get(i).getProfesor()+"",
-                            (auxCadenaSecciones[0].isIndicador())?auxCadenaSecciones[0].getProfesor():"No cuenta",
-                            (auxCadenaSecciones[1].isIndicador())?auxCadenaSecciones[1].getProfesor():"No cuenta",
-                            (auxCadenaSecciones[2].isIndicador())?auxCadenaSecciones[2].getProfesor():"No cuenta",
-                            (auxCadenaSecciones[3].isIndicador())?auxCadenaSecciones[3].getProfesor():"No cuenta",
-                            (auxCadenaSecciones[4].isIndicador())?auxCadenaSecciones[4].getProfesor():"No cuenta",
-                            (auxCadenaSecciones[5].isIndicador())?auxCadenaSecciones[5].getProfesor():"No cuenta",
-                            (auxCadenaSecciones[6].isIndicador())?auxCadenaSecciones[6].getProfesor():"No cuenta",
-                            (auxCadenaSecciones[7].isIndicador())?auxCadenaSecciones[7].getProfesor():"No cuenta",
-                            (auxCadenaSecciones[8].isIndicador())?auxCadenaSecciones[8].getProfesor():"No cuenta",
-                            (auxCadenaSecciones[9].isIndicador())?auxCadenaSecciones[9].getProfesor():"No cuenta",
-                            (auxCadenaSecciones[10].isIndicador())?auxCadenaSecciones[10].getProfesor():"No cuenta",
-                            (auxCadenaSecciones[11].isIndicador())?auxCadenaSecciones[11].getProfesor():"No cuenta",
-                            (auxCadenaSecciones[12].isIndicador())?auxCadenaSecciones[12].getProfesor():"No cuenta",
-                            (auxCadenaSecciones[13].isIndicador())?auxCadenaSecciones[13].getProfesor():"No cuenta"
-                            /**
-                             * Los profesores se encuentran Por asignar hasta que jefatura los asigne
-                             * El campo que se muestra como No cuenta en la estrucutra es un ""
-                             */
-            });
-        }
-    }
-    
-    /**
-     * Elimina la fila seleccionada con el mouse luego de hacer click en el boton jButton3
-     */
-    
-    public void eliminarSeleccion(){
-        
-        //Item seleccionado
-        int indiceFila = jTable1.getSelectedRow();
-        //Se borra en el jtable
-        this.modelo = (DefaultTableModel)jTable1.getModel();
-        this.modelo.removeRow(indiceFila);
-        //Se borra en la lista de objetos
-        this.padre.listaOferta.remove(indiceFila);
-    }
-    
-    /**
-     * Genera la cantidad de columnas dependiendo de las secciones indicadas
-     */
-    
-    public void generarColumnas(){
-    
-        if(condicion == true){
-            TableColumn columna;
 
-            for (int i = posicion ; i < nroSecciones; i++,posicion++) {
-
-                secciones[i]="sección"+(i+1);
-                modelo.addColumn(""+secciones[i]);
-                columna = jTable1.getColumn(""+secciones[i]);
-                columna.setPreferredWidth(320);
-            }
-            
-            jTable1.setModel(modelo);
-        }
-        
-        cargarJTable();
-        
-        limpiar();
-    }
-    
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        capturarNumeroSecciones();
-    }//GEN-LAST:event_jButton1ActionPerformed
-    
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      
-        auxAsignatura = (String) jComboBox1.getSelectedItem();
-        auxCod = asignaturas.get(BuscarMateria(auxAsignatura)).getCodigo()+"";
-        
-        OperacionesBD.addOferta(auxCod,Integer.parseInt(jTextField1.getText()),usuario.getNombre(),usuario.getClave());
-        
-        capturarNumeroprofesores();
-       
-        generarColumnas();
-        
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -550,9 +442,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
             jTextField1.setVisible(true);
             jTextField1.setText(""+padre.listaOferta.get(jTable1.getSelectedRow()).getNroSecciones());
   
-            jComboBox2.setVisible(true);
             jComboBox1.setSelectedItem(padre.listaOferta.get(jTable1.getSelectedRow()).getAsignatura());
-            cargarComboProfesores(padre.listaOferta.get(jTable1.getSelectedRow()).getNroSecciones());
             
             jButton4.setVisible(false);
             jButton5.setVisible(true);
@@ -561,6 +451,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
          try {
@@ -572,11 +463,10 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
             }else{
                 //Auxiliares para crear nuevo objeto Oferta
                 int auxSecciones = Integer.parseInt(jTextField1.getText());
-                int auxProfesor = Integer.parseInt((String) jComboBox2.getSelectedItem());
                 auxAsignatura = (String) jComboBox1.getSelectedItem();
                 auxCod = asignaturas.get(BuscarMateria(auxAsignatura)).getCodigo()+"";
                 //Se crea nuevo objeto oferta 
-                Oferta auxOferta = new Oferta(auxAsignatura,auxProfesor,auxSecciones);
+                Oferta auxOferta = new Oferta(auxAsignatura,auxCod,auxSecciones);
 
                 //Variable auxiliar para crear cadena de secciones
                 //Se considera que existe un maximo de 14 secciones por x materia
@@ -603,13 +493,10 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
                 //Modificar el array secciones
                 auxOferta.setSecciones(auxCadenaSecciones);
 
-
-                //Esta linea es la unica diferencia con le funcion capturarNumeroprofesores()
                 //Se inserta el nuevo objeto en la lista con el fin de reemplazar el anterior
                 padre.listaOferta.set(indiceFilaEditar, auxOferta);
                 capturarNumeroSecciones();
-                generarColumnas();
-                OperacionesBD.setOferta(auxCod, nroSecciones, usuario.getNombre(), usuario.getClave());
+                OperacionesBD.setOferta(auxCod, auxSecciones, usuario.getNombre(), usuario.getClave());
                 
             }
             
@@ -682,17 +569,14 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -700,5 +584,6 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }
