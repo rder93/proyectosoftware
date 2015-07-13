@@ -385,6 +385,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
        int elemento = BuscarMateria(auxAsignatura);
        
        if( validarMateria(auxAsignatura)==true ){
+           
             //Nuevo objeto para insertar en la lista Oferta
            Oferta auxOferta = new Oferta(auxAsignatura,auxCod,auxSecciones);
 
