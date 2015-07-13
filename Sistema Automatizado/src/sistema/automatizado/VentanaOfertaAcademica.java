@@ -26,7 +26,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
     int indiceFilaEditar = 0; //Ubicación de la fila que se desea editar
     ArrayList<Asignatura> asignaturas = new  ArrayList<Asignatura>();
     
-    public VentanaOfertaDetalle ventanaDetalle = new VentanaOfertaDetalle(this);
+    
     
     public Ventana padre;
     public static Usuario usuario;
@@ -552,9 +552,18 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenu1MouseClicked
 
+   
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ventanaDetalle.setVisible(true);
+        try {
+            Oferta oferta = padre.listaOferta.get(jTable1.getSelectedRow());
+            VentanaOfertaDetalle ventanaDetalle = new VentanaOfertaDetalle(oferta);
+            ventanaDetalle.setVisible(true);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane,"Seleccione una materia de la tabla", "ADVERTENCIA", 0);
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
     
     
