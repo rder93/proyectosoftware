@@ -13,7 +13,7 @@ package sistema.automatizado;
 public class Seccion {
     
     private String profesor;
-    private String cod_asignatura;  
+    private String cod_asignatura;
     private int nro;
 
     public Seccion(String profesor, String cod_asignatura, int nro) {
