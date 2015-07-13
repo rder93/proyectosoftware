@@ -18,9 +18,7 @@ import static sistema.automatizado.Ventana.usuario;
  */
 public class VentanaOfertaAcademica extends javax.swing.JFrame {
     
-    boolean condicion = false; //variable control
     DefaultTableModel modelo = new DefaultTableModel();
-    //String [] secciones = new String [20];
     String auxCod = "";
     int posicion = 0;
     int indiceFilaEditar = 0; //Ubicación de la fila que se desea editar
@@ -297,31 +295,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
         } 
     
     }    
-    /**
-     * Captura el número de secciones indicadas en el jTextField1
-     */
-    public void capturarNumeroSecciones(){
-      
-      int condicionVacio = 1;
-      int aux = 0;
-      if("".equals(jTextField1.getText())) condicionVacio = 0; // Si está vacío
-      
-      if(condicionVacio == 0){
-          JOptionPane.showMessageDialog(rootPane,"Campo vacío", "ADVERTENCIA", 0);
-      }else{
-          try {
-              //Se toma el número de secciones indicado
-              aux = Integer.parseInt (jTextField1.getText());
-              if(aux<0 || aux==0)
-                JOptionPane.showMessageDialog(rootPane,"Verifique número de secciones", "ADVERTENCIA", 0);
 
-          } catch (Exception e) {
-              JOptionPane.showMessageDialog(rootPane,"Error en el ingreso de secciones", "ADVERTENCIA", 0);
-          }
-      }//fin else
-    
-    }
-    
     /**
      * Valida las materias que ya han sido registradas
      */
@@ -349,8 +323,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
         }
         return -1; //error
     }
-    
-    
+
        
     /**
      * Refleja en el jTable1 la estructura
@@ -393,52 +366,46 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
          
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
-        capturarNumeroSecciones();
-        auxCod = asignaturas.get(jComboBox1.getSelectedIndex()).getCodigo();
-     
-       
-       int auxSecciones = Integer.parseInt(jTextField1.getText());
-       
-       if( validarMateria(auxCod)==true ){
+      int condicionVacio = 1;
+      int auxSecciones = 0;
+      if("".equals(jTextField1.getText())) condicionVacio = 0; // Si está vacío
+      
+      if(condicionVacio == 0){
+          //Error está vacío
+          JOptionPane.showMessageDialog(rootPane,"Campo vacío", "ADVERTENCIA", 0);
+      }else{
+          try {
+              //Se toma el número de secciones indicado
+              auxSecciones = Integer.parseInt (jTextField1.getText());
+              if(auxSecciones<=0){
+                JOptionPane.showMessageDialog(rootPane,"Verifique número de secciones", "ADVERTENCIA", 0);
+              }else{
+                  //Es un número y no está vacío
+                  auxCod = asignaturas.get(jComboBox1.getSelectedIndex()).getCodigo();
+                  if( validarMateria(auxCod)==true ){
            
-            //Nuevo objeto para insertar en la lista Oferta
-           Oferta auxOferta = new Oferta(auxCod,"2015-01",auxSecciones);
+                    //Nuevo objeto para insertar en la lista Oferta
+                   Oferta auxOferta = new Oferta(auxCod,"2015-01",auxSecciones);
 
-            //Variable auxiliar para crear cadena de secciones
-            //Se considera que existe un maximo de 14 secciones por x materia
-            Seccion [] auxCadenaSecciones = new Seccion[14]; 
+                    //Insertar nuevo nodo objeto oferta
+                    padre.listaOferta.add(auxOferta);
 
-            for (int i = 0; i < 14; i++) {
+                    OperacionesBD.addOferta(auxCod,Integer.parseInt(jTextField1.getText()),usuario.getNombre(),usuario.getClave());
 
-                if(i< auxSecciones ){
-                        
-                        //True= de ser parte de las secciones que escogio
-                        auxCadenaSecciones[i]=new Seccion("Por asignar",auxCod,(i+1));
+                    padre.listaOferta = OperacionesBD.getOferta(usuario.getNombre(), usuario.getClave());
+
+                    limpiar();
                 }else{
-                        //False = de no ser parte de las secciones que escogio
-                        auxCadenaSecciones[i]=new Seccion("","",0);
+                   JOptionPane.showMessageDialog(rootPane,"Esta materia ya fue registrada", "ADVERTENCIA", 0);
                 }
-                /**
-                 * Ejemplo: Si escoge 4
-                 * Los primeros 4 son true
-                 * Los siguientes 10 son false
-                 **/
-            }
+              
+              }
 
-            //Modificar el array secciones
-            auxOferta.setSecciones(auxCadenaSecciones);
-
-            //Insertar nuevo nodo objeto oferta
-            padre.listaOferta.add(auxOferta);
-            
-            //AQUI EL PARCHE hashdhas x.x
-            OperacionesBD.addOferta(auxCod,Integer.parseInt(jTextField1.getText()),usuario.getNombre(),usuario.getClave());
-            padre.listaOferta = OperacionesBD.getOferta(usuario.getNombre(), usuario.getClave());
-            limpiar();
-        }else{
-           JOptionPane.showMessageDialog(rootPane,"Esta materia ya fue registrada", "ADVERTENCIA", 0);
-       }  
-
+          } catch (Exception e) {
+              JOptionPane.showMessageDialog(rootPane,"Error en el ingreso de secciones", "ADVERTENCIA", 0);
+          }
+      }//fin else
+        
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -490,32 +457,6 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
                 auxCod = asignaturas.get(jComboBox1.getSelectedIndex()).getCodigo();
                 //Se crea nuevo objeto oferta 
                 Oferta auxOferta = new Oferta(auxCod,"2015-01",auxSecciones);
-
-                //Variable auxiliar para crear cadena de secciones
-                //Se considera que existe un maximo de 14 secciones por x materia
-                Seccion [] auxCadenaSecciones = new Seccion[14]; 
-
-                for (int i = 0; i < 14; i++) {
-
-                if(i< auxSecciones ){
-                    
-                    //True= de ser parte de las secciones que escogio
-                    auxCadenaSecciones[i]=new Seccion("Por asignar",auxCod,(i+1));
-                }else{
-
-                    //False = de no ser parte de las secciones que escogio
-                    auxCadenaSecciones[i]=new Seccion("","",0);
-                }
-                /**
-                 * Ejemplo: Si escoge 4
-                 * Los primeros 4 son true
-                 * Los siguientes 10 son false
-                 **/
-                }
-
-                
-                //Modificar el array secciones
-                auxOferta.setSecciones(auxCadenaSecciones);
                 
                 //Se inserta el nuevo objeto en la lista con el fin de reemplazar el anterior
                 padre.listaOferta.set(indiceFilaEditar, auxOferta);
@@ -532,8 +473,6 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    
-    //ESTOS DOS EVENTOS HAY QUE MODIFICARLOS
     
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
         // TODO add your handling code here:
