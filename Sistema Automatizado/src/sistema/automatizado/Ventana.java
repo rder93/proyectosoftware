@@ -390,7 +390,7 @@ public class Ventana extends javax.swing.JFrame{
         listaOferta = OperacionesBD.getOferta(usuario.getNombre(), usuario.getClave());
        
         
-        if(listaAsignaturas!=null){
+        if(listaOferta!=null){
             
             ventanaofertaacademica.usuario = new Usuario();      
             ventanaofertaacademica.usuario.setNombre(usuario.getNombre());

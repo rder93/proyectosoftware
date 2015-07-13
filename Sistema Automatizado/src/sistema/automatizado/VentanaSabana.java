@@ -454,28 +454,18 @@ public class VentanaSabana extends javax.swing.JFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        
-        for (int i = 0; i < this.asignaturas.size(); i++) {
-            if (this.asignaturas.get(i).getNombre().equals(this.jComboBox1.getSelectedItem().toString()) ){
-               // if (padre.listaOferta.get(i).getAsignatura().equals(this.asignaturas.get(i).getCodigo())) {
-                    
-                    
-                    
-                    
-                    cargarjComboBox2( padre.listaOferta.get(i).getNroSecciones());
-                    this.modelo = (DefaultTableModel) this.jTable2.getModel();
+        for (int i = 0; i < padre.listaOferta.size(); i++) {
+            if(this.asignaturas.get(jComboBox1.getSelectedIndex()).getCodigo().equals(padre.listaOferta.get(i).getCodigo())){
+                cargarjComboBox2( padre.listaOferta.get(i).getNroSecciones());
+                
+                this.modelo = (DefaultTableModel) this.jTable2.getModel();
                     this.modelo.setNumRows(0);
                     modelo.addRow(new Object[]{
-                        this.asignaturas.get(i).getNivel()+"",
-                        this.asignaturas.get(i).getCodigo()+"",
-                        this.asignaturas.get(i).getUc()+"",
-                        this.asignaturas.get(i).getHoras()+""
+                        this.asignaturas.get(jComboBox1.getSelectedIndex()).getNivel()+"",
+                        this.asignaturas.get(jComboBox1.getSelectedIndex()).getCodigo()+"",
+                        this.asignaturas.get(jComboBox1.getSelectedIndex()).getUc()+"",
+                        this.asignaturas.get(jComboBox1.getSelectedIndex()).getHoras()+""
                     });
-                break;   
-               // }
-                
-                
-            } else {
             }
         }
         
