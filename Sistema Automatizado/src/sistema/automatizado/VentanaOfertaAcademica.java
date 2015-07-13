@@ -433,6 +433,8 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
             //Insertar nuevo nodo objeto oferta
             padre.listaOferta.add(auxOferta);
             
+            //AQUI SE DEBE CREAR EL OBJETO ASIGNATURA <---------------------
+            
             limpiar();
         }else{
            JOptionPane.showMessageDialog(rootPane,"Esta materia ya fue registrada", "ADVERTENCIA", 0);
@@ -509,9 +511,11 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
                  **/
                 }
 
+                 //AQUI SE DEBE MODIFICAR EL OBJETO ASIGNATURA <---------------------
+                
                 //Modificar el array secciones
                 auxOferta.setSecciones(auxCadenaSecciones);
-
+                
                 //Se inserta el nuevo objeto en la lista con el fin de reemplazar el anterior
                 padre.listaOferta.set(indiceFilaEditar, auxOferta);
                 capturarNumeroSecciones();
