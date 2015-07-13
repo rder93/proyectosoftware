@@ -447,6 +447,8 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(rootPane,"No se puede realizar esta acción", "ADVERTENCIA", 0);
         }else{
             eliminarSeleccion();
+            OperacionesBD.deleteOferta(asignaturas.get(jComboBox1.getSelectedIndex()).getCodigo(),
+                                        Integer.parseInt(jTextField1.getText()),usuario.getNombre(), usuario.getClave());
             limpiar();
         } 
     }//GEN-LAST:event_jButton3ActionPerformed

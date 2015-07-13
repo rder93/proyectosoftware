@@ -176,16 +176,15 @@ public class OperacionesBD {
     
     
     public static void setOferta(String codigo, int nSecciones, String usuario, String clave ){
-        
-        
+
         
         try {
             ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
             Connection cn = conexion.conectar();
             Statement st = cn.createStatement();
-            String sql = "UPDATE asignaturas "
-                       + " SET lapso = '2015-01',"
-                       + " cant_secciones = "+nSecciones+","
+            String sql = "UPDATE oferta_academica "
+                       + "SET lapso = '2015-01',"
+                       + "cant_secciones = "+nSecciones+" "
                        + "WHERE cod_asignatura = '"+codigo+"'";
   
             st.executeUpdate(sql);
@@ -223,6 +222,30 @@ public class OperacionesBD {
             return false;
         }
     }
+    
+    public static boolean deleteOferta(String codigo, int nSecciones, String usuario, String clave ){
+        
+        try {
+            ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
+            Connection cn = conexion.conectar();
+            Connection cn2 = conexion.conectar();
+            Statement st = cn.createStatement();
+            Statement st2 = cn2.createStatement();
+            String sql = "DELETE "
+                       + "FROM oferta_academica "
+                       + "WHERE cod_asignatura = '"+codigo+"'";
+            String sql2 = "DELETE FROM secciones WHERE cod_asignatura='"+codigo+"'";
+            
+            st2.executeUpdate(sql2);
+            return st.executeUpdate(sql)>0;
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            
+            return false;
+        }
+    }
+    
     
     public static boolean deleteAsignatura(String codigo, String usuario, String clave ){
         
