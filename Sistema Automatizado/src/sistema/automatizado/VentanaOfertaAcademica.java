@@ -354,13 +354,39 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
         for ( int i=0; i<this.padre.listaOferta.size(); i++ ){
             auxCadenaSecciones = padre.listaOferta.get(i).getSecciones();
             
+            /**
+             * 
+             * NO SE QUE ES ESTO HAHAH
+            */
+            
+            /*
             modelo.addRow(new Object[]{
                             this.padre.listaOferta.get(i).getCodigo(),
                             this.padre.listaOferta.get(i).getAsignatura(),
                             this.padre.listaOferta.get(i).getNroSecciones()
 
-            });
+            });*/
         }
+        
+        /*
+        * Pregunta de las dos listas para que sean iguales el codigo
+        *
+        */
+        
+        for (int i = 0; i < padre.listaOferta.size(); i++) {
+                
+            for (int j = 0; j < asignaturas.size(); j++) {
+                
+                if(padre.listaOferta.get(i).getAsignatura().equals(asignaturas.get(j).getCodigo())){
+                    
+                    Oferta aux = padre.listaOferta.get(i);
+                    modelo.addRow(new Object[]{aux.getAsignatura(),asignaturas.get(i).getNombre(),aux.getNroSecciones()});
+                   
+                }
+            }
+            
+        }
+        
     }
     
     /**
