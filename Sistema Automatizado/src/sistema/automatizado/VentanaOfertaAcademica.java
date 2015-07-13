@@ -412,10 +412,10 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
                 if(i< auxSecciones ){
                         
                         //True= de ser parte de las secciones que escogio
-                        auxCadenaSecciones[i]=new Seccion(true,"Por asignar",auxCod);
+                        auxCadenaSecciones[i]=new Seccion("Por asignar",auxCod,(i+1));
                 }else{
                         //False = de no ser parte de las secciones que escogio
-                        auxCadenaSecciones[i]=new Seccion(false,"","");
+                        auxCadenaSecciones[i]=new Seccion("","",0);
                 }
                 /**
                  * Ejemplo: Si escoge 4
@@ -499,11 +499,11 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
                 if(i< auxSecciones ){
                     
                     //True= de ser parte de las secciones que escogio
-                    auxCadenaSecciones[i]=new Seccion(true,"Por asignar",auxCod);
+                    auxCadenaSecciones[i]=new Seccion("Por asignar",auxCod,(i+1));
                 }else{
 
                     //False = de no ser parte de las secciones que escogio
-                    auxCadenaSecciones[i]=new Seccion(false,"","");
+                    auxCadenaSecciones[i]=new Seccion("","",0);
                 }
                 /**
                  * Ejemplo: Si escoge 4

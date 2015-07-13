@@ -12,32 +12,25 @@ package sistema.automatizado;
  */
 public class Seccion {
     
-    private boolean indicador;
     private String profesor;
-    private String cod_asignatura;        
+    private String cod_asignatura;  
+    private int nro;
 
-    public Seccion(boolean indicador, String profesor) {
-        this.indicador = indicador;
-        this.profesor = profesor;
-    }
-
-    public Seccion(boolean indicador, String profesor, String cod_asignatura) {
-        this.indicador = indicador;
+    public Seccion(String profesor, String cod_asignatura, int nro) {
         this.profesor = profesor;
         this.cod_asignatura = cod_asignatura;
-    }
-    
-    public Seccion() {
-        this.indicador = false;
-        this.profesor = "";
-    }
-    
-    public boolean isIndicador() {
-        return indicador;
+        this.nro = nro;
     }
 
-    public void setIndicador(boolean indicador) {
-        this.indicador = indicador;
+    public int getNro() {
+        return nro;
+    }
+
+    public void setNro(int nro) {
+        this.nro = nro;
+    }
+
+    public Seccion() {
     }
 
     public String getCod_asignatura() {
