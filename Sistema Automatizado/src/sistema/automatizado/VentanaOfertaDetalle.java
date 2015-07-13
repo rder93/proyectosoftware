@@ -9,6 +9,7 @@ package sistema.automatizado;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -20,8 +21,8 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
      * Creates new form VentanaOfertaDetalle
      */
     public Oferta oferta;
-
-    
+    DefaultTableModel modelo = new DefaultTableModel();
+    String [] secciones = new String [20];
     public VentanaOfertaDetalle(Oferta oferta) {
         initComponents();
         this.oferta = oferta;
@@ -33,7 +34,11 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         getContentPane().setBackground(new java.awt.Color(255,255,255));
         jLabel2.setText(""+oferta.getNroSecciones());
- 
+        
+        jTable1.setModel(modelo);
+       // modelo.addColumn("Secciones");
+        generarColumnas();
+        
     }
 
     private VentanaOfertaDetalle() {
@@ -79,10 +84,10 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+                {null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -93,16 +98,14 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 835, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addComponent(jLabel2)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGap(101, 101, 101)
+                .addComponent(jLabel2)
+                .addContainerGap(673, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,6 +121,23 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     public void generarColumnas(){
+    
+            modelo = (DefaultTableModel) jTable1.getModel();
+            modelo.setNumRows(0);
+            TableColumn columna;
+
+            for (int i = 0 ; i < oferta.getNroSecciones(); i++) {
+
+                secciones[i]="sección"+(i+1);
+                modelo.addColumn(""+secciones[i]);
+                columna = jTable1.getColumn(""+secciones[i]);
+                
+            }
+            
+            jTable1.setModel(modelo);
+
+    }
     
     /**
      * @param args the command line arguments

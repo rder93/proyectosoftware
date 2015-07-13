@@ -561,7 +561,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
             
             Oferta oferta = padre.listaOferta.get(jTable1.getSelectedRow());
             VentanaOfertaDetalle ventanaDetalle = new VentanaOfertaDetalle(oferta);
-            
+            //ventanaDetalle.generarColumnas();
             ventanaDetalle.setVisible(true);
             
         } catch (Exception e) {
