@@ -14,7 +14,7 @@ import static sistema.automatizado.Ventana.usuario;
 
 /**
  *
- * @author Irene - Stalin :P
+ * @author Irene
  */
 public class VentanaOfertaAcademica extends javax.swing.JFrame {
     
@@ -328,24 +328,29 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
     /**
      * Valida las materias que ya han sido registradas
      */
-    public boolean validarMateria(String auxMateria){
+    public boolean validarMateria(String auxCod){
     
         for (int i = 0; i < padre.listaOferta.size(); i++) {
             
-            if( padre.listaOferta.get(i).getAsignatura().equals(auxMateria) ){
+            if( padre.listaOferta.get(i).getCodigo().equals(auxCod) ){
                 return false; //Ya fue registrada
             }   
         }
         return true; //No ha sido registrada
     }
     
-    public int BuscarMateria(String auxMateria){
+    
+    /**
+     * Retorna la posicion de una asignastura en la lista asignatura
+     * se buscar por el codigo que es comun en lista oferta y list asginatura
+     */
+    public int BuscarMateria(String auxCod){
         for (int i = 0; i < asignaturas.size(); i++) {
-            if( asignaturas.get(i).getNombre().equals(auxMateria) ){
-                return i;   
+            if( asignaturas.get(i).getCodigo().equals(auxCod) ){
+                return i;   //encontrado
             }
         }
-        return -1;
+        return -1; //error
     }
     
     
@@ -362,10 +367,10 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
                 
             for (int j = 0; j < asignaturas.size(); j++) {
                 
-                if(padre.listaOferta.get(i).getAsignatura().equals(asignaturas.get(j).getCodigo())){
+                if(padre.listaOferta.get(i).getCodigo().equals(asignaturas.get(j).getCodigo())){
                     
                     Oferta aux = padre.listaOferta.get(i);
-                    modelo.addRow(new Object[]{aux.getAsignatura(),asignaturas.get(j).getNombre(),aux.getNroSecciones()});
+                    modelo.addRow(new Object[]{aux.getCodigo(),asignaturas.get(j).getNombre(),aux.getNroSecciones()});
                     
                 }
             }
@@ -393,13 +398,12 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
         
         capturarNumeroSecciones();
         auxAsignatura = (String) jComboBox1.getSelectedItem();
-        auxCod = asignaturas.get(BuscarMateria(auxAsignatura)).getCodigo()+"";
+        auxCod = asignaturas.get(jComboBox1.getSelectedIndex()).getCodigo();
      
        
        int auxSecciones = Integer.parseInt(jTextField1.getText());
-       int elemento = BuscarMateria(auxAsignatura);
        
-       if( validarMateria(auxAsignatura)==true ){
+       if( validarMateria(auxCod)==true ){
            
             //Nuevo objeto para insertar en la lista Oferta
            Oferta auxOferta = new Oferta(auxAsignatura,auxCod,auxSecciones);
@@ -462,7 +466,8 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
             jTextField1.setVisible(true);
             jTextField1.setText(""+padre.listaOferta.get(jTable1.getSelectedRow()).getNroSecciones());
   
-            jComboBox1.setSelectedItem(padre.listaOferta.get(jTable1.getSelectedRow()).getAsignatura());
+            String auxCod = padre.listaOferta.get(jTable1.getSelectedRow()).getCodigo();
+            jComboBox1.setSelectedItem(asignaturas.get(BuscarMateria(auxCod)).getNombre());
             
             jButton4.setVisible(false);
             jButton5.setVisible(true);
@@ -484,7 +489,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
                 //Auxiliares para crear nuevo objeto Oferta
                 int auxSecciones = Integer.parseInt(jTextField1.getText());
                 auxAsignatura = (String) jComboBox1.getSelectedItem();
-                auxCod = asignaturas.get(BuscarMateria(auxAsignatura)).getCodigo()+"";
+                auxCod = asignaturas.get(jComboBox1.getSelectedIndex()).getCodigo();
                 //Se crea nuevo objeto oferta 
                 Oferta auxOferta = new Oferta(auxAsignatura,auxCod,auxSecciones);
 

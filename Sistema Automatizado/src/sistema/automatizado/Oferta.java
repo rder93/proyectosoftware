@@ -12,22 +12,20 @@ package sistema.automatizado;
  */
 public class Oferta {
     
-    private String asignatura;
-    private String lapso;
     private String codigo;
+    private String lapso;
     private int nroSecciones;
     private Seccion [] secciones = new Seccion[14]; 
 
-    public Oferta(String asignatura, String codigo, int nroSecciones) {
-        this.asignatura = asignatura;
-        this.lapso = "2015-01";
+    public Oferta(String codigo, String lapso, int nroSecciones) {
         this.codigo = codigo;
+        this.lapso = lapso;
         this.nroSecciones = nroSecciones;
     }
+
     
     public Oferta() {
         this.secciones = new Seccion [14];
-        this.asignatura = "";
         this.lapso = "";
         this.nroSecciones = 0;
     }   
@@ -40,14 +38,6 @@ public class Oferta {
         this.nroSecciones = nroSecciones;
     }
     
-  
-    public String getAsignatura() {
-        return asignatura;
-    }
-
-    public void setAsignatura(String Asignatura) {
-        this.asignatura = Asignatura;
-    }
 
     public Seccion[] getSecciones() {
         return secciones;

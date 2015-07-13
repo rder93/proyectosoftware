@@ -415,7 +415,7 @@ public class Ventana extends javax.swing.JFrame{
         
         listaOferta = OperacionesBD.getOferta(usuario.getNombre(), usuario.getClave());
         
-        JOptionPane.showMessageDialog(this, listaOferta.get(0).getAsignatura());
+        //JOptionPane.showMessageDialog(this, listaOferta.get(0).getAsignatura());
         
         if(listaOferta!=null){
             ventanasabana.usuario = new Usuario();      
