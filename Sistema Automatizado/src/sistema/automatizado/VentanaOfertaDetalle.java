@@ -20,8 +20,7 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
      * Creates new form VentanaOfertaDetalle
      */
     public Oferta oferta;
-    public int tamano = 0;
-    DefaultTableModel modelo = new DefaultTableModel();
+
     
     public VentanaOfertaDetalle(Oferta oferta) {
         initComponents();
@@ -33,8 +32,7 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
         setTitle("Detalle asignatura");
         this.setLocationRelativeTo(null);
         getContentPane().setBackground(new java.awt.Color(255,255,255));
-        
-        jTable1.setModel(modelo);
+ 
     }
 
     private VentanaOfertaDetalle() {
@@ -109,15 +107,6 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    void generarColumnas(){
-    
-        String [] secciones = oferta.setSecciones(secciones);
-        
-        for (int i = 0; i < tamano; i++) {
-            modelo.addColumn("Seccion"+1);
-        }
-        tamano = 0;    
-    }
     
     /**
      * @param args the command line arguments
