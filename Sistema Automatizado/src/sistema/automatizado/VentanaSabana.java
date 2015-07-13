@@ -56,6 +56,7 @@ public class VentanaSabana extends javax.swing.JFrame {
         jButton6.setBorderPainted(false);
         
         cargarDias();
+        limpiar();
         jLabel2.setText((String) distribucionSabana.get(posicionDia).getDia());
     }
 
@@ -322,6 +323,7 @@ public class VentanaSabana extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     /**
      * Carga el combobox con las secciones que se han creado para esa materia
      */
@@ -335,9 +337,9 @@ public class VentanaSabana extends javax.swing.JFrame {
     public void limpiar(){
         
         jComboBox1.removeAllItems(); //Materias
-       
+        jComboBox2.removeAllItems(); //secciones
+        this.modelo.setNumRows(0);
         
-        //cargarJTable(); //Para que la tabla se ajuste dependiendo de cada cambio
     }
     
     public void cargarInfo(String usuario, String clave){

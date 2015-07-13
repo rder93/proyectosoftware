@@ -421,6 +421,7 @@ public class Ventana extends javax.swing.JFrame{
             ventanasabana.usuario = new Usuario();      
             ventanasabana.usuario.setNombre(usuario.getNombre());
             ventanasabana.usuario.setClave(usuario.getClave());
+            ventanasabana.limpiar();
             ventanasabana.cargarInfo(usuario.getNombre(), usuario.getClave());
             ventanasabana.cargarAsig(usuario.getNombre(), usuario.getClave());
             ventanasabana.setVisible(true);
