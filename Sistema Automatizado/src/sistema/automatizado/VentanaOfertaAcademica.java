@@ -357,7 +357,6 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
         Seccion [] auxCadenaSecciones = new Seccion[14];
         this.modelo = (DefaultTableModel) jTable1.getModel();
         this.modelo.setNumRows(0);
-
         
         for (int i = 0; i < padre.listaOferta.size(); i++) {
                 
@@ -366,8 +365,8 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
                 if(padre.listaOferta.get(i).getAsignatura().equals(asignaturas.get(j).getCodigo())){
                     
                     Oferta aux = padre.listaOferta.get(i);
-                    this.modelo.addRow(new Object[]{aux.getAsignatura(),asignaturas.get(j).getNombre(),aux.getNroSecciones()});
-                   
+                    modelo.addRow(new Object[]{aux.getAsignatura(),asignaturas.get(j).getNombre(),aux.getNroSecciones()});
+                    
                 }
             }
             
@@ -432,8 +431,6 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
 
             //Insertar nuevo nodo objeto oferta
             padre.listaOferta.add(auxOferta);
-            
-            //AQUI SE DEBE CREAR EL OBJETO ASIGNATURA <---------------------
             
             limpiar();
         }else{
@@ -511,7 +508,6 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
                  **/
                 }
 
-                 //AQUI SE DEBE MODIFICAR EL OBJETO ASIGNATURA <---------------------
                 
                 //Modificar el array secciones
                 auxOferta.setSecciones(auxCadenaSecciones);
