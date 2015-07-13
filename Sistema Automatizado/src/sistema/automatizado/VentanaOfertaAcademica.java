@@ -378,9 +378,9 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
             for (int j = 0; j < asignaturas.size(); j++) {
                 
                 if(padre.listaOferta.get(i).getAsignatura().equals(asignaturas.get(j).getCodigo())){
-                    
+                    JOptionPane.showMessageDialog(this, "es igual "+j);
                     Oferta aux = padre.listaOferta.get(i);
-                    modelo.addRow(new Object[]{aux.getAsignatura(),asignaturas.get(i).getNombre(),aux.getNroSecciones()});
+                    modelo.addRow(new Object[]{aux.getAsignatura(),asignaturas.get(j).getNombre(),aux.getNroSecciones()});
                    
                 }
             }
