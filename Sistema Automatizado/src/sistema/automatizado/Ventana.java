@@ -395,7 +395,6 @@ public class Ventana extends javax.swing.JFrame{
             ventanaofertaacademica.usuario = new Usuario();      
             ventanaofertaacademica.usuario.setNombre(usuario.getNombre());
             ventanaofertaacademica.usuario.setClave(usuario.getClave());
-            ventanaofertaacademica.limpiarInicio();
             ventanaofertaacademica.cargar(usuario.getNombre(), usuario.getClave()); 
             ventanaofertaacademica.limpiar();
             ventanaofertaacademica.setVisible(true);
