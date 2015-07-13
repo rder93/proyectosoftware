@@ -90,6 +90,7 @@ public class VentanaSabana extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jComboBox2 = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -204,6 +205,13 @@ public class VentanaSabana extends javax.swing.JFrame {
 
         jLabel7.setText("Nro. secciones:");
 
+        jButton3.setText("Limpiar");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButton3MouseReleased(evt);
+            }
+        });
+
         jMenu4.setText("Archivo");
 
         jMenuItem2.setText("Salir");
@@ -265,7 +273,9 @@ public class VentanaSabana extends javax.swing.JFrame {
                                         .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(76, 76, 76))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
@@ -298,7 +308,9 @@ public class VentanaSabana extends javax.swing.JFrame {
                             .addComponent(jLabel7))))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton2)
+                        .addComponent(jButton3))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -498,7 +510,6 @@ public class VentanaSabana extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu2MouseClicked
 
     private void jButton2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseReleased
-        // TODO add your handling code here:
         int rows[] = this.jTable1.getSelectedRows();
         int columns[] = this.jTable1.getSelectedColumns();
         
@@ -509,6 +520,18 @@ public class VentanaSabana extends javax.swing.JFrame {
                     this.jTable1.setValueAt("HOLA", i, j);
         }
     }//GEN-LAST:event_jButton2MouseReleased
+
+    private void jButton3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseReleased
+        int rows[] = this.jTable1.getSelectedRows();
+        int columns[] = this.jTable1.getSelectedColumns();
+        
+        if ( (rows.length != 0) && (columns.length != 0) )
+        {
+            for ( int i=rows[0]; i<=rows[rows.length-1]; i++ )
+                for ( int j=columns[0]; j<=columns[columns.length-1]; j++ )
+                    this.jTable1.setValueAt("", i, j);
+        }
+    }//GEN-LAST:event_jButton3MouseReleased
 
     
     
@@ -551,6 +574,7 @@ public class VentanaSabana extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JComboBox jComboBox1;
