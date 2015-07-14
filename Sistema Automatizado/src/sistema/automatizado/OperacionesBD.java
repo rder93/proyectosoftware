@@ -61,7 +61,7 @@ public class OperacionesBD {
             
             while (rs.next()) {
                 
-                Seccion objSeccion = new Seccion(rs.getString("profesor"), rs.getString("lapso"), 
+                Seccion objSeccion = new Seccion(rs.getInt("profesor"), rs.getString("lapso"), 
                                                 rs.getString("modalidad"), rs.getString("status"), 
                                                 rs.getBoolean("publicado"), rs.getString("cod_asignatura"), 
                                                 rs.getInt("n_seccion"));
@@ -171,6 +171,35 @@ public class OperacionesBD {
         return null;
     }
     
+    public static ArrayList<Areas> getAreas(String usuario, String clave){
+        
+        ArrayList<Areas> areas = new  ArrayList<Areas>();
+        
+        try {
+            ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
+            Connection cn = conexion.conectar();
+            Statement st = cn.createStatement();
+            String sql = "SELECT * FROM areas";
+            ResultSet rs = st.executeQuery(sql);
+            
+            while (rs.next()) {
+                
+  
+               Areas objAreas = new Areas(rs.getInt("cod_area"),rs.getString("nombre"),rs.getInt("cod_departamento"));
+                
+                areas.add(objAreas);
+                
+            }
+           
+            return areas;
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        
+        return null;
+    }
+    
     public static void addOferta(String codigo, int nSecciones, String usuario, String clave){
         
         try {
@@ -245,7 +274,25 @@ public class OperacionesBD {
         }
     }
     
-    
+    public static void setSeccion(int cedula, int nroSeccion, String usuario, String clave ){
+
+        
+        try {
+            ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
+            Connection cn = conexion.conectar();
+            Statement st = cn.createStatement();
+            String sql = "UPDATE secciones "
+                       + "SET profesor = "+cedula+" "
+                       + "WHERE n_seccion = "+nroSeccion+"";
+  
+            st.executeUpdate(sql);
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        
+        }
+    }
+
     
     public static boolean setAsignatura(String codigo, int uc, int hora, String nombre, String carrera, String departamento, int nivel, String usuario, String clave ){
         

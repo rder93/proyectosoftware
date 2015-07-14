@@ -12,7 +12,7 @@ package sistema.automatizado;
  */
 public class Seccion {
     
-    private String profesor;
+    private int profesor;
     private String lapso;
     private String modalidad;
     private String status;
@@ -20,7 +20,7 @@ public class Seccion {
     private String cod_asignatura;
     private int nro;
 
-    public Seccion(String profesor, String lapso, String modalidad, String status, boolean publicado, String cod_asignatura, int nro) {
+    public Seccion(int profesor, String lapso, String modalidad, String status, boolean publicado, String cod_asignatura, int nro) {
         this.profesor = profesor;
         this.lapso = lapso;
         this.modalidad = modalidad;
@@ -30,11 +30,6 @@ public class Seccion {
         this.nro = nro;
     }
 
-    public Seccion(String profesor,String cod_asignatura,int nro){
-        this.profesor = profesor;
-        this.cod_asignatura = cod_asignatura;
-        this.nro = nro;
-    }
     
     public Seccion(){
         
@@ -56,12 +51,45 @@ public class Seccion {
         this.cod_asignatura = cod_asignatura;
     }
 
-    public String getProfesor() {
+    public int getProfesor() {
         return profesor;
     }
 
-    public void setProfesor(String id_profesor) {
-        this.profesor = id_profesor;
+    public void setProfesor(int profesor) {
+        this.profesor = profesor;
     }
-    
+
+    public String getLapso() {
+        return lapso;
+    }
+
+    public void setLapso(String lapso) {
+        this.lapso = lapso;
+    }
+
+    public String getModalidad() {
+        return modalidad;
+    }
+
+    public void setModalidad(String modalidad) {
+        this.modalidad = modalidad;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public boolean isPublicado() {
+        return publicado;
+    }
+
+    public void setPublicado(boolean publicado) {
+        this.publicado = publicado;
+    }
+
+   
 }

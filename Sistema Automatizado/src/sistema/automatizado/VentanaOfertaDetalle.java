@@ -25,31 +25,39 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
     /**
      * Creates new form VentanaOfertaDetalle
      */
-    public Oferta oferta;
-    public Ventana padre;
-    public static Usuario usuario;
+   
+    
     DefaultTableModel modelo = new DefaultTableModel();
     String [] secciones = new String [20];
-    ArrayList<Seccion> listaSeccion = new  ArrayList<Seccion>();
-    ArrayList<Asignatura> listaAsignaturas = new  ArrayList<Asignatura>();
+  //  public ArrayList<Seccion> listaSeccion = new  ArrayList<Seccion>();
+  //  public ArrayList<Asignatura> listaAsignaturas = new  ArrayList<Asignatura>();
+   // public ArrayList<Docente> listaDocentes = new ArrayList<Docente> ();
     
-    public VentanaOfertaDetalle(Oferta oferta, ArrayList<Seccion> listaSeccion, ArrayList<Asignatura> listaAsignaturas) {
+    public Oferta oferta;
+    //public Ventana padre;
+    //public static Usuario usuario;
+    VentanaOfertaAcademica padre;
+    
+    public VentanaOfertaDetalle(VentanaOfertaAcademica padre) {
         initComponents();
-        this.oferta = oferta; 
-        this.listaAsignaturas = listaAsignaturas;
+        this.padre = padre;
+       // this.listaAsignaturas = listaAsignaturas;
+        //this.listaSeccion = listaSeccion;
+        //this.listaDocentes = listaDocentes;
+        
         Image icono = Toolkit.getDefaultToolkit().getImage("logo.png");
         this.setIconImage(icono);
         setTitle("Detalle asignatura");
         this.setLocationRelativeTo(null);
         getContentPane().setBackground(new java.awt.Color(255,255,255));
-        this.listaSeccion = listaSeccion;
-        jLabel2.setText(""+oferta.getCodigo());
+        
+        
+        
         
         jTable1.setModel(modelo);
         // modelo.addColumn("Secciones");
-        generarColumnas();
-        cargarjComboBox1();
-        cargarAreas(usuario.getNombre(), usuario.getClave());
+        
+        //cargarjComboBox2();
     }
 
     private VentanaOfertaDetalle() {
@@ -75,19 +83,11 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
         };
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
-        jLabel7 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox();
+        jComboBox2 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -128,8 +128,6 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
 
         jLabel3.setText("Código asignatura:");
 
-        jLabel4.setText("C.I:");
-
         jLabel5.setText("Sección:");
 
         jButton1.setText("Agregar profesor");
@@ -139,13 +137,9 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("Dedicacion:");
-
-        jLabel7.setText("Modalidad:");
-
         jLabel8.setText("Nombre:");
 
-        jLabel9.setText("Area de Conocimiento:");
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,35 +157,17 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel2))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jLabel8)
-                                            .addComponent(jLabel4))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                                            .addComponent(jTextField1)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel9))
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox4, 0, 136, Short.MAX_VALUE))))
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(184, 184, 184)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,31 +182,14 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         pack();
@@ -239,11 +198,11 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try {
-            int auxCedula = Integer.parseInt(jTextField1.getText());
+            int cedula = Integer.parseInt(padre.listaDocentes.get(jComboBox2.getSelectedIndex()).getCi());
             int auxSeccion = jComboBox1.getSelectedIndex()+1;
-            
-            OperacionesBD.addProfesor(auxCedula, jTextField2.getText(), auxSeccion, auxSeccion, auxCedula, auxCedula);
-            
+            //System.out.println(padre.usuario.getNombre());
+            OperacionesBD.setSeccion(cedula,oferta.getCodigo(), padre.usuario.getNombre(), padre.usuario.getClave());
+            padre.listaSeccion = OperacionesBD.getSeccion(padre.usuario.getNombre(), padre.usuario.getClave());
             
             //Se refresca la tabla
             cargar();
@@ -252,27 +211,28 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane,"Por favor revise la cédula introducida", "ADVERTENCIA", 0);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    public void cargarjComboBox2(Oferta oferta){
+        this.oferta = oferta;
+        jLabel2.setText(""+oferta.getCodigo());
+        jComboBox2.removeAllItems();
+        //System.out.println(""+listaDocentes.size());
+        for (int i = 0; i < padre.listaDocentes.size(); i++){
+            jComboBox2.addItem(padre.listaDocentes.get(i).getNombre());
+        }
+        generarColumnas();
+        cargarjComboBox1();
+    }
+    
     public void cargarjComboBox1(){
         
         jComboBox1.removeAllItems();
         for (int i = 0; i < oferta.getNroSecciones(); i++) {
             jComboBox1.addItem(""+(i+1));
         }
+       
+    }
 
-    }
-    
-    public void cargarAreas(String usuario, String clave){
-        
-        for (int i = 0; i <; i++) {
-            
-        }
-        jComboBox4.addItem();
-        
-        
-    }
-    
-    
      public void generarColumnas(){
     
             modelo = (DefaultTableModel) jTable1.getModel();
@@ -291,6 +251,16 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
             cargar();
     }
      
+     
+     public String buscarProfesor(int cedula){
+         
+         for (int i = 0; i < padre.listaDocentes.size(); i++) {
+             if(cedula ==Integer.parseInt(padre.listaDocentes.get(i).getCi()))
+                 return padre.listaDocentes.get(i).getNombre();
+         }
+         return null;
+     }
+     
      public void cargar(){
          
          String [] aux = new String[14];
@@ -300,14 +270,14 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
          int posicion = 0;
          
          
-         for (int i = 0; i < listaSeccion.size()  ; i++) {
+         for (int i = 0; i < padre.listaSeccion.size()  ; i++) {
              
-             if(oferta.getCodigo().equals(listaSeccion.get(i).getCod_asignatura())){
+             if(oferta.getCodigo().equals(padre.listaSeccion.get(i).getCod_asignatura())){
                 
-                 if(listaSeccion.get(i).getProfesor() == null)
+                 if(padre.listaSeccion.get(i).getProfesor() == 0)
                      aux[posicion] = "Por Asignar";
                  else
-                    aux[posicion] = listaSeccion.get(i).getProfesor()+"";
+                    aux[posicion] = buscarProfesor(padre.listaSeccion.get(i).getProfesor());
                  posicion++;
              }
               
@@ -371,21 +341,13 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
-    private javax.swing.JComboBox jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

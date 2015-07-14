@@ -24,8 +24,9 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
     int indiceFilaEditar = 0; //Ubicación de la fila que se desea editar
     ArrayList<Asignatura> asignaturas = new  ArrayList<Asignatura>();
     ArrayList<Seccion> listaSeccion = new  ArrayList<Seccion>();
+    ArrayList<Docente> listaDocentes = new  ArrayList<Docente>();
     
-    
+    VentanaOfertaDetalle ventanaDetalle = new VentanaOfertaDetalle(this);
     
     public Ventana padre;
     public static Usuario usuario;
@@ -500,10 +501,14 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
         try {
             
             listaSeccion = OperacionesBD.getSeccion(usuario.getNombre(), usuario.getClave());
+            listaDocentes = OperacionesBD.getDocentes(usuario.getNombre(), usuario.getClave());
+            
             Oferta oferta = padre.listaOferta.get(jTable1.getSelectedRow());
-            VentanaOfertaDetalle ventanaDetalle = new VentanaOfertaDetalle(oferta,listaSeccion);
-            System.out.println(""+listaSeccion.size());
 
+            
+            
+            ventanaDetalle.cargarjComboBox2(oferta);
+            
             ventanaDetalle.setVisible(true);
             
         } catch (Exception e) {
