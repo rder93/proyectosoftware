@@ -4,10 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/RICARDO/Documents/GitHub/proyectosoftware/Sistema%20Automatizado/src/sistema/automatizado/VentanaOfertaDetalle.java</file>
-            <file>file:/C:/Users/RICARDO/Documents/GitHub/proyectosoftware/Sistema%20Automatizado/src/sistema/automatizado/OperacionesBD.java</file>
-            <file>file:/C:/Users/RICARDO/Documents/GitHub/proyectosoftware/Sistema%20Automatizado/src/sistema/automatizado/VentanaAsignatura.java</file>
-            <file>file:/C:/Users/RICARDO/Documents/GitHub/proyectosoftware/Sistema%20Automatizado/src/sistema/automatizado/Ventana.java</file>
             <file>file:/C:/Users/RICARDO/Documents/GitHub/proyectosoftware/Sistema%20Automatizado/src/sistema/automatizado/VentanaOfertaAcademica.java</file>
+            <file>file:/C:/Users/RICARDO/Documents/GitHub/proyectosoftware/Sistema%20Automatizado/src/sistema/automatizado/OperacionesBD.java</file>
+            <file>file:/C:/Users/RICARDO/Documents/GitHub/proyectosoftware/Sistema%20Automatizado/src/sistema/automatizado/VentanaInicio.java</file>
+            <file>file:/C:/Users/RICARDO/Documents/GitHub/proyectosoftware/Sistema%20Automatizado/src/sistema/automatizado/ConexionPostgreSQL.java</file>
+            <file>file:/C:/Users/RICARDO/Documents/GitHub/proyectosoftware/Sistema%20Automatizado/src/sistema/automatizado/VentanaAsignatura.java</file>
         </group>
     </open-files>
 </project-private>

@@ -13,8 +13,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -28,7 +30,7 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
    
     
     DefaultTableModel modelo = new DefaultTableModel();
-    String [] secciones = new String [20];
+    
   //  public ArrayList<Seccion> listaSeccion = new  ArrayList<Seccion>();
   //  public ArrayList<Asignatura> listaAsignaturas = new  ArrayList<Asignatura>();
    // public ArrayList<Docente> listaDocentes = new ArrayList<Docente> ();
@@ -41,10 +43,6 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
     public VentanaOfertaDetalle(VentanaOfertaAcademica padre) {
         initComponents();
         this.padre = padre;
-       // this.listaAsignaturas = listaAsignaturas;
-        //this.listaSeccion = listaSeccion;
-        //this.listaDocentes = listaDocentes;
-        
         Image icono = Toolkit.getDefaultToolkit().getImage("logo.png");
         this.setIconImage(icono);
         setTitle("Detalle asignatura");
@@ -55,14 +53,126 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
         
         
         jTable1.setModel(modelo);
-        // modelo.addColumn("Secciones");
-        
-        //cargarjComboBox2();
+
     }
 
     private VentanaOfertaDetalle() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public void limpiarTabla(JTable tabla){
+         
+        try {
+            DefaultTableModel modelo=(DefaultTableModel) tabla.getModel();
+            TableColumnModel modCol = tabla.getColumnModel();
+            
+            int filas=tabla.getRowCount();
+            for (int i = 0; filas > i ; i++) {
+                modelo.removeRow(0);
+            }
+            
+            jTable1.setModel(new DefaultTableModel());
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
+        }
+        
+    }
+    
+    
+    public void cargarjComboBox2(Oferta oferta){
+        this.oferta = oferta;
+        jLabel2.setText(""+oferta.getCodigo());
+        jComboBox2.removeAllItems();
+        jComboBox1.removeAllItems();
+        //System.out.println(""+listaDocentes.size());
+        for (int i = 0; i < padre.listaDocentes.size(); i++){
+            jComboBox2.addItem(padre.listaDocentes.get(i).getNombre());
+        }
+        
+        for (int i = 0; i < oferta.getNroSecciones(); i++) {
+            jComboBox1.addItem(""+(i+1));
+        }
+        
+        System.out.println(""+oferta.getNroSecciones());
+        
+        generarColumnas();
+        
+    }
+
+     public void generarColumnas(){
+    
+            limpiarTabla(jTable1);
+
+            String [] secciones = new String [14];
+            modelo = (DefaultTableModel) jTable1.getModel();
+            modelo.setNumRows(0);
+            TableColumn columna;
+
+            for (int i = 0 ; i < oferta.getNroSecciones(); i++) {
+
+                secciones[i]="sección"+(i+1);
+                modelo.addColumn(""+secciones[i]);
+                columna = jTable1.getColumn(""+secciones[i]);
+                
+            }
+            
+            jTable1.setModel(modelo);
+            
+            cargar();
+    }
+     
+     
+     public String buscarProfesor(int cedula){
+         
+         for (int i = 0; i < padre.listaDocentes.size(); i++) {
+             if(cedula ==Integer.parseInt(padre.listaDocentes.get(i).getCi()))
+                 return padre.listaDocentes.get(i).getNombre();
+         }
+         return null;
+     }
+     
+     public void cargar(){
+
+         String [] aux = new String[14];
+         modelo = (DefaultTableModel) jTable1.getModel();
+         this.modelo.setNumRows(0);
+         
+         int posicion = 0;
+         
+         
+         for (int i = 0; i < padre.listaSeccion.size()  ; i++) {
+             
+             if(oferta.getCodigo().equals(padre.listaSeccion.get(i).getCod_asignatura())){
+                
+                 if(padre.listaSeccion.get(i).getProfesor() == 0)
+                     aux[posicion] = "Por Asignar";
+                 else
+                    aux[posicion] = buscarProfesor(padre.listaSeccion.get(i).getProfesor());
+                 posicion++;
+             }
+              
+             
+         }
+
+         modelo.addRow(new Object[]{aux[0],
+                                    aux[1],
+                                    aux[2],
+                                    aux[3],
+                                    aux[4],
+                                    aux[5],
+                                    aux[6],
+                                    aux[7],
+                                    aux[8],
+                                    aux[9],
+                                    aux[10],
+                                    aux[11],
+                                    aux[12],
+                                    aux[13]});
+         
+         
+     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -201,7 +311,7 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
             int cedula = Integer.parseInt(padre.listaDocentes.get(jComboBox2.getSelectedIndex()).getCi());
             int auxSeccion = jComboBox1.getSelectedIndex()+1;
             //System.out.println(padre.usuario.getNombre());
-            OperacionesBD.setSeccion(cedula,oferta.getCodigo(), padre.usuario.getNombre(), padre.usuario.getClave());
+            OperacionesBD.setSeccion(cedula,auxSeccion,oferta.getCodigo(), padre.usuario.getNombre(), padre.usuario.getClave());
             padre.listaSeccion = OperacionesBD.getSeccion(padre.usuario.getNombre(), padre.usuario.getClave());
             
             //Se refresca la tabla
@@ -212,95 +322,7 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     
-    public void cargarjComboBox2(Oferta oferta){
-        this.oferta = oferta;
-        jLabel2.setText(""+oferta.getCodigo());
-        jComboBox2.removeAllItems();
-        //System.out.println(""+listaDocentes.size());
-        for (int i = 0; i < padre.listaDocentes.size(); i++){
-            jComboBox2.addItem(padre.listaDocentes.get(i).getNombre());
-        }
-        generarColumnas();
-        cargarjComboBox1();
-    }
     
-    public void cargarjComboBox1(){
-        
-        jComboBox1.removeAllItems();
-        for (int i = 0; i < oferta.getNroSecciones(); i++) {
-            jComboBox1.addItem(""+(i+1));
-        }
-       
-    }
-
-     public void generarColumnas(){
-    
-            modelo = (DefaultTableModel) jTable1.getModel();
-            modelo.setNumRows(0);
-            TableColumn columna;
-
-            for (int i = 0 ; i < oferta.getNroSecciones(); i++) {
-
-                secciones[i]="sección"+(i+1);
-                modelo.addColumn(""+secciones[i]);
-                columna = jTable1.getColumn(""+secciones[i]);
-                
-            }
-            
-            jTable1.setModel(modelo);
-            cargar();
-    }
-     
-     
-     public String buscarProfesor(int cedula){
-         
-         for (int i = 0; i < padre.listaDocentes.size(); i++) {
-             if(cedula ==Integer.parseInt(padre.listaDocentes.get(i).getCi()))
-                 return padre.listaDocentes.get(i).getNombre();
-         }
-         return null;
-     }
-     
-     public void cargar(){
-         
-         String [] aux = new String[14];
-         modelo = (DefaultTableModel) jTable1.getModel();
-         this.modelo.setNumRows(0);
-         
-         int posicion = 0;
-         
-         
-         for (int i = 0; i < padre.listaSeccion.size()  ; i++) {
-             
-             if(oferta.getCodigo().equals(padre.listaSeccion.get(i).getCod_asignatura())){
-                
-                 if(padre.listaSeccion.get(i).getProfesor() == 0)
-                     aux[posicion] = "Por Asignar";
-                 else
-                    aux[posicion] = buscarProfesor(padre.listaSeccion.get(i).getProfesor());
-                 posicion++;
-             }
-              
-             
-         }
-
-         modelo.addRow(new Object[]{aux[0],
-                                    aux[1],
-                                    aux[2],
-                                    aux[3],
-                                    aux[4],
-                                    aux[5],
-                                    aux[6],
-                                    aux[7],
-                                    aux[8],
-                                    aux[9],
-                                    aux[10],
-                                    aux[11],
-                                    aux[12],
-                                    aux[13]});
-         
-         
-     }
 
     /**
      * @param args the command line arguments

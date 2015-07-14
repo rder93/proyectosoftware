@@ -25,7 +25,7 @@ public class ConexionPostgreSQL {
      * @param clave
      */
     public ConexionPostgreSQL(String usuario, String clave){
-        this.hostname = "organiza2.sytes.net";
+        this.hostname ="127.0.0.1";
         this.baseDeDatos = "atlantico";
         this.puerto = "5432";
         this.url = "jdbc:postgresql://"+hostname+":"+puerto+"/"+baseDeDatos;

@@ -274,7 +274,7 @@ public class OperacionesBD {
         }
     }
     
-    public static void setSeccion(int cedula, int nroSeccion, String usuario, String clave ){
+    public static void setSeccion(int cedula, int nroSeccion, String cod_asignatura, String usuario, String clave ){
 
         
         try {
@@ -282,8 +282,10 @@ public class OperacionesBD {
             Connection cn = conexion.conectar();
             Statement st = cn.createStatement();
             String sql = "UPDATE secciones "
-                       + "SET profesor = "+cedula+" "
-                       + "WHERE n_seccion = "+nroSeccion+"";
+                        + "SET profesor = "+cedula+", "
+                        + "n_seccion = "+nroSeccion+", "
+                        + "lapso = '2015-01' " 
+                        + "WHERE cod_asignatura = '"+cod_asignatura+"'";
   
             st.executeUpdate(sql);
             
