@@ -24,6 +24,7 @@ import javax.swing.table.DefaultTableModel;
 public class VentanaPlantaFisica extends javax.swing.JFrame {
 
     private PlantaFisica plantaFisica;
+    public static Usuario usuario;
     
     /**
      * Creates new form VentanaPlantaFisica
@@ -85,7 +86,7 @@ public class VentanaPlantaFisica extends javax.swing.JFrame {
         for (int i = 0; i < padre.listaPlantaFisica.size() ; i++) {
             
             PlantaFisica aux = padre.listaPlantaFisica.get(i);
-            modelo.addRow(new Object[]{aux.getModulo(),aux.getNumero(),aux.getTipo()});
+            modelo.addRow(new Object[]{aux.getModulo(),aux.getNumero(),aux.getId()});
             
         }
         
@@ -105,10 +106,10 @@ public class VentanaPlantaFisica extends javax.swing.JFrame {
         tblPlantaFisica = new javax.swing.JTable();
         lblModulo = new javax.swing.JLabel();
         lblNumero = new javax.swing.JLabel();
-        lblTipo = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
         txtModulo = new javax.swing.JTextField();
         txtNumero = new javax.swing.JTextField();
-        txtTipo = new javax.swing.JTextField();
+        txtId = new javax.swing.JTextField();
         btnLimpiarCampos = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
@@ -123,11 +124,11 @@ public class VentanaPlantaFisica extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Módulo", "Aula", "Tipo"
+                "Módulo", "Aula"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -140,7 +141,7 @@ public class VentanaPlantaFisica extends javax.swing.JFrame {
 
         lblNumero.setText("Número:");
 
-        lblTipo.setText("Tipo:");
+        lblId.setText("Id:");
 
         btnLimpiarCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/limpiarcampos.png"))); // NOI18N
         btnLimpiarCampos.setToolTipText("Limpiar campos");
@@ -206,12 +207,12 @@ public class VentanaPlantaFisica extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblNumero)
                             .addComponent(lblModulo)
-                            .addComponent(lblTipo))
+                            .addComponent(lblId))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtModulo)
                             .addComponent(txtNumero)
-                            .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(30, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -241,8 +242,8 @@ public class VentanaPlantaFisica extends javax.swing.JFrame {
                     .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTipo)
-                    .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblId)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnLimpiarCampos)
@@ -264,7 +265,7 @@ public class VentanaPlantaFisica extends javax.swing.JFrame {
 
         //Se procede a ejecutar el método encargado de agregar un nuevo registro
         //tomando como parámetros l@s String de los campos de texto
-        plantaFisica.agregar(Integer.parseInt(txtModulo.getText()), txtNumero.getText(), txtTipo.getText());
+        plantaFisica.agregar(Integer.parseInt(txtModulo.getText()), txtNumero.getText(), txtId.getText());
         limpiarCampos();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -272,8 +273,12 @@ public class VentanaPlantaFisica extends javax.swing.JFrame {
 
         //Se verifica que exista una fila seleccionada para poder modificarla
         //se puede selecionar con el mouse o con las flehas del teclado
-        if(tblPlantaFisica.getSelectedRow()>=0)
-        plantaFisica.modificar(Integer.parseInt(txtModulo.getText()), txtNumero.getText(), txtTipo.getText(), tblPlantaFisica.getSelectedRow());
+        if(tblPlantaFisica.getSelectedRow()>=0){
+            if(OperacionesBD.setAula(txtModulo.getText(), txtNumero.getText(), tblPlantaFisica.getModel().getValueAt(tblPlantaFisica.getSelectedRow(), 2).toString(),usuario.getNombre() ,  usuario.getClave()))
+                plantaFisica.modificar(Integer.parseInt(txtModulo.getText()), txtNumero.getText(), txtId.getText(), tblPlantaFisica.getSelectedRow());   
+        }else{
+            JOptionPane.showMessageDialog(this, "Debe seleccionar aula que desea modificar");
+        }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -297,7 +302,7 @@ public class VentanaPlantaFisica extends javax.swing.JFrame {
         
         txtModulo.setText("");
         txtNumero.setText("");
-        txtTipo.setText("");
+        txtId.setText("");
     }
     
     // Método "Escuchador" de teclas específicamente las fechas de arriba y abajo 
@@ -320,9 +325,9 @@ public class VentanaPlantaFisica extends javax.swing.JFrame {
                         else
                             txtNumero.setText("");
                         if(plantaFisica.getModeloDeTabla().getValueAt(tblPlantaFisica.getSelectedRow(),2)!=null)
-                            txtTipo.setText(plantaFisica.getModeloDeTabla().getValueAt(tblPlantaFisica.getSelectedRow(),2).toString());
+                            txtId.setText(plantaFisica.getModeloDeTabla().getValueAt(tblPlantaFisica.getSelectedRow(),2).toString());
                         else
-                            txtTipo.setText("");
+                            txtId.setText("");
                         
                     }
                 }
@@ -349,9 +354,9 @@ public class VentanaPlantaFisica extends javax.swing.JFrame {
                         else
                             txtNumero.setText("");
                         if(plantaFisica.getModeloDeTabla().getValueAt(tblPlantaFisica.getSelectedRow(),2)!=null)
-                            txtTipo.setText(plantaFisica.getModeloDeTabla().getValueAt(tblPlantaFisica.getSelectedRow(),2).toString());
+                            txtId.setText(plantaFisica.getModeloDeTabla().getValueAt(tblPlantaFisica.getSelectedRow(),2).toString());
                         else
-                            txtTipo.setText("");
+                            txtId.setText("");
                 }   
             }
         });
@@ -402,12 +407,12 @@ public class VentanaPlantaFisica extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblModulo;
     private javax.swing.JLabel lblNumero;
-    private javax.swing.JLabel lblTipo;
     private javax.swing.JTable tblPlantaFisica;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtModulo;
     private javax.swing.JTextField txtNumero;
-    private javax.swing.JTextField txtTipo;
     // End of variables declaration//GEN-END:variables
 }
