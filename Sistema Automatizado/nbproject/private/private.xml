@@ -2,6 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group>
             <file>file:/C:/Users/RICARDO/Documents/GitHub/proyectosoftware/Sistema%20Automatizado/src/sistema/automatizado/VentanaOfertaDetalle.java</file>
             <file>file:/C:/Users/RICARDO/Documents/GitHub/proyectosoftware/Sistema%20Automatizado/src/sistema/automatizado/VentanaOfertaAcademica.java</file>
@@ -10,5 +11,8 @@
             <file>file:/C:/Users/RICARDO/Documents/GitHub/proyectosoftware/Sistema%20Automatizado/src/sistema/automatizado/ConexionPostgreSQL.java</file>
             <file>file:/C:/Users/RICARDO/Documents/GitHub/proyectosoftware/Sistema%20Automatizado/src/sistema/automatizado/VentanaAsignatura.java</file>
         </group>
+=======
+        <group/>
+>>>>>>> origin/master
     </open-files>
 </project-private>
