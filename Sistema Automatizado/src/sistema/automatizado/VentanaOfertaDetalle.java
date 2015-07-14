@@ -94,7 +94,7 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
             jComboBox1.addItem(""+(i+1));
         }
         
-        System.out.println(""+oferta.getNroSecciones());
+        //System.out.println(""+oferta.getNroSecciones());
         
         generarColumnas();
         
@@ -132,45 +132,98 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
          return null;
      }
      
+     public void burbuja(){
+     
+         
+     
+     }
+     
+     /**
+      * Ordena el string auxProfesores en el orden correspondiente a sus secciones
+      */
+     
+     public String [] ordernarPorSecciones( String [] auxProfesores){
+         
+        
+        String auxNombre = ""; //variable auxiliar para guardar un nombre
+        
+        int [] A = new int[14]; //vector auxiliar para guardar todos los nros de secciones
+        int aux; //variable auxiliar para guardar una seccion
+         
+        //Se rellena con numeros altos para que así no hayan posiciones que se rellenen con 0
+        for (int i = 0; i < A.length; i++) {
+             A[i] = 100;
+        }
+        
+        //Se colocan los numeros de las secciones en orden secuencial 
+        int posicion = 0;
+        for (int i = 0; i < padre.listaSeccion.size()  ; i++)     
+             if(oferta.getCodigo().equals(padre.listaSeccion.get(i).getCod_asignatura())){
+                 
+                if(padre.listaSeccion.get(i).getProfesor() == 0){
+                     auxProfesores[posicion] = "Por Asignar";
+                     A[posicion] = padre.listaSeccion.get(i).getNro();
+                }else{
+                    auxProfesores[posicion] = buscarProfesor(padre.listaSeccion.get(i).getProfesor());
+                    A[posicion] = padre.listaSeccion.get(i).getNro();
+                }
+                posicion++;   
+             }
+
+        
+        //Se somete el vector a un ordenamiento, quedando los 100 en las ultimas posiciones
+        for (int k = 0; k < A.length-1; k++) {
+            for (int j = 0; j < A.length-k-1; j++) {
+                if(A[j+1] < A[j]){
+                    
+                    aux = A[j];
+                    auxNombre = auxProfesores[j];
+                    
+                    A[j] = A[j+1];
+                    auxProfesores[j] = auxProfesores[j+1];
+                    
+                    A[j+1] = aux;
+                    auxProfesores[j+1] = auxNombre;
+                }//fin if
+            }//fin for interno
+        }//fin for externo
+        
+        return auxProfesores;
+     }
+     /**
+      * Encargado de dar estructura al modelo del jtable1
+      */
      public void cargar(){
 
-         String [] aux = new String[14];
+         String [] auxProfesores = new String[14];
          modelo = (DefaultTableModel) jTable1.getModel();
          this.modelo.setNumRows(0);
          
          int posicion = 0;
+         auxProfesores =  ordernarPorSecciones( auxProfesores);         
          
          
-         for (int i = 0; i < padre.listaSeccion.size()  ; i++) {
-             
-             if(oferta.getCodigo().equals(padre.listaSeccion.get(i).getCod_asignatura())){
-                
-                 if(padre.listaSeccion.get(i).getProfesor() == 0)
-                     aux[posicion] = "Por Asignar";
-                 else
-                    aux[posicion] = buscarProfesor(padre.listaSeccion.get(i).getProfesor());
-                 posicion++;
-             }
-              
-             
-         }
-
-         modelo.addRow(new Object[]{aux[0],
-                                    aux[1],
-                                    aux[2],
-                                    aux[3],
-                                    aux[4],
-                                    aux[5],
-                                    aux[6],
-                                    aux[7],
-                                    aux[8],
-                                    aux[9],
-                                    aux[10],
-                                    aux[11],
-                                    aux[12],
-                                    aux[13]});
+         modelo.addRow(new Object[]{(auxProfesores[0]==null)?"Por Asignar":auxProfesores[0],
+                                    (auxProfesores[1]==null)?"Por Asignar":auxProfesores[1],
+                                    (auxProfesores[2]==null)?"Por Asignar":auxProfesores[2],
+                                    (auxProfesores[3]==null)?"Por Asignar":auxProfesores[3],
+                                    (auxProfesores[4]==null)?"Por Asignar":auxProfesores[4],
+                                    (auxProfesores[5]==null)?"Por Asignar":auxProfesores[5],
+                                    (auxProfesores[6]==null)?"Por Asignar":auxProfesores[6],
+                                    (auxProfesores[7]==null)?"Por Asignar":auxProfesores[7],
+                                    (auxProfesores[8]==null)?"Por Asignar":auxProfesores[8],
+                                    (auxProfesores[9]==null)?"Por Asignar":auxProfesores[9],
+                                    (auxProfesores[10]==null)?"Por Asignar":auxProfesores[10],
+                                    (auxProfesores[11]==null)?"Por Asignar":auxProfesores[11],
+                                    (auxProfesores[12]==null)?"Por Asignar":auxProfesores[12],
+                                    (auxProfesores[13]==null)?"Por Asignar":auxProfesores[13],
+                                    });
+                                    /**
+                                     * Si no existe profesor asignado (null) se indica que aun esta por asignar
+                                     * de lo contrario se muestra el profesor asignado
+                                     */
          
-         
+        
      }
     
 
@@ -310,12 +363,13 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
         try {
             int cedula = Integer.parseInt(padre.listaDocentes.get(jComboBox2.getSelectedIndex()).getCi());
             int auxSeccion = jComboBox1.getSelectedIndex()+1;
-            //System.out.println(padre.usuario.getNombre());
+            
             OperacionesBD.setSeccion(cedula,auxSeccion,oferta.getCodigo(), padre.usuario.getNombre(), padre.usuario.getClave());
             padre.listaSeccion = OperacionesBD.getSeccion(padre.usuario.getNombre(), padre.usuario.getClave());
             
             //Se refresca la tabla
             //limpiarTabla(jTable1);
+            
             cargar();
             
         } catch (Exception e) {
