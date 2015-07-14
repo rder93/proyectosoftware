@@ -282,10 +282,9 @@ public class OperacionesBD {
             Connection cn = conexion.conectar();
             Statement st = cn.createStatement();
             String sql = "UPDATE secciones "
-                        + "SET profesor = "+cedula+", "
-                        + "n_seccion = "+nroSeccion+", "
-                        + "lapso = '2015-01' " 
-                        + "WHERE cod_asignatura = '"+cod_asignatura+"'";
+                        + "SET profesor = "+cedula+" "
+                        + "WHERE cod_asignatura = '"+cod_asignatura+"' AND "
+                        + "n_seccion = "+nroSeccion+" ";
   
             st.executeUpdate(sql);
             

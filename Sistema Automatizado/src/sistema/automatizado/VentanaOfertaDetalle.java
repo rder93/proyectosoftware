@@ -315,6 +315,7 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
             padre.listaSeccion = OperacionesBD.getSeccion(padre.usuario.getNombre(), padre.usuario.getClave());
             
             //Se refresca la tabla
+            //limpiarTabla(jTable1);
             cargar();
             
         } catch (Exception e) {
