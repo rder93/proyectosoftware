@@ -156,7 +156,7 @@ public class OperacionesBD {
             while (rs.next()) {
                 
   
-               PlantaFisica objPlantaFisica = new PlantaFisica(rs.getInt(3),rs.getString("nombre"));
+               PlantaFisica objPlantaFisica = new PlantaFisica(rs.getInt(3),rs.getString("nombre"), rs.getString("id_aula"));
                 
                 plantafisica.add(objPlantaFisica);
                 
@@ -274,6 +274,26 @@ public class OperacionesBD {
         }
     }
     
+    public static boolean setAula(String modulo, String numero, String id_aula, String usuario, String clave ){
+
+        
+        try {
+            ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
+            Connection cn = conexion.conectar();
+            Statement st = cn.createStatement();
+            String sql = "UPDATE aulas "
+                       + "SET nombre = '"+numero+"',"
+                       + "edificio = "+modulo+" "
+                       + "WHERE id_aula = '"+id_aula+"'";
+  
+            st.executeUpdate(sql);
+            return true;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return false;
+        }
+    }
+    
     public static void setSeccion(int cedula, int nroSeccion, String cod_asignatura, String usuario, String clave ){
 
         
@@ -297,7 +317,8 @@ public class OperacionesBD {
     
     public static boolean setAsignatura(String codigo, int uc, int hora, String nombre, String carrera, String departamento, int nivel, String usuario, String clave ){
         
-        
+        if(departamento.isEmpty())
+            departamento="NULL";
         
         try {
             ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
