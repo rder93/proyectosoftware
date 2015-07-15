@@ -32,7 +32,6 @@ public class VentanaSabana extends javax.swing.JFrame {
     
     ArrayList<Asignatura> asignaturas = new  ArrayList<Asignatura>();
     ArrayList<String> dias = new  ArrayList<String>();
-    ArrayList<String> horas = new  ArrayList<String>();
     DefaultTableModel modelo = new DefaultTableModel();
     int posicionDia = 0; //Posicion del dia selccionado
     
@@ -369,36 +368,132 @@ public class VentanaSabana extends javax.swing.JFrame {
         
     }
     
+    public int buscarDia(String dia){
+    
+        switch (dia) {
+            
+            case "Lunes":
+                     return 1;
+            case "Martes":  
+                     return 2;
+            case "Miercoles":  
+                     return 3;
+            case "Jueves":  
+                     return 4;
+            case "Viernes":  
+                     return 5;
+            case "Sabado":  
+                    return 6;
+            case "Domingo":  
+                     return 7;
+            default: return -1;
+        }
+    
+    }
+    
+    
+    /**
+     * Retorna el nivel de una materia partiendo de un codigo
+     */
+    
+    public int buscarSemestre(String codigo){
+    
+        for (int i = 0; i < padre.listaAsignaturas.size(); i++) {
+            if( (padre.listaAsignaturas.get(i).getCodigo()).equals(codigo)){
+                return (padre.listaAsignaturas.get(i).getNivel()+1);
+                //Se le suma +1 al nivel para obtener el semestre
+            }
+        }
+        
+        return -1; //error
+    }
+    
+    /**
+     * Retorna el nombre de una materia partiendo de un codigo
+     */
+    
+    public String buscarNombre(String codigo){
+    
+        for (int i = 0; i < padre.listaAsignaturas.size(); i++) {
+            if( (padre.listaAsignaturas.get(i).getCodigo()).equals(codigo)){
+                return (padre.listaAsignaturas.get(i).getNombre());
+            }
+        }
+        
+        return ""; //error
+    }
+    
+    public String buscarProfesor(String codigo, int seccion){
+        
+        for (int i = 0; i < padre.listaSeccion.size(); i++) {
+            /**Se busca la seccion que estamos buscando por codigo y seccion
+             * Para asi obtener el codigo del profesor
+             * De  no tener profesor se coloca por asignar
+             */
+            if( padre.listaSeccion.get(i).getCod_asignatura().equals(codigo) 
+                && padre.listaSeccion.get(i).getNro() == seccion){
+                
+                if(padre.listaSeccion.get(i).getProfesor() == 0){
+                    return "Por asignar";//No tiene profesor asginado
+                
+                }else{//Si tiene profesor asignado
+                    for (int j = 0; j < padre.listaDocente.size(); j++) {
+                        if( Integer.parseInt(padre.listaDocente.get(j).getCi()) == padre.listaSeccion.get(i).getProfesor() ){
+                            System.out.println(""+padre.listaDocente.get(j).getCi());
+                            return padre.listaDocente.get(j).getNombre();
+                        }
+                    }
+                }
+            }    
+        }
+        return "";
+    }
+    
+ 
+    
+    public void cargarSabana(){
+
+        for (int i = 0; i < padre.listaSabana.size(); i++) {
+            
+            int rows[] = {(padre.listaSabana.get(i).getHoraInicial()-1),(padre.listaSabana.get(i).getHoraFinal()-1)};
+            int columns[] ={ buscarDia(padre.listaSabana.get(i).getDia()) };
+            if ( (rows.length != 0) && (columns.length != 0) ){
+                for ( int k=rows[0]; k<=rows[rows.length-1]; k++ ){
+                    for ( int j=columns[0]; j<=columns[columns.length-1]; j++ ){
+                         System.out.println(""+i);
+                        this.jTable1.setValueAt(
+                                    /*Nombre de la asignatura*/
+                                    buscarNombre(padre.listaSabana.get(i).getAsignatura())+" "+
+                                    /*Semestre de la asignatura*/
+                                    buscarSemestre(padre.listaSabana.get(i).getAsignatura())+"-"+
+                                    /*Sección de la asignatura*/
+                                    padre.listaSabana.get(i).getId_seccion()+" "+
+                                    /*Nombre del profesor asginado o en su defecto "Por asignar"*/
+                                    buscarProfesor(padre.listaSabana.get(i).getAsignatura(), padre.listaSabana.get(i).getId_seccion()),
+                                    /**Coordenadas en la tabla 
+                                     * Donde la hora inicial es la fila inicial
+                                     *       el dia es la columna inicial
+                                     */
+                                    k,j);
+                        
+                    }
+                }
+            
+            } 
+        }
+    
+    }
+    
     /**
      * Agrega los item asignatura al combo
      */
-    
-    public void posicioneHoras(){
-    
-        
-    }
-    
     public void cargar(){
         
         for (int i = 0; i < padre.listaAsignaturas.size() ; i++) {
             
             jComboBox1.addItem(padre.listaAsignaturas.get(i).getNombre());
         }
-        
-      
-        
-        for (int i = 0; i < padre.listaSabana.size(); i++) {
-            
-            this.modelo = (DefaultTableModel) this.jTable2.getModel();
-            this.modelo.setNumRows(0);
-            modelo.addRow(new Object[]{
-                        padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getNivel()+"",
-                        padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getCodigo()+"",
-                        padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getUc()+"",
-                        padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getHoras()+""
-            });
-        }
-        
+        cargarSabana();
     }
     
     

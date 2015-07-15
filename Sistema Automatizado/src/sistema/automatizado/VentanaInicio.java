@@ -110,6 +110,8 @@ public class VentanaInicio extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/logotipo_2.png"))); // NOI18N
 
+        txtClave.setText("123456");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

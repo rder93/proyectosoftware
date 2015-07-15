@@ -36,6 +36,7 @@ public class Ventana extends javax.swing.JFrame{
     public ArrayList<Sabana> listaSabana = new ArrayList<Sabana>();
     public ArrayList<Carreras> listaCarreras = new ArrayList<Carreras>();
     public ArrayList<Departamentos> listaDepartamentos = new ArrayList<Departamentos>();
+    ArrayList<Seccion> listaSeccion = new  ArrayList<Seccion>();
     
     public static Usuario usuario;
     
@@ -369,7 +370,7 @@ public class Ventana extends javax.swing.JFrame{
             ventanaofertaacademica.limpiar();
             ventanaofertaacademica.setVisible(true);
             
-            //ok recuerda q siempre para todas las ventanas debes hacer lo usuario osea esto y esto
+            
             
         }
         
@@ -381,7 +382,8 @@ public class Ventana extends javax.swing.JFrame{
         listaOferta = OperacionesBD.getOferta(usuario.getNombre(), usuario.getClave());
         listaSabana = OperacionesBD.getSabana(usuario.getNombre(), usuario.getClave());
         listaAsignaturas = OperacionesBD.getAsignaturas(usuario.getNombre(), usuario.getClave());
-        
+        listaSeccion = OperacionesBD.getSeccion(usuario.getNombre(), usuario.getClave());
+        listaDocente = OperacionesBD.getDocentes(usuario.getNombre(), usuario.getClave());
         //JOptionPane.showMessageDialog(this, listaOferta.get(0).getAsignatura());
         
         if(listaOferta!=null){
