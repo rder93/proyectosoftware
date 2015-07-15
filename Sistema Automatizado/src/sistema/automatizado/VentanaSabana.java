@@ -563,10 +563,11 @@ public class VentanaSabana extends javax.swing.JFrame {
                 
         }else{
 
-            if((++posicionDia)>5){
-                posicionDia-=7;
+            if((++posicionDia)>6){
+                posicionDia-=6;
             }
         }
+        
    }
     
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
