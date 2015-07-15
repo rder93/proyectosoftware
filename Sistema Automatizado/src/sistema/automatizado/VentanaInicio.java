@@ -110,7 +110,7 @@ public class VentanaInicio extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/logotipo_2.png"))); // NOI18N
 
-        txtClave.setText("123456");
+        txtClave.setText("qweasdzx");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -156,14 +156,14 @@ public class VentanaInicio extends javax.swing.JFrame {
         //Esto debe ser validado con nombre y contraseña
         usuario = txtUsuario.getText();
         clave = txtClave.getText();
-        //if(Validaciones.autenticarUsuario(usuario,clave)){
+        if(Validaciones.autenticarUsuario(usuario,clave)){
             ventana.usuario = new Usuario();
             ventana.usuario.setNombre(usuario);
             ventana.usuario.setClave(clave);
             ventana.cargarDatos();
             ventana.setVisible(true);
             this.dispose();
-        //}
+        }
         
 
     }//GEN-LAST:event_btnIngresarActionPerformed

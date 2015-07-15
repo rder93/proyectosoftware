@@ -31,13 +31,13 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="lblNumero" min="-2" max="-2" attributes="0"/>
                           <Component id="lblModulo" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblTipo" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblId" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="txtModulo" max="32767" attributes="0"/>
                           <Component id="txtNumero" max="32767" attributes="0"/>
-                          <Component id="txtTipo" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                          <Component id="txtId" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="jScrollPane1" min="-2" pref="349" max="-2" attributes="0"/>
@@ -75,8 +75,8 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblTipo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtTipo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblId" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtId" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
@@ -101,10 +101,9 @@
         <Component class="javax.swing.JTable" name="tblPlantaFisica">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="3" rowCount="0">
+              <Table columnCount="2" rowCount="0">
                 <Column editable="false" title="M&#xf3;dulo" type="java.lang.Object"/>
                 <Column editable="false" title="Aula" type="java.lang.Object"/>
-                <Column editable="false" title="Tipo" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -143,16 +142,16 @@
         <Property name="text" type="java.lang.String" value="N&#xfa;mero:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblTipo">
+    <Component class="javax.swing.JLabel" name="lblId">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Tipo:"/>
+        <Property name="text" type="java.lang.String" value="Id:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtModulo">
     </Component>
     <Component class="javax.swing.JTextField" name="txtNumero">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtTipo">
+    <Component class="javax.swing.JTextField" name="txtId">
     </Component>
     <Component class="javax.swing.JButton" name="btnLimpiarCampos">
       <Properties>

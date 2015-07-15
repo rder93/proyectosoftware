@@ -312,13 +312,15 @@ public class VentanaAsignatura extends javax.swing.JFrame {
 
         //Se procede a ejecutar el método encargado de agregar un nuevo registro
         //tomando como parámetros l@s String de los campos de texto
-        if(OperacionesBD.addAsignatura(txtCodigo.getText(), Integer.parseInt(txtUC.getText()),
-                                    Integer.parseInt(txtHoras.getText()), txtNombre.getText(),txtCarrera.getText(),
-                                    txtDepartamento.getText(), Integer.parseInt(txtNivel.getText()), usuario.getNombre(), usuario.getClave()))
         
-            asignatura.agregar(txtCodigo.getText(), Integer.parseInt(txtUC.getText()), 
-                               Integer.parseInt(txtHoras.getText()), txtNombre.getText(), Integer.parseInt(txtNivel.getText()),
-                               txtDepartamento.getText(), txtCarrera.getText());
+        if(Validaciones.validarAsignatura(txtNombre.getText(), txtUC.getText(), txtHoras.getText(), txtCarrera.getText(), txtDepartamento.getText(), txtNivel.getText()))
+            if(OperacionesBD.addAsignatura(txtCodigo.getText(), Integer.parseInt(txtUC.getText()),
+                                        Integer.parseInt(txtHoras.getText()), txtNombre.getText(),txtCarrera.getText(),
+                                        txtDepartamento.getText(), Integer.parseInt(txtNivel.getText()), usuario.getNombre(), usuario.getClave()))
+
+                asignatura.agregar(txtCodigo.getText(), Integer.parseInt(txtUC.getText()), 
+                                   Integer.parseInt(txtHoras.getText()), txtNombre.getText(), Integer.parseInt(txtNivel.getText()),
+                                   txtDepartamento.getText(), txtCarrera.getText());
         limpiarCampos();
         
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -327,20 +329,21 @@ public class VentanaAsignatura extends javax.swing.JFrame {
 
         //Se verifica que exista una fila seleccionada para poder modificarla
         //se puede selecionar con el mouse o con las flehas del teclado
-        if(tblAsignatura.getSelectedRow()<0)
-            JOptionPane.showMessageDialog(this, "Debe seleccionar la fila que desea modificar");
-        else{
-            
-            txtCodigo.setText(tblAsignatura.getModel().getValueAt(tblAsignatura.getSelectedRow(), 1).toString());
-            
-            if(OperacionesBD.setAsignatura(txtCodigo.getText(), Integer.parseInt(txtUC.getText()),
-                                           Integer.parseInt(txtHoras.getText()), txtNombre.getText(),txtCarrera.getText(),
-                                           txtDepartamento.getText(), Integer.parseInt(txtNivel.getText()), usuario.getNombre(), usuario.getClave()))
-        
-                asignatura.modificar(txtCodigo.getText(), Integer.parseInt(txtUC.getText()), 
-                                     Integer.parseInt(txtHoras.getText()), txtNombre.getText(), tblAsignatura.getSelectedRow(), 
-                                     Integer.parseInt(txtNivel.getText()),txtDepartamento.getText(), txtCarrera.getText());
-        }
+        if(Validaciones.validarAsignatura(txtNombre.getText(), txtUC.getText(), txtHoras.getText(), txtCarrera.getText(), txtDepartamento.getText(), txtNivel.getText()))
+            if(tblAsignatura.getSelectedRow()<0)
+                JOptionPane.showMessageDialog(this, "Debe seleccionar la fila que desea modificar");
+            else{
+
+                txtCodigo.setText(tblAsignatura.getModel().getValueAt(tblAsignatura.getSelectedRow(), 1).toString());
+
+                if(OperacionesBD.setAsignatura(txtCodigo.getText(), Integer.parseInt(txtUC.getText()),
+                                               Integer.parseInt(txtHoras.getText()), txtNombre.getText(),txtCarrera.getText(),
+                                               txtDepartamento.getText(), Integer.parseInt(txtNivel.getText()), usuario.getNombre(), usuario.getClave()))
+
+                    asignatura.modificar(txtCodigo.getText(), Integer.parseInt(txtUC.getText()), 
+                                         Integer.parseInt(txtHoras.getText()), txtNombre.getText(), tblAsignatura.getSelectedRow(), 
+                                         Integer.parseInt(txtNivel.getText()),txtDepartamento.getText(), txtCarrera.getText());
+            }
         
     }//GEN-LAST:event_btnModificarActionPerformed
 
@@ -348,22 +351,25 @@ public class VentanaAsignatura extends javax.swing.JFrame {
 
         //Se verifica que exista una fila seleccionada para poder eliminarla
         //se puede selecionar con el mouse o con las flehas del teclado
-        if(tblAsignatura.getSelectedRow()>=0){
-            txtCodigo.setText(tblAsignatura.getModel().getValueAt(tblAsignatura.getSelectedRow(), 1).toString());
-            int opcion = JOptionPane.showConfirmDialog(null, "¿Realmente desea eliminar este registro?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-            
-            //Si se confirma la eliminación del registro se procede a ejecutar la operación
-            if(opcion==0){
-                
-                if(OperacionesBD.deleteAsignatura(txtCodigo.getText(), 
-                                                    usuario.getNombre(), 
-                                                    usuario.getClave())){
-                    
-                    asignatura.eliminar(tblAsignatura.getSelectedRow());
-                    limpiarCampos();
+        if(!Validaciones.verificarSoloNumeros(txtCodigo.getText()))
+            JOptionPane.showMessageDialog(this, "El código de la carrera debe ser un valor entero");
+        else
+            if(tblAsignatura.getSelectedRow()>=0){
+                txtCodigo.setText(tblAsignatura.getModel().getValueAt(tblAsignatura.getSelectedRow(), 1).toString());
+                int opcion = JOptionPane.showConfirmDialog(null, "¿Realmente desea eliminar este registro?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+                //Si se confirma la eliminación del registro se procede a ejecutar la operación
+                if(opcion==0){
+
+                    if(OperacionesBD.deleteAsignatura(txtCodigo.getText(), 
+                                                        usuario.getNombre(), 
+                                                        usuario.getClave())){
+
+                        asignatura.eliminar(tblAsignatura.getSelectedRow());
+                        limpiarCampos();
+                    }
                 }
             }
-        }
     }//GEN-LAST:event_btnEliminarActionPerformed
     
     

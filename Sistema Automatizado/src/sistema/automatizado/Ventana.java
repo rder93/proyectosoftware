@@ -430,11 +430,16 @@ public class Ventana extends javax.swing.JFrame{
    
     private void menuPlantaFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPlantaFisicaActionPerformed
 
-        
         listaPlantaFisica = OperacionesBD.getAulas(usuario.getNombre(), usuario.getClave());
         
-        ventanaplantafisica.cargar();
-        ventanaplantafisica.setVisible(true);
+        if(listaPlantaFisica!=null){
+            ventanaplantafisica.usuario =new Usuario();
+            ventanaplantafisica.usuario.setNombre(usuario.getNombre());
+            ventanaplantafisica.usuario.setClave(usuario.getClave());
+            
+            ventanaplantafisica.cargar();
+            ventanaplantafisica.setVisible(true);
+        }
     }//GEN-LAST:event_menuPlantaFisicaActionPerformed
 
     private void menuAsignaturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAsignaturasActionPerformed
