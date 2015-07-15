@@ -156,9 +156,12 @@ public class Validaciones {
             
             char caracter = nombre.charAt(i);
             
+            if(Character.isLetter('ñ'))
+                System.out.println("siiii");
+            
             if(!Character.isSpaceChar(caracter)){
                 if(!Character.isLetter(caracter))
-                    if(!esAcento(caracter)){
+                    if(!Character.isUpperCase(caracter)){
                         JOptionPane.showMessageDialog(null, "El nombre de la asignatura solo debe contener letras MAYUSCULAS");
                         return false;
                     }
@@ -180,13 +183,4 @@ public class Validaciones {
         
         return true;
     }
-    
-    public static boolean esAcento(char caracter){
-        
-        if(caracter=='Á')
-            JOptionPane.showMessageDialog(null, "es acento");
-        return true;
-    }
-    
-
 }

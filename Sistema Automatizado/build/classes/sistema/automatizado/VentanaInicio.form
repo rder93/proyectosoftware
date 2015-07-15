@@ -162,7 +162,7 @@
     </Component>
     <Component class="javax.swing.JPasswordField" name="txtClave">
       <Properties>
-        <Property name="text" type="java.lang.String" value="123456"/>
+        <Property name="text" type="java.lang.String" value="qweasdzx"/>
       </Properties>
     </Component>
   </SubComponents>
