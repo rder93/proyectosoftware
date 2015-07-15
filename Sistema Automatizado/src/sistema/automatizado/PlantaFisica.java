@@ -17,25 +17,26 @@ public class PlantaFisica {
     
     private int modulo;
     private String numero;
-    private String tipo;
+    private String id;
     private JTable tblCargaData;
     private DefaultTableModel modeloDeTabla;
 
-    public PlantaFisica(int modulo,String numero) {
+    public PlantaFisica(int modulo,String numero, String id) {
         this.modulo = modulo;
         this.numero = numero;
+        this.id = id;
     }
 
     public PlantaFisica(JTable tblCargaData) {
         this.tblCargaData = tblCargaData;
         this.modulo = 0;
         this.numero = "";
-        this.tipo = "";
+        
         
         //Construcción a pie de la tabla que se va a mostrar
         //no tiene caso modificar la que esta en el frame VentanaCargaData.java
         String datos[][]={};
-        String columnas[]={"Módulo","Número","Tipo"};
+        String columnas[]={"Módulo","Número","Id"};
         
         modeloDeTabla= new DefaultTableModel(datos,columnas){
             //Se impide que el usuario pueda alterar los datos sobre la tabla directamente,
@@ -70,12 +71,12 @@ public class PlantaFisica {
         this.numero = numero;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getId() {
+        return id;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setId(String id) {
+        this.id = id;
     }
     
     public JTable getTblCargaData() {
@@ -124,7 +125,7 @@ public class PlantaFisica {
         //Se actualizan los valores de los campos de la fila que se va a modificar
         //específicando el nuevo valor, el numero de la fila y el numero de la columna
         
-        modeloDeTabla.setValueAt(numero,numFila,0);
+        modeloDeTabla.setValueAt(modulo,numFila,0);
         modeloDeTabla.setValueAt(numero,numFila,1);
         modeloDeTabla.setValueAt(tipo,numFila,2);
         
