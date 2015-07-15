@@ -559,6 +559,36 @@ public class VentanaSabana extends javax.swing.JFrame {
                
             }
         }
+        String auxDia = null;
+        switch( posicionDia ) {
+            case 0: 
+                auxDia = "Lunes";
+                break;
+            case 1: 
+                auxDia = "Martes";
+                break;
+            case 2: 
+                auxDia = "Miercoles";
+                break;
+            case 3: 
+                auxDia = "Jueves";
+                break;
+            case 4: 
+                auxDia = "Viernes";
+                break;
+            case 5: 
+                auxDia = "Sabado";;
+                break;
+            default: 
+                System.out.println("Error");
+                break;
+            }
+        
+        for (int i = 0; i < padre.listaSabana.size(); i++) {
+            if( padre.listaSabana.get(i).getDia().equals(auxDia) ){
+                padre.listaSabana.remove(i);
+            }
+        }
         //Hay que limpiar los objetos de la lista Sabana que sean de este dia 
  
     }//GEN-LAST:event_jMenuItem1ActionPerformed
