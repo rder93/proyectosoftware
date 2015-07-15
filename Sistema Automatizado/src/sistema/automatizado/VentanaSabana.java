@@ -373,19 +373,19 @@ public class VentanaSabana extends javax.swing.JFrame {
         switch (dia) {
             
             case "Lunes":
-                     return 1;
+                    return 0;
             case "Martes":  
-                     return 2;
+                    return 1;
             case "Miercoles":  
-                     return 3;
+                    return 2;
             case "Jueves":  
-                     return 4;
+                    return 3;
             case "Viernes":  
-                     return 5;
+                    return 4;
             case "Sabado":  
-                    return 6;
+                   return 5;
             case "Domingo":  
-                     return 7;
+                    return 6;
             default: return -1;
         }
     
@@ -439,7 +439,6 @@ public class VentanaSabana extends javax.swing.JFrame {
                 }else{//Si tiene profesor asignado
                     for (int j = 0; j < padre.listaDocente.size(); j++) {
                         if( Integer.parseInt(padre.listaDocente.get(j).getCi()) == padre.listaSeccion.get(i).getProfesor() ){
-                            System.out.println(""+padre.listaDocente.get(j).getCi());
                             return padre.listaDocente.get(j).getNombre();
                         }
                     }
@@ -453,35 +452,44 @@ public class VentanaSabana extends javax.swing.JFrame {
     
     public void cargarSabana(){
 
-        for (int i = 0; i < padre.listaSabana.size(); i++) {
-            
-            int rows[] = {(padre.listaSabana.get(i).getHoraInicial()-1),(padre.listaSabana.get(i).getHoraFinal()-1)};
-            int columns[] ={ buscarDia(padre.listaSabana.get(i).getDia()) };
-            if ( (rows.length != 0) && (columns.length != 0) ){
-                for ( int k=rows[0]; k<=rows[rows.length-1]; k++ ){
-                    for ( int j=columns[0]; j<=columns[columns.length-1]; j++ ){
-                         System.out.println(""+i);
-                        this.jTable1.setValueAt(
-                                    /*Nombre de la asignatura*/
-                                    buscarNombre(padre.listaSabana.get(i).getAsignatura())+" "+
-                                    /*Semestre de la asignatura*/
-                                    buscarSemestre(padre.listaSabana.get(i).getAsignatura())+"-"+
-                                    /*Sección de la asignatura*/
-                                    padre.listaSabana.get(i).getId_seccion()+" "+
-                                    /*Nombre del profesor asginado o en su defecto "Por asignar"*/
-                                    buscarProfesor(padre.listaSabana.get(i).getAsignatura(), padre.listaSabana.get(i).getId_seccion()),
-                                    /**Coordenadas en la tabla 
-                                     * Donde la hora inicial es la fila inicial
-                                     *       el dia es la columna inicial
-                                     */
-                                    k,j);
-                        
-                    }
-                }
-            
-            } 
+        
+        for (int l = 0; l < 16; l++) {
+            for (int m = 1; m < 14; m++) {
+                this.jTable1.setValueAt("", l, m); 
+            }
         }
-    
+        
+        for (int i = 0; i < padre.listaSabana.size(); i++) {
+            if( buscarDia(padre.listaSabana.get(i).getDia()) == posicionDia ){
+                
+                int rows[] = {(padre.listaSabana.get(i).getHoraInicial()-1),(padre.listaSabana.get(i).getHoraFinal()-1)};
+                int columns[] = { padre.listaSabana.get(i).getAula() };
+                if ( (rows.length != 0) && (columns.length != 0) ){
+                    for ( int k=rows[0]; k<=rows[rows.length-1]; k++ ){
+                        for ( int j=columns[0]; j<=columns[columns.length-1]; j++ ){
+                             
+                            this.jTable1.setValueAt(
+                                        /*Nombre de la asignatura*/
+                                        buscarNombre(padre.listaSabana.get(i).getAsignatura())+" "+
+                                        /*Semestre de la asignatura*/
+                                        buscarSemestre(padre.listaSabana.get(i).getAsignatura())+"-"+
+                                        /*Sección de la asignatura*/
+                                        padre.listaSabana.get(i).getId_seccion()+" "+
+                                        /*Nombre del profesor asginado o en su defecto "Por asignar"*/
+                                        buscarProfesor(padre.listaSabana.get(i).getAsignatura(), padre.listaSabana.get(i).getId_seccion()),
+                                        /**Coordenadas en la tabla 
+                                         * Donde la hora inicial es la fila inicial
+                                         *       el dia es la columna inicial
+                                         */
+                                        k,j);
+
+                        }
+                    }
+
+                } 
+            
+            }
+        }
     }
     
     /**
@@ -566,6 +574,7 @@ public class VentanaSabana extends javax.swing.JFrame {
         /*Sentido: Izquierda*/
         movimientoDia(true);
         jLabel2.setText(dias.get(posicionDia));
+        cargarSabana();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -573,7 +582,7 @@ public class VentanaSabana extends javax.swing.JFrame {
         /*Sentido: Derecha*/
         movimientoDia(false);
         jLabel2.setText(dias.get(posicionDia));
-
+        cargarSabana();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -668,7 +677,7 @@ public class VentanaSabana extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        limpiar();
+        
         for (int i = 0; i < 16; i++) {
             for (int j = 1; j < 14; j++) {
                 this.jTable1.setValueAt("", i, j);
@@ -677,11 +686,11 @@ public class VentanaSabana extends javax.swing.JFrame {
         }
        
         
-        for (int i = 0; i < padre.listaSabana.size(); i++) {
+      /*  for (int i = 0; i < padre.listaSabana.size(); i++) {
             if( padre.listaSabana.get(i).getDia().equals(dias.get(posicionDia)) ){
                 padre.listaSabana.remove(i);
             }
-        }
+        }*/
         //Hay que limpiar los objetos de la lista Sabana que sean de este dia 
  
     }//GEN-LAST:event_jMenuItem1ActionPerformed
