@@ -5,6 +5,8 @@
  */
 package sistema.automatizado;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -54,11 +56,14 @@ public class Validaciones {
             }
     }
     
-    public static boolean validarPlantaFisica(String modulo, String id){
+    public static boolean validarPlantaFisica(String modulo, String id, String nombre){
         
         if(verificarSoloNumeros(modulo)){
             if(verificarSoloNumeros(id))
-                return true;
+                if(verificarPatronAula(nombre))
+                    return true;
+                else
+                    return false;
             else{
                 JOptionPane.showMessageDialog(null, "El id solo debe contener numeros");
                 return false;
@@ -102,6 +107,24 @@ public class Validaciones {
         return true;  
     }
     
+    public static boolean verificarPatronAula(String nombre){
+        
+        
+        Pattern pat = Pattern.compile("A-\\d\\d");
+        Matcher mat = pat.matcher(nombre);
+        if (mat.matches()) {
+            if(nombre.charAt(2)=='0' && nombre.charAt(3)=='0' ){
+                JOptionPane.showMessageDialog(null, "Las aulas deben comenzar a enumerarse del numero 01");
+                return false;
+            }
+            else
+                return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "El nombre del aula debe tener el siguiente formato: A-##");
+            return false;
+        }
     
-}
-lee la nota
+    }
+    
+    
+ }
