@@ -20,7 +20,9 @@ public class Sabana {
     private int horaInicial;
     private int horaFinal;
 
-    public Sabana(String asignatura, String lapso, int id_seccion, String aula, String modulo, String dia, int horaInicial, int horaFinal) {
+    public Sabana(String asignatura, String lapso, int id_seccion, 
+                  String aula, String modulo, String dia, 
+                  int horaInicial, int horaFinal) {
         this.asignatura = asignatura;
         this.lapso = lapso;
         this.id_seccion = id_seccion;

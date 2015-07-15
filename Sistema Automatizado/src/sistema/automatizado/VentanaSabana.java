@@ -73,6 +73,7 @@ public class VentanaSabana extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem3 = new javax.swing.JMenuItem();
         jButton5 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
@@ -94,9 +95,13 @@ public class VentanaSabana extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+
+        jMenuItem3.setText("jMenuItem3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -214,6 +219,22 @@ public class VentanaSabana extends javax.swing.JFrame {
         });
 
         jMenu4.setText("Archivo");
+
+        jMenuItem1.setText("Limpiar este día");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem1);
+
+        jMenuItem4.setText("Limpiar sabana");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem4);
 
         jMenuItem2.setText("Salir");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -506,11 +527,13 @@ public class VentanaSabana extends javax.swing.JFrame {
         int rows[] = this.jTable1.getSelectedRows();
         int columns[] = this.jTable1.getSelectedColumns();
         
-        if ( (rows.length != 0) && (columns.length != 0) )
-        {
-            for ( int i=rows[0]; i<=rows[rows.length-1]; i++ )
-                for ( int j=columns[0]; j<=columns[columns.length-1]; j++ )
+        if ( (rows.length != 0) && (columns.length != 0) ){
+            for ( int i=rows[0]; i<=rows[rows.length-1]; i++ ){
+                for ( int j=columns[0]; j<=columns[columns.length-1]; j++ ){
                     this.jTable1.setValueAt("HOLA", i, j);
+                }
+            }
+            
         }
     }//GEN-LAST:event_jButton2MouseReleased
 
@@ -518,13 +541,62 @@ public class VentanaSabana extends javax.swing.JFrame {
         int rows[] = this.jTable1.getSelectedRows();
         int columns[] = this.jTable1.getSelectedColumns();
         
-        if ( (rows.length != 0) && (columns.length != 0) )
-        {
-            for ( int i=rows[0]; i<=rows[rows.length-1]; i++ )
-                for ( int j=columns[0]; j<=columns[columns.length-1]; j++ )
+        if ( (rows.length != 0) && (columns.length != 0) ){
+            for ( int i=rows[0]; i<=rows[rows.length-1]; i++ ){
+                for ( int j=columns[0]; j<=columns[columns.length-1]; j++ ){
                     this.jTable1.setValueAt("", i, j);
+                }
+            }
         }
     }//GEN-LAST:event_jButton3MouseReleased
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+        for (int i = 0; i < 16; i++) {
+            for (int j = 1; j < 14; j++) {
+                this.jTable1.setValueAt("", i, j);
+               
+            }
+        }
+        String auxDia = null;
+        switch( posicionDia ) {
+            case 0: 
+                auxDia = "Lunes";
+                break;
+            case 1: 
+                auxDia = "Martes";
+                break;
+            case 2: 
+                auxDia = "Miercoles";
+                break;
+            case 3: 
+                auxDia = "Jueves";
+                break;
+            case 4: 
+                auxDia = "Viernes";
+                break;
+            case 5: 
+                auxDia = "Sabado";;
+                break;
+            default: 
+                System.out.println("Error");
+                break;
+            }
+        
+        for (int i = 0; i < padre.listaSabana.size(); i++) {
+            if( padre.listaSabana.get(i).getDia().equals(auxDia) ){
+                padre.listaSabana.remove(i);
+            }
+        }
+        //Hay que limpiar los objetos de la lista Sabana que sean de este dia 
+ 
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        //hay que limpiar toda la lista  sabana y volver a cargar la tabla
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     
     
@@ -583,7 +655,10 @@ public class VentanaSabana extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
