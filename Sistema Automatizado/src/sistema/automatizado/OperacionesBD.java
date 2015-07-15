@@ -209,11 +209,11 @@ public class OperacionesBD {
             
             while(rs.next()){
                 
-                //Sabana objSabana = new Sabana(rs.getString("cod_asignatura"),rs.getString("lapso"),
-                  //                            rs.getInt("n_seccion"), rs.getString("id_aula"), rs.getString("id_edificio"),
-                    //                          rs.getString("dia"), rs.getInt("hr_inicio"), rs.getInt("hr_final"));
+                Sabana objSabana = new Sabana(rs.getString("cod_asignatura"),rs.getString("lapso"),
+                                             rs.getInt("n_seccion"), rs.getInt("id_aula"), rs.getInt("id_edificio"),
+                                             rs.getString("dia"), rs.getInt("hr_inicio"), rs.getInt("hr_final"));
 
-                //sabana.add(objSabana);
+                sabana.add(objSabana);
             
             }
             
