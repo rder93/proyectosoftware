@@ -343,12 +343,18 @@ public class VentanaAsignatura extends javax.swing.JFrame {
                                                Integer.parseInt(txtHoras.getText()), txtNombre.getText(),txtCarrera.getText(),
                                                txtDepartamento.getText(), Integer.parseInt(txtNivel.getText()), usuario.getNombre(), usuario.getClave()))
 
-                    asignatura.modificar(txtCodigo.getText(), Integer.parseInt(txtUC.getText()), 
+                    if(txtDepartamento.getText().equals(""))
+                        asignatura.modificar(txtCodigo.getText(), Integer.parseInt(txtUC.getText()), 
+                                         Integer.parseInt(txtHoras.getText()), txtNombre.getText(), tblAsignatura.getSelectedRow(), 
+                                         Integer.parseInt(txtNivel.getText()),"", 
+                                         padre.listaCarreras.get(0).getNombre());
+                    else
+                        asignatura.modificar(txtCodigo.getText(), Integer.parseInt(txtUC.getText()), 
                                          Integer.parseInt(txtHoras.getText()), txtNombre.getText(), tblAsignatura.getSelectedRow(), 
                                          Integer.parseInt(txtNivel.getText()),padre.listaDepartamentos.get(Integer.parseInt(txtDepartamento.getText())).getNombre(), 
                                          padre.listaCarreras.get(0).getNombre());
 
-            }
+            }//aqui esta el erro al convertir el departamento vacio ""
         
     }//GEN-LAST:event_btnModificarActionPerformed
 

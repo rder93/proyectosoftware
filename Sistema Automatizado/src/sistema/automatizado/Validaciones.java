@@ -27,7 +27,7 @@ public class Validaciones {
     
     public static boolean validarAsignatura(String nombre, String uc, String horas, String carrera, String departamento, String nivel){
         
-        
+        if(verificarNombre(nombre))
             if(verificarSoloNumeros(uc))
                 if(verificarSoloNumeros(horas))
                     if(verificarSoloNumeros(carrera))
@@ -54,6 +54,9 @@ public class Validaciones {
                 JOptionPane.showMessageDialog(null, "El número de UC debe ser un valor entero");
                 return false;
             }
+        else{
+            return false;
+        }
     }
     
     public static boolean validarPlantaFisica(String modulo, String id, String nombre){
@@ -127,5 +130,63 @@ public class Validaciones {
         return true;  
     }
     
+    public static boolean verificarNombre(String nombre){
+        
+        if(nombre.length()==0){
+            JOptionPane.showMessageDialog(null, "El nombre es un campo obligatorio");
+            return false;
+        }
+        
+        if(!Character.isLetter(nombre.charAt(0))){
+            JOptionPane.showMessageDialog(null, "El nombre debe empezar con una letra");
+            return false;
+        }
+        
+        for(int i = 0; i < nombre.length(); ++i){
+            
+            char caracter = nombre.charAt(i);
+            
+            if(Character.isDigit(caracter)){
+               JOptionPane.showMessageDialog(null, "El nombre de la asignatura no debe contener numeros");
+               return false;
+            }
+        }
+        
+        for(int i = 0; i < nombre.length(); ++i){
+            
+            char caracter = nombre.charAt(i);
+            
+            if(!Character.isSpaceChar(caracter)){
+                if(!Character.isLetter(caracter))
+                    if(!esAcento(caracter)){
+                        JOptionPane.showMessageDialog(null, "El nombre de la asignatura solo debe contener letras MAYUSCULAS");
+                        return false;
+                    }
+            }
+        }
+        
+        for(int i = 0; i < nombre.length(); ++i){
+            
+            char caracter = nombre.charAt(i);
+            
+            if(Character.isLetter(caracter)){
+                if(!Character.isUpperCase(caracter)){
+                    JOptionPane.showMessageDialog(null, "El nombre de la asignatura debe estar escrito en MAYUSCULAS");
+                    return false;
+                }
+            }
+        }
+        
+        
+        return true;
+    }
     
+    public static boolean esAcento(char caracter){
+        
+        if(caracter=='Á')
+            JOptionPane.showMessageDialog(null, "es acento");
+        return true;
+    }
+    
+
 }
