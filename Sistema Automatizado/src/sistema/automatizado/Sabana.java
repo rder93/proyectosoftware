@@ -14,14 +14,14 @@ public class Sabana {
     private String asignatura;
     private String lapso;
     private int id_seccion;
-    private String aula;
-    private String modulo;
+    private int aula;
+    private int modulo;
     private String dia;
     private int horaInicial;
     private int horaFinal;
 
     public Sabana(String asignatura, String lapso, int id_seccion, 
-                  String aula, String modulo, String dia, 
+                  int aula, int modulo, String dia, 
                   int horaInicial, int horaFinal) {
         this.asignatura = asignatura;
         this.lapso = lapso;
@@ -57,19 +57,19 @@ public class Sabana {
         this.id_seccion = id_seccion;
     }
 
-    public String getAula() {
+    public int getAula() {
         return aula;
     }
 
-    public void setAula(String aula) {
+    public void setAula(int aula) {
         this.aula = aula;
     }
 
-    public String getModulo() {
+    public int getModulo() {
         return modulo;
     }
 
-    public void setModulo(String modulo) {
+    public void setModulo(int modulo) {
         this.modulo = modulo;
     }
 

@@ -32,6 +32,7 @@ public class VentanaSabana extends javax.swing.JFrame {
     
     ArrayList<Asignatura> asignaturas = new  ArrayList<Asignatura>();
     ArrayList<String> dias = new  ArrayList<String>();
+    ArrayList<String> horas = new  ArrayList<String>();
     DefaultTableModel modelo = new DefaultTableModel();
     int posicionDia = 0; //Posicion del dia selccionado
     
@@ -56,8 +57,10 @@ public class VentanaSabana extends javax.swing.JFrame {
         jButton6.setBorderPainted(false);
         
         cargarDias();
-        limpiar();
+       
         jLabel2.setText(dias.get(posicionDia));
+        
+        
     }
 
     private VentanaSabana() {
@@ -370,12 +373,30 @@ public class VentanaSabana extends javax.swing.JFrame {
      * Agrega los item asignatura al combo
      */
     
+    public void posicioneHoras(){
+    
+        
+    }
+    
     public void cargar(){
         
         for (int i = 0; i < padre.listaAsignaturas.size() ; i++) {
             
             jComboBox1.addItem(padre.listaAsignaturas.get(i).getNombre());
-
+        }
+        
+      
+        
+        for (int i = 0; i < padre.listaSabana.size(); i++) {
+            
+            this.modelo = (DefaultTableModel) this.jTable2.getModel();
+            this.modelo.setNumRows(0);
+            modelo.addRow(new Object[]{
+                        padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getNivel()+"",
+                        padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getCodigo()+"",
+                        padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getUc()+"",
+                        padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getHoras()+""
+            });
         }
         
     }
@@ -416,12 +437,13 @@ public class VentanaSabana extends javax.swing.JFrame {
     
     private void cargarDias(){
     
-        dias.add("LUNES");
-        dias.add("MARTES");
-        dias.add("MIERCOLES");
-        dias.add("JUEVES");
-        dias.add("VIERNES");
-        dias.add("SABADO");
+        dias.add("Lunes");
+        dias.add("Martes");
+        dias.add("Miercoles");
+        dias.add("Jueves");
+        dias.add("Viernes");
+        dias.add("Sabado");
+        dias.add("Domingo");
  
     }
     /**
@@ -433,13 +455,13 @@ public class VentanaSabana extends javax.swing.JFrame {
         if(sentido){
 
             if((--posicionDia)<0){
-                posicionDia+=6;
+                posicionDia+=7;
             }
                 
         }else{
 
             if((++posicionDia)>5){
-                posicionDia-=6;
+                posicionDia-=7;
             }
         }
    }
@@ -464,8 +486,9 @@ public class VentanaSabana extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
     
+      
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        boolean condicion = false; //Variable de control
         for (int i = 0; i < padre.listaOferta.size(); i++) {
             if(padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getCodigo().equals(padre.listaOferta.get(i).getCodigo())){
                 cargarjComboBox2( padre.listaOferta.get(i).getNroSecciones());
@@ -478,9 +501,15 @@ public class VentanaSabana extends javax.swing.JFrame {
                         padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getUc()+"",
                         padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getHoras()+""
                     });
+                    condicion = true; //Si existe en oferta
             }
         }
         
+        if(condicion == false ){   //Si no existe en oferta 
+            
+            JOptionPane.showMessageDialog(rootPane,"No existe oferta para esta asignatura", "ADVERTENCIA", 0);
+        }
+        System.out.println(""+padre.listaSabana.size());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
@@ -551,33 +580,10 @@ public class VentanaSabana extends javax.swing.JFrame {
                
             }
         }
-        String auxDia = null;
-        switch( posicionDia ) {
-            case 0: 
-                auxDia = "Lunes";
-                break;
-            case 1: 
-                auxDia = "Martes";
-                break;
-            case 2: 
-                auxDia = "Miercoles";
-                break;
-            case 3: 
-                auxDia = "Jueves";
-                break;
-            case 4: 
-                auxDia = "Viernes";
-                break;
-            case 5: 
-                auxDia = "Sabado";;
-                break;
-            default: 
-                System.out.println("Error");
-                break;
-            }
+       
         
         for (int i = 0; i < padre.listaSabana.size(); i++) {
-            if( padre.listaSabana.get(i).getDia().equals(auxDia) ){
+            if( padre.listaSabana.get(i).getDia().equals(dias.get(posicionDia)) ){
                 padre.listaSabana.remove(i);
             }
         }
