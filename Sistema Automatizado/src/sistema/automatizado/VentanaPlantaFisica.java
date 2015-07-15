@@ -265,7 +265,9 @@ public class VentanaPlantaFisica extends javax.swing.JFrame {
 
         //Se procede a ejecutar el método encargado de agregar un nuevo registro
         //tomando como parámetros l@s String de los campos de texto
-        plantaFisica.agregar(Integer.parseInt(txtModulo.getText()), txtNumero.getText(), txtId.getText());
+        if(Validaciones.validarPlantaFisica(txtModulo.getText(),txtId.getText(), txtNumero.getText()))
+            if(OperacionesBD.addAula(txtModulo.getText(), txtNumero.getText(), txtId.getText(), usuario.getNombre(), usuario.getClave()))
+                plantaFisica.agregar(Integer.parseInt(txtModulo.getText()), txtNumero.getText(), txtId.getText());
         limpiarCampos();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -273,12 +275,13 @@ public class VentanaPlantaFisica extends javax.swing.JFrame {
 
         //Se verifica que exista una fila seleccionada para poder modificarla
         //se puede selecionar con el mouse o con las flehas del teclado
-        if(tblPlantaFisica.getSelectedRow()>=0){
-            if(OperacionesBD.setAula(txtModulo.getText(), txtNumero.getText(), tblPlantaFisica.getModel().getValueAt(tblPlantaFisica.getSelectedRow(), 2).toString(),usuario.getNombre() ,  usuario.getClave()))
-                plantaFisica.modificar(Integer.parseInt(txtModulo.getText()), txtNumero.getText(), txtId.getText(), tblPlantaFisica.getSelectedRow());   
-        }else{
-            JOptionPane.showMessageDialog(this, "Debe seleccionar aula que desea modificar");
-        }
+        if(Validaciones.validarPlantaFisica(txtModulo.getText(), txtId.getText(), txtNumero.getText()))
+            if(tblPlantaFisica.getSelectedRow()>=0){
+                if(OperacionesBD.setAula(txtModulo.getText(), txtNumero.getText(), tblPlantaFisica.getModel().getValueAt(tblPlantaFisica.getSelectedRow(), 2).toString(),usuario.getNombre() ,  usuario.getClave()))
+                    plantaFisica.modificar(Integer.parseInt(txtModulo.getText()), txtNumero.getText(), txtId.getText(), tblPlantaFisica.getSelectedRow());   
+            }else{
+                JOptionPane.showMessageDialog(this, "Debe seleccionar aula que desea modificar");
+            }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -290,8 +293,11 @@ public class VentanaPlantaFisica extends javax.swing.JFrame {
 
             //Si se confirma la eliminación del registro se procede a ejecutar la operación
             if(opcion==0){
-                plantaFisica.eliminar(tblPlantaFisica.getSelectedRow());
-                limpiarCampos();
+                if(Validaciones.validarPlantaFisica(txtModulo.getText(), txtId.getText(), "A-01"))
+                    if(OperacionesBD.deleteAula(txtId.getText(),txtModulo.getText() ,usuario.getNombre(), usuario.getClave())){
+                        plantaFisica.eliminar(tblPlantaFisica.getSelectedRow());
+                        limpiarCampos();
+                    }
             }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
