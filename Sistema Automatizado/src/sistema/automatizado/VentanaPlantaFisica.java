@@ -124,11 +124,11 @@ public class VentanaPlantaFisica extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Módulo", "Aula"
+                "Módulo", "Aula", "Id"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
