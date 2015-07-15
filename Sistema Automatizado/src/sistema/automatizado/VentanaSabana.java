@@ -364,6 +364,17 @@ public class VentanaSabana extends javax.swing.JFrame {
         
     }
     
+    public void cargar(){
+        
+        for (int i = 0; i < padre.listaAsignaturas.size() ; i++) {
+            
+            jComboBox1.addItem(padre.listaAsignaturas.get(i).getNombre());
+
+        }
+        
+    }
+    
+    
     public void cargarInfo(String usuario, String clave){
         
         jLabel3.setText(usuario);
@@ -391,36 +402,6 @@ public class VentanaSabana extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         } 
 
-    }
-    
-    
-    public void cargarAsig(String usuario, String clave){
-        
-        //Aqui se almacena toda la informacion de las asignaturas
-        try {
-            ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
-            Connection cn = conexion.conectar();
-            Statement st = cn.createStatement();
-            String sql = "SELECT * "
-                       + "FROM (asignaturas AS a LEFT OUTER JOIN departamentos AS d ON  a.departamento=d.cod_departamento) LEFT OUTER JOIN carreras AS c ON a.carrera=c.cod_carrera "
-                       + "ORDER BY (nivel,cod_asignatura)";
-            
-            ResultSet rs = st.executeQuery(sql);
-            
-            while (rs.next()) {
-                
-                jComboBox1.addItem(rs.getString(2));
-                
-                Asignatura objAsignatura = new Asignatura(rs.getInt("nivel"), rs.getString("cod_asignatura"), rs.getInt("uc"), rs.getInt("horas_sem"), rs.getString(2), rs.getString(9), rs.getString(11));
-                this.asignaturas.add(objAsignatura);
-                
-                
-            }
-            
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        } 
-    
     }
     
     /**
@@ -479,16 +460,16 @@ public class VentanaSabana extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         for (int i = 0; i < padre.listaOferta.size(); i++) {
-            if(this.asignaturas.get(jComboBox1.getSelectedIndex()).getCodigo().equals(padre.listaOferta.get(i).getCodigo())){
+            if(padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getCodigo().equals(padre.listaOferta.get(i).getCodigo())){
                 cargarjComboBox2( padre.listaOferta.get(i).getNroSecciones());
                 
                 this.modelo = (DefaultTableModel) this.jTable2.getModel();
                     this.modelo.setNumRows(0);
                     modelo.addRow(new Object[]{
-                        this.asignaturas.get(jComboBox1.getSelectedIndex()).getNivel()+"",
-                        this.asignaturas.get(jComboBox1.getSelectedIndex()).getCodigo()+"",
-                        this.asignaturas.get(jComboBox1.getSelectedIndex()).getUc()+"",
-                        this.asignaturas.get(jComboBox1.getSelectedIndex()).getHoras()+""
+                        padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getNivel()+"",
+                        padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getCodigo()+"",
+                        padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getUc()+"",
+                        padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getHoras()+""
                     });
             }
         }
@@ -499,9 +480,13 @@ public class VentanaSabana extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         padre.listaAsignaturas = OperacionesBD.getAsignaturas(usuario.getNombre(), usuario.getClave());
+        padre.listaCarreras = OperacionesBD.getCarreras(usuario.getNombre(), usuario.getClave());
+        padre.listaDepartamentos = OperacionesBD.getDepartamentos(usuario.getNombre(), usuario.getClave());
         
         if(padre.listaAsignaturas!=null){
-            
+            padre.ventanaAsignaturas.usuario = new Usuario();
+            padre.ventanaAsignaturas.usuario.setNombre(usuario.getNombre());
+            padre.ventanaAsignaturas.usuario.setClave(usuario.getClave());
             padre.ventanaAsignaturas.cargar();
             padre.ventanaAsignaturas.setVisible(true);
         }

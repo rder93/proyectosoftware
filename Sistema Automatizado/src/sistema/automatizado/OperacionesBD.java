@@ -196,6 +196,35 @@ public class OperacionesBD {
         return null;
     }
     
+    public static ArrayList<Sabana> getSabana(String usuario, String clave){
+        
+        ArrayList<Sabana> sabana = new  ArrayList<Sabana>();
+        
+        try {
+            ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
+            Connection cn = conexion.conectar();
+            Statement st = cn.createStatement();
+            String sql = "SELECT * FROM sabana" ;
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next()){
+                
+                Sabana objSabana = new Sabana(rs.getString("cod_asignatura"),rs.getString("lapso"),
+                                              rs.getInt("n_seccion"), rs.getString("id_aula"), rs.getString("id_edificio"),
+                                              rs.getString("dia"), rs.getInt("hr_inicio"), rs.getInt("hr_final"));
+
+                sabana.add(objSabana);
+            
+            }
+            
+            return sabana;
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        
+        return null;
+    }
     
     public static ArrayList<PlantaFisica> getAulas(String usuario, String clave){
         

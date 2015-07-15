@@ -379,6 +379,8 @@ public class Ventana extends javax.swing.JFrame{
         //jButton3.setToolTipText("Informacion");
         
         listaOferta = OperacionesBD.getOferta(usuario.getNombre(), usuario.getClave());
+        listaSabana = OperacionesBD.getSabana(usuario.getNombre(), usuario.getClave());
+        listaAsignaturas = OperacionesBD.getAsignaturas(usuario.getNombre(), usuario.getClave());
         
         //JOptionPane.showMessageDialog(this, listaOferta.get(0).getAsignatura());
         
@@ -387,8 +389,8 @@ public class Ventana extends javax.swing.JFrame{
             ventanasabana.usuario.setNombre(usuario.getNombre());
             ventanasabana.usuario.setClave(usuario.getClave());
             ventanasabana.limpiar();
+            ventanasabana.cargar();
             ventanasabana.cargarInfo(usuario.getNombre(), usuario.getClave());
-            ventanasabana.cargarAsig(usuario.getNombre(), usuario.getClave());
             ventanasabana.setVisible(true);
         }
     }//GEN-LAST:event_btnSabanaActionPerformed
