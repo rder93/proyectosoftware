@@ -5,6 +5,8 @@
  */
 package sistema.automatizado;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,7 +27,7 @@ public class Validaciones {
     
     public static boolean validarAsignatura(String nombre, String uc, String horas, String carrera, String departamento, String nivel){
         
-        if(verificarSoloLetras(nombre))
+        
             if(verificarSoloNumeros(uc))
                 if(verificarSoloNumeros(horas))
                     if(verificarSoloNumeros(carrera))
@@ -52,10 +54,25 @@ public class Validaciones {
                 JOptionPane.showMessageDialog(null, "El número de UC debe ser un valor entero");
                 return false;
             }
-        else{
-            JOptionPane.showMessageDialog(null, "El nombre debe contener solo letras");
-            return false;
-        }
+    }
+    
+    public static boolean validarPlantaFisica(String modulo, String id, String nombre){
+        
+        if(verificarSoloNumeros(modulo)){
+            if(verificarSoloNumeros(id))
+                if(verificarPatronAula(nombre))
+                    return true;
+                else
+                    return false;
+            else{
+                JOptionPane.showMessageDialog(null, "El id solo debe contener numeros");
+                return false;
+            }
+        }else{
+                JOptionPane.showMessageDialog(null, "El modulo  solo debe contener numeros");
+                return false;
+            }
+    
     }
     
     public static boolean verificarSoloNumeros(String cadena){
@@ -63,7 +80,8 @@ public class Validaciones {
         if(cadena.length()==0){
             return false;
         }
-        
+        //Irene prueba algo q tu digas q da error lo viste
+        //escucha la nota de voz conesen..
         for(int i = 0; i < cadena.length(); ++i){
             
             char caracter = cadena.charAt(i);
@@ -89,5 +107,24 @@ public class Validaciones {
         return true;  
     }
     
+    public static boolean verificarPatronAula(String nombre){
+        
+        
+        Pattern pat = Pattern.compile("A-\\d\\d");
+        Matcher mat = pat.matcher(nombre);
+        if (mat.matches()) {
+            if(nombre.charAt(2)=='0' && nombre.charAt(3)=='0' ){
+                JOptionPane.showMessageDialog(null, "Las aulas deben comenzar a enumerarse del numero 01");
+                return false;
+            }
+            else
+                return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "El nombre del aula debe tener el siguiente formato: A-##");
+            return false;
+        }
     
-}
+    }
+    
+    
+ }

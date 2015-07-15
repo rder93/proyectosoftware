@@ -342,6 +342,24 @@ public class OperacionesBD {
         }
     }
     
+    public static boolean addAula(String modulo, String numero, String id_aula, String usuario, String clave ){
+
+       
+        try {
+            ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
+            Connection cn = conexion.conectar();
+            Statement st = cn.createStatement();
+            String sql = "INSERT INTO aulas "
+                       + "VALUES ("+id_aula+",'"+numero+"'," +modulo+")";
+  
+            st.executeUpdate(sql);
+            return true;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return false;
+        }
+    }
+    
     
     public static boolean deleteOferta(String codigo, int nSecciones, String usuario, String clave ){
         
@@ -357,6 +375,27 @@ public class OperacionesBD {
             String sql2 = "DELETE FROM secciones WHERE cod_asignatura='"+codigo+"'";
             
             st2.executeUpdate(sql2);
+            return st.executeUpdate(sql)>0;
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            
+            return false;
+        }
+    }
+    
+    public static boolean deleteAula(String id_aula, String modulo, String usuario, String clave ){
+        
+        try {
+            ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
+            Connection cn = conexion.conectar();
+            Statement st = cn.createStatement();
+            String sql = "DELETE "
+                       + "FROM aulas "
+                       + "WHERE id_aula = '"+id_aula+"' AND edificio="+modulo;
+            
+            
+            
             return st.executeUpdate(sql)>0;
             
         } catch (Exception ex) {
