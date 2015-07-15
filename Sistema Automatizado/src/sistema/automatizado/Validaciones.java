@@ -156,9 +156,6 @@ public class Validaciones {
             
             char caracter = nombre.charAt(i);
             
-            if(Character.isLetter('ñ'))
-                System.out.println("siiii");
-            
             if(!Character.isSpaceChar(caracter)){
                 if(!Character.isLetter(caracter))
                     if(!Character.isUpperCase(caracter)){
