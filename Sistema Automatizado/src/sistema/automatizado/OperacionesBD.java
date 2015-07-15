@@ -140,6 +140,63 @@ public class OperacionesBD {
         return null;
     }
     
+    public static ArrayList<Carreras> getCarreras(String usuario, String clave){
+        
+        ArrayList<Carreras> carreras = new  ArrayList<Carreras>();
+        
+        try {
+            ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
+            Connection cn = conexion.conectar();
+            Statement st = cn.createStatement();
+            String sql = "SELECT * FROM carreras" ;
+            ResultSet rs = st.executeQuery(sql);
+            
+            rs.next();
+                
+            Carreras objCarrera = new Carreras(rs.getString("cod_carrera"), rs.getString("nombre"));
+                
+            carreras.add(objCarrera);
+                
+            
+           
+            return carreras;
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        
+        return null;
+    }
+    
+    public static ArrayList<Departamentos> getDepartamentos(String usuario, String clave){
+        
+        ArrayList<Departamentos> departamentos = new  ArrayList<Departamentos>();
+        
+        try {
+            ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
+            Connection cn = conexion.conectar();
+            Statement st = cn.createStatement();
+            String sql = "SELECT * FROM departamentos" ;
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next()){
+                
+                Departamentos objDepartamentos = new Departamentos(rs.getInt("cod_departamento"), rs.getString("nombre"));
+
+                departamentos.add(objDepartamentos);
+            
+            }
+            
+            return departamentos;
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        
+        return null;
+    }
+    
+    
     public static ArrayList<PlantaFisica> getAulas(String usuario, String clave){
         
         ArrayList<PlantaFisica> plantafisica = new  ArrayList<PlantaFisica>();

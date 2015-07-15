@@ -34,7 +34,8 @@ public class Ventana extends javax.swing.JFrame{
     public ArrayList<Docente> listaDocente = new ArrayList<Docente>();
     public ArrayList<Oferta> listaOferta = new ArrayList<Oferta>();
     public ArrayList<Sabana> listaSabana = new ArrayList<Sabana>();
-    
+    public ArrayList<Carreras> listaCarreras = new ArrayList<Carreras>();
+    public ArrayList<Departamentos> listaDepartamentos = new ArrayList<Departamentos>();
     
     public static Usuario usuario;
     
@@ -413,6 +414,8 @@ public class Ventana extends javax.swing.JFrame{
         panelAyuda.setVisible(false);
         
         listaAsignaturas = OperacionesBD.getAsignaturas(usuario.getNombre(), usuario.getClave());
+        listaCarreras = OperacionesBD.getCarreras(usuario.getNombre(), usuario.getClave());
+        listaDepartamentos = OperacionesBD.getDepartamentos(usuario.getNombre(), usuario.getClave());
         
         if(listaAsignaturas!=null){
             ventanaAsignaturas.usuario = new Usuario();

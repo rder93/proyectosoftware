@@ -27,6 +27,7 @@ public class VentanaAsignatura extends javax.swing.JFrame {
     private Asignatura asignatura;
     
     public static Usuario usuario;
+    public int auxCodDep;
     
     /**
      * Creates new form VentanaAsignatura
@@ -81,11 +82,13 @@ public class VentanaAsignatura extends javax.swing.JFrame {
 
         limpiarTabla(tblAsignatura);
         DefaultTableModel modelo = (DefaultTableModel)tblAsignatura.getModel();
+        Carreras auxCarrera = padre.listaCarreras.get(0);
+        
         for (int i = 0; i < padre.listaAsignaturas.size(); i++) {
             
             Asignatura aux = padre.listaAsignaturas.get(i);
             modelo.addRow(new Object[]{aux.getNivel(),aux.getCodigo(),aux.getUc(),aux.getHoras(),
-                                aux.getNombre(),aux.getDepartamento(),aux.getCarrera()});
+                                aux.getNombre(),aux.getDepartamento(),auxCarrera.getNombre()});
             
         }
 
@@ -342,7 +345,9 @@ public class VentanaAsignatura extends javax.swing.JFrame {
 
                     asignatura.modificar(txtCodigo.getText(), Integer.parseInt(txtUC.getText()), 
                                          Integer.parseInt(txtHoras.getText()), txtNombre.getText(), tblAsignatura.getSelectedRow(), 
-                                         Integer.parseInt(txtNivel.getText()),txtDepartamento.getText(), txtCarrera.getText());
+                                         Integer.parseInt(txtNivel.getText()),padre.listaDepartamentos.get(Integer.parseInt(txtDepartamento.getText())).getNombre(), 
+                                         padre.listaCarreras.get(0).getNombre());
+
             }
         
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -419,15 +424,25 @@ public class VentanaAsignatura extends javax.swing.JFrame {
                         else
                             txtNombre.setText("");
 
-                        if(asignatura.getModeloDeTabla().getValueAt(tblAsignatura.getSelectedRow(),5)!=null)
-                            txtDepartamento.setText(asignatura.getModeloDeTabla().getValueAt(tblAsignatura.getSelectedRow(),5).toString());
-                        else
-                            txtDepartamento.setText("");    
+                    if(asignatura.getModeloDeTabla().getValueAt(tblAsignatura.getSelectedRow(),5)!=null)
+                        
+                        for (int i = 0; i < padre.listaDepartamentos.size() ; i++) {
+                                
+                            if(padre.listaAsignaturas.get(tblAsignatura.getSelectedRow()).getDepartamento().equals(padre.listaDepartamentos.get(i).getNombre())){
+                                txtDepartamento.setText(""+padre.listaDepartamentos.get(i).getCod_departamento());
+                                auxCodDep = i;
+                            }
+                                
+                        }
+                            //txtDepartamento.setText(asignatura.getModeloDeTabla().getValueAt(tblAsignatura.getSelectedRow(),5).toString());
+                    else
+                        txtDepartamento.setText("");   
 
-                        if(asignatura.getModeloDeTabla().getValueAt(tblAsignatura.getSelectedRow(),6)!=null)
-                            txtCarrera.setText(asignatura.getModeloDeTabla().getValueAt(tblAsignatura.getSelectedRow(),6).toString());
-                        else
-                            txtCarrera.setText("");   
+                    if(asignatura.getModeloDeTabla().getValueAt(tblAsignatura.getSelectedRow(),6)!=null)
+                        txtCarrera.setText(padre.listaCarreras.get(0).getCod_carrera());
+                            //txtCarrera.setText(asignatura.getModeloDeTabla().getValueAt(tblAsignatura.getSelectedRow(),6).toString());
+                    else
+                        txtCarrera.setText("");   
                     }
                 }
             }
@@ -467,14 +482,24 @@ public class VentanaAsignatura extends javax.swing.JFrame {
                         txtNombre.setText(asignatura.getModeloDeTabla().getValueAt(tblAsignatura.getSelectedRow(),4).toString());
                     else
                         txtNombre.setText("");
-                    
+                        
                     if(asignatura.getModeloDeTabla().getValueAt(tblAsignatura.getSelectedRow(),5)!=null)
-                        txtDepartamento.setText(asignatura.getModeloDeTabla().getValueAt(tblAsignatura.getSelectedRow(),5).toString());
+                        
+                        for (int i = 0; i < padre.listaDepartamentos.size() ; i++) {
+                                
+                            if(padre.listaAsignaturas.get(tblAsignatura.getSelectedRow()).getDepartamento().equals(padre.listaDepartamentos.get(i).getNombre())){
+                                txtDepartamento.setText(""+padre.listaDepartamentos.get(i).getCod_departamento());
+                                auxCodDep = i;
+                            }
+                                
+                        }
+                            //txtDepartamento.setText(asignatura.getModeloDeTabla().getValueAt(tblAsignatura.getSelectedRow(),5).toString());
                     else
                         txtDepartamento.setText("");    
                     
                     if(asignatura.getModeloDeTabla().getValueAt(tblAsignatura.getSelectedRow(),6)!=null)
-                        txtCarrera.setText(asignatura.getModeloDeTabla().getValueAt(tblAsignatura.getSelectedRow(),6).toString());
+                        txtCarrera.setText(padre.listaCarreras.get(0).getCod_carrera());
+                        //txtCarrera.setText(asignatura.getModeloDeTabla().getValueAt(tblAsignatura.getSelectedRow(),6).toString());
                     else
                         txtCarrera.setText("");
 
