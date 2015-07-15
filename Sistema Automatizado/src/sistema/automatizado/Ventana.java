@@ -24,8 +24,7 @@ public class Ventana extends javax.swing.JFrame{
      * Creates new form Ventana
      */
     
-     /*Varibale auxiliar*/
-    //public PlantaFisica auxPlantaFisica = new PlantaFisica();
+    
     public Asignatura auxAsignaturas;
     public BackgroundMenuBar menucolor;
     
@@ -34,8 +33,13 @@ public class Ventana extends javax.swing.JFrame{
     public ArrayList<Asignatura> listaAsignaturas = new ArrayList<Asignatura>();
     public ArrayList<Docente> listaDocente = new ArrayList<Docente>();
     public ArrayList<Oferta> listaOferta = new ArrayList<Oferta>();
+    public ArrayList<Sabana> listaSabana = new ArrayList<Sabana>();
+    
     
     public static Usuario usuario;
+    
+    
+    /*Lista de ventanas*/
     public VentanaOfertaAcademica ventanaofertaacademica = new VentanaOfertaAcademica(this);
     public VentanaSabana ventanasabana = new VentanaSabana(this);
     public VentanaPlantaFisica ventanaplantafisica = new VentanaPlantaFisica(this);
@@ -87,12 +91,6 @@ public class Ventana extends javax.swing.JFrame{
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAyuda = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu7 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -252,35 +250,6 @@ public class Ventana extends javax.swing.JFrame{
 
         getContentPane().add(panelAyuda, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 930, 250));
 
-        jMenu7.setText("Archivo");
-
-        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/Save_1.png"))); // NOI18N
-        jMenuItem6.setText("Guardar");
-        jMenu7.add(jMenuItem6);
-
-        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/reply-16.png"))); // NOI18N
-        jMenuItem7.setText("Deshacer");
-        jMenu7.add(jMenuItem7);
-
-        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/77-24.png"))); // NOI18N
-        jMenuItem8.setText("Borrar todo");
-        jMenu7.add(jMenuItem8);
-
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/refresh-32_2.png"))); // NOI18N
-        jMenuItem2.setText("Cargar data");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu7.add(jMenuItem2);
-
-        jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/lapiz_2.png"))); // NOI18N
-        jMenuItem10.setText("Crear sabana");
-        jMenu7.add(jMenuItem10);
-
-        jMenuBar1.add(jMenu7);
-
         jMenu8.setText("Acerca de");
 
         jMenuItem9.setText("Ayuda");
@@ -404,11 +373,6 @@ public class Ventana extends javax.swing.JFrame{
         }
         
     }//GEN-LAST:event_btnOfertaAcademicaActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void btnSabanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSabanaActionPerformed
         //jButton3.setToolTipText("Informacion");
@@ -638,17 +602,11 @@ public class Ventana extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
