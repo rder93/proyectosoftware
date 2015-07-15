@@ -31,7 +31,7 @@ public class VentanaSabana extends javax.swing.JFrame {
     public static Usuario usuario;
     
     ArrayList<Asignatura> asignaturas = new  ArrayList<Asignatura>();
-    ArrayList<DistribucionSabana> distribucionSabana = new  ArrayList<DistribucionSabana>();
+    ArrayList<String> dias = new  ArrayList<String>();
     DefaultTableModel modelo = new DefaultTableModel();
     int posicionDia = 0; //Posicion del dia selccionado
     
@@ -57,7 +57,7 @@ public class VentanaSabana extends javax.swing.JFrame {
         
         cargarDias();
         limpiar();
-        jLabel2.setText((String) distribucionSabana.get(posicionDia).getDia());
+        jLabel2.setText(dias.get(posicionDia));
     }
 
     private VentanaSabana() {
@@ -355,7 +355,9 @@ public class VentanaSabana extends javax.swing.JFrame {
             jComboBox2.addItem(i+1);
         }
     }
-    
+    /**
+     *  Limpiar los combo box y la tabla
+     */
     public void limpiar(){
         
         jComboBox1.removeAllItems(); //Materias
@@ -363,6 +365,10 @@ public class VentanaSabana extends javax.swing.JFrame {
         this.modelo.setNumRows(0);
         
     }
+    
+    /**
+     * Agrega los item asignatura al combo
+     */
     
     public void cargar(){
         
@@ -410,12 +416,12 @@ public class VentanaSabana extends javax.swing.JFrame {
     
     private void cargarDias(){
     
-        distribucionSabana.add(new DistribucionSabana("LUNES"));
-        distribucionSabana.add(new DistribucionSabana("MARTES"));
-        distribucionSabana.add(new DistribucionSabana("MIERCOLES"));
-        distribucionSabana.add(new DistribucionSabana("JUEVES"));
-        distribucionSabana.add(new DistribucionSabana("VIERNES"));
-        distribucionSabana.add(new DistribucionSabana("SABADO"));
+        dias.add("LUNES");
+        dias.add("MARTES");
+        dias.add("MIERCOLES");
+        dias.add("JUEVES");
+        dias.add("VIERNES");
+        dias.add("SABADO");
  
     }
     /**
@@ -439,16 +445,17 @@ public class VentanaSabana extends javax.swing.JFrame {
    }
     
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        
+        /*Sentido: Izquierda*/
         movimientoDia(true);
-        jLabel2.setText((String) distribucionSabana.get(posicionDia).getDia());
+        jLabel2.setText(dias.get(posicionDia));
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-
+        
+        /*Sentido: Derecha*/
         movimientoDia(false);
-        jLabel2.setText((String) distribucionSabana.get(posicionDia).getDia());
+        jLabel2.setText(dias.get(posicionDia));
 
     }//GEN-LAST:event_jButton6ActionPerformed
 
