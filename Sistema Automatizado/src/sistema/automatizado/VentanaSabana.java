@@ -28,7 +28,7 @@ public class VentanaSabana extends javax.swing.JFrame {
     
     public Ventana padre;
     public static Usuario usuario;
-    
+    boolean condicionControl = false;
     ArrayList<Asignatura> asignaturas = new  ArrayList<Asignatura>();
     ArrayList<String> dias = new  ArrayList<String>();
     DefaultTableModel modelo = new DefaultTableModel();
@@ -212,7 +212,7 @@ public class VentanaSabana extends javax.swing.JFrame {
 
         jLabel7.setText("Nro. secciones:");
 
-        jButton3.setText("Limpiar");
+        jButton3.setText("Limpiar selección");
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jButton3MouseReleased(evt);
@@ -299,7 +299,7 @@ public class VentanaSabana extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(76, 76, 76))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
@@ -447,7 +447,9 @@ public class VentanaSabana extends javax.swing.JFrame {
         return "";
     }
     
- 
+    /**
+     * Carga la información que existe en la bdd sobre la sabana
+     */
     
     public void cargarSabana(){
 
@@ -611,6 +613,7 @@ public class VentanaSabana extends javax.swing.JFrame {
                         padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getHoras()+""
                     });
                     condicion = true; //Si existe en oferta
+                    condicionControl = true; //Se visualizaron los detalles
             }
         }
         
@@ -656,56 +659,82 @@ public class VentanaSabana extends javax.swing.JFrame {
     
     private void jButton2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseReleased
 
-        
-        try {
-            int rows[] = this.jTable1.getSelectedRows();
-            int columns[] = this.jTable1.getSelectedColumns();
-            int[] auxAula = new int[100];
-            
-            int auxHoraInicial = rows[0] + 1;
-            int auxHoraFinal = rows[rows.length-1] + 1;
-            
-            if( auxHoraInicial != auxHoraFinal ){
-                
-                for (int i = 0; i < columns.length; i++) {
-                    
-                    auxAula[i] = Integer.parseInt(this.jTable1.getColumnName(columns[i]).replaceFirst("Aula ","")); 
-                    
-                    String auxDia = dias.get(posicionDia);
-                    String auxAsignatura = (String) this.jTable2.getValueAt(0, 1);
-                    String auxLapso = jLabel6.getText();
+        if(condicionControl == true ){
+            try {
+                int rows[] = this.jTable1.getSelectedRows();
+                int columns[] = this.jTable1.getSelectedColumns();
+                int[] auxAula = new int[100];
 
-                    int  auxId_seccion = jComboBox2.getSelectedIndex()+1;
-                    
-                    int auxModulo = 2;
-                    padre.listaSabana.add(new Sabana (auxAsignatura, auxLapso, auxId_seccion, 
-                                                                auxAula[i], auxModulo, auxDia, 
-                                                                auxHoraInicial, auxHoraFinal));
-                    OperacionesBD.addSabana(usuario.getNombre(), usuario.getClave(),
-                                                    auxAsignatura, auxLapso, auxId_seccion, 
-                                                    auxAula[i], auxModulo, auxDia, 
-                                                    auxHoraInicial, auxHoraFinal);
-                   cargarSabana();        
-                } 
-            }else{
-                JOptionPane.showMessageDialog(rootPane,"Seleccione más de un bloque", "ADVERTENCIA", 0);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane,"Verifique su seleccion", "ADVERTENCIA", 0);
-        }        
+                int auxHoraInicial = rows[0] + 1;
+                int auxHoraFinal = rows[rows.length-1] + 1;
+
+                if( auxHoraInicial != auxHoraFinal ){
+
+                    for (int i = 0; i < columns.length; i++) {
+
+                        auxAula[i] = Integer.parseInt(this.jTable1.getColumnName(columns[i]).replaceFirst("Aula ","")); 
+                        String auxDia = dias.get(posicionDia);
+                        String auxAsignatura = (String) this.jTable2.getValueAt(0, 1);
+                        String auxLapso = jLabel6.getText();
+                        int  auxId_seccion = jComboBox2.getSelectedIndex()+1;
+                        int auxModulo = 2;
+                        
+                        padre.listaSabana.add(new Sabana (auxAsignatura, auxLapso, auxId_seccion, 
+                                                                    auxAula[i], auxModulo, auxDia, 
+                                                                    auxHoraInicial, auxHoraFinal));
+                        OperacionesBD.addSabana(usuario.getNombre(), usuario.getClave(),
+                                                        auxAsignatura, auxLapso, auxId_seccion, 
+                                                        auxAula[i], auxModulo, auxDia, 
+                                                        auxHoraInicial, auxHoraFinal);
+                       cargarSabana();        
+                    } 
+                }else{
+                    JOptionPane.showMessageDialog(rootPane,"Seleccione más de un bloque", "ADVERTENCIA", 0);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(rootPane,"Verifique su seleccion", "ADVERTENCIA", 0);
+            }        
+            condicionControl = false;
+            this.modelo.setNumRows(0);
+            jComboBox2.removeAllItems();
+        }else{
+            JOptionPane.showMessageDialog(rootPane,"Es necesario hacer click en detalles", "ADVERTENCIA", 0);
+        }
     }//GEN-LAST:event_jButton2MouseReleased
 
     private void jButton3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseReleased
         int rows[] = this.jTable1.getSelectedRows();
         int columns[] = this.jTable1.getSelectedColumns();
+
+        for (int i = 0; i < padre.listaSabana.size(); i++) {
+            //hay que validar que no sea la columna de horas
+                
+                if( padre.listaSabana.get(i).getDia().equals(dias.get(posicionDia)) ){
+                    
+                    for (int j = 0; j < rows.length; j++) {
+                        for (int k = 0; k < columns.length; k++) {
+                            System.out.println("hi "+padre.listaSabana.get(i).getHoraInicial());
+                            //System.out.println("i"+i);
+                            //System.out.println("fila "+rows[j]);
+                           // System.out.println("columna "+columns[k]);
+                            if( padre.listaSabana.get(i).getHoraInicial() == (rows[j]+1)
+                            && padre.listaSabana.get(i).getAula()-2 ==  columns[k]){
+                                System.out.println("hola");
+                                this.jTable1.setValueAt("", j, k);
+                            }
+                        }
+                    }
+                    
+                }
+        }
         
-        if ( (rows.length != 0) && (columns.length != 0) ){
+        /**
             for ( int i=rows[0]; i<=rows[rows.length-1]; i++ ){
                 for ( int j=columns[0]; j<=columns[columns.length-1]; j++ ){
-                    this.jTable1.setValueAt("", i, j);
+                    
                 }
             }
-        }
+        */
     }//GEN-LAST:event_jButton3MouseReleased
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
