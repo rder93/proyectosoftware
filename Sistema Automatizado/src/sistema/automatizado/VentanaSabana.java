@@ -705,6 +705,13 @@ public class VentanaSabana extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         
+        for (int i = 0; i < padre.listaSabana.size(); i++) {
+            if( padre.listaSabana.get(i).getDia().equals(dias.get(posicionDia)) ){
+                padre.listaSabana.remove(i);
+            
+            }
+        }
+        
         for (int i = 0; i < 16; i++) {
             for (int j = 1; j < 14; j++) {
                 this.jTable1.setValueAt("", i, j);
@@ -731,62 +738,27 @@ public class VentanaSabana extends javax.swing.JFrame {
         
         //Selección
         int rows[] = this.jTable1.getSelectedRows();
-        int columns[] = this.jTable1.getSelectedColumns();
-        boolean condicionHoraInicial = false;
-        boolean condicionHoraFinal = false;
+        int column = this.jTable1.getSelectedColumn();
+
+        int auxAuala = 0;
         for (int i = 0; i < padre.listaSabana.size(); i++) {
-            //hay que validar que no sea la columna de horas
-                
-                //Se filtran los objetos sabana del día que se selecciono
+
                 if( padre.listaSabana.get(i).getDia().equals(dias.get(posicionDia)) ){
-                    
-                    //System.out.println("rows-i="+rows[0]+" * rows-f="+rows[rows.length-1]+" / columns-i="+columns[0]+" * columns-f="+columns[columns.length-1]);
-                    
-                    //Se hace un ciclo dependiendo de la selección
-                    for (int j = 0; j < rows.length; j++) {
-                        for (int k = 0; k < columns.length; k++) {
-                            System.out.println(rows[j]+","+columns[k]);   
-                            //condicionHoraInicial = false;
-                            if(padre.listaSabana.get(i).getHoraInicial() == (rows[j]+1)){ 
-                                condicionHoraInicial = true;
+
+                            if ( padre.listaSabana.get(i).getAula()-2 == column || 
+                                padre.listaSabana.get(i).getAula() == column) {
+                                auxAuala = padre.listaSabana.get(i).getAula();
                             }
-                            //condicionHoraFinal = false;
-                            if( padre.listaSabana.get(i).getHoraFinal() == (rows[j]+1) ){ 
-                                condicionHoraFinal = true;
-                            }
-                            if ( condicionHoraInicial == true || condicionHoraFinal == true ) {
-                                if ( padre.listaSabana.get(i).getAula()>6 ){
-                                    if ( padre.listaSabana.get(i).getAula()-2 == columns[k] ) {
-                                        this.jTable1.setValueAt("", rows[j], columns[k]);
-                                    }
-                                }
-                                else {
-                                    if ( padre.listaSabana.get(i).getAula() == columns[k] ) {
-                                        this.jTable1.setValueAt("", rows[j], columns[k]);
-                                    }
-                                }
-                            }
-                            if( condicionHoraInicial == true && condicionHoraFinal == true ){
-                                condicionHoraInicial = false;
-                                condicionHoraFinal = false;
-                                System.out.println("ri="+rows[0]+"  rf="+rows[rows.length-1]+"  c="+columns[k]);
-                                for ( int z=0; z<rows.length; z++ )
-                                    this.jTable1.setValueAt("", rows[z], columns[k]);
-                            }
-                           
-                        }
-                    }
+
+                            if( (padre.listaSabana.get(i).getHoraInicial() == rows[0]+1) &&
+                                (padre.listaSabana.get(i).getHoraFinal() == ((rows.length-1)+(rows[0]+1))) &&
+                                padre.listaSabana.get(i).getAula() == auxAuala){
+                                
+                                padre.listaSabana.remove(i);
+                                cargarSabana();
+                            }                        
                 }
         }
-        
-        /**
-            for ( int i=rows[0]; i<=rows[rows.length-1]; i++ ){
-                for ( int j=columns[0]; j<=columns[columns.length-1]; j++ ){
-                    
-                }
-            }
-        */
-        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     
