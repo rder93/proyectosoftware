@@ -399,7 +399,7 @@ public class OperacionesBD {
         }
     }
     
-    public static void setSeccion(int cedula, int nroSeccion, String cod_asignatura, String usuario, String clave ){
+    public static void setSeccion(int cedula, int nroSeccion, String cod_asignatura, String modalidad, String usuario, String clave ){
 
         
         try {
@@ -407,7 +407,8 @@ public class OperacionesBD {
             Connection cn = conexion.conectar();
             Statement st = cn.createStatement();
             String sql = "UPDATE secciones "
-                        + "SET profesor = "+cedula+" "
+                        + "SET profesor = "+cedula+", "
+                        + "modalidad = '"+modalidad+"' "
                         + "WHERE cod_asignatura = '"+cod_asignatura+"' AND "
                         + "n_seccion = "+nroSeccion+" ";
   
@@ -546,6 +547,26 @@ public class OperacionesBD {
             String sql = "DELETE "
                        + "FROM asignaturas "
                        + "WHERE cod_asignatura='"+codigo+"'";
+            
+            return st.executeUpdate(sql)>0;
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            
+            return false;
+        }
+    }
+    
+    public static boolean deleteSeccion(String cod_asignatura, String lapso, int n_seccion, String usuario, String clave ){
+        
+        try {
+            ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
+            Connection cn = conexion.conectar();
+            Statement st = cn.createStatement();
+            String sql = "DELETE "
+                        + "FROM secciones "
+                        + "WHERE cod_asignatura='"+cod_asignatura+"' AND"
+                        + "lapso = '"+lapso+"' AND n_seccion = "+n_seccion+" ";
             
             return st.executeUpdate(sql)>0;
             
