@@ -488,6 +488,29 @@ public class OperacionesBD {
         }
     }
     
+    public static boolean deleteSabana(String cod_asignatura, String lapso, int n_seccion, int id_aula, int id_edificio, String dia, int hr_inicio, int hr_final, String usuario, String clave ){
+        
+        try {
+            ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
+            Connection cn = conexion.conectar();
+            Statement st = cn.createStatement();
+            String sql = "DELETE "
+                        + "FROM sabana "
+                        + "WHERE cod_asignatura = '"+cod_asignatura+"' AND lapso = '"+lapso+"' AND"
+                        + " n_seccion = "+n_seccion+" AND id_aula = "+id_aula+", AND"
+                        + "  id_edificio = "+id_edificio+" AND dia = '"+dia+"' AND hr_inicio = "+hr_inicio+" AND hr_final = "+hr_final+" ";
+            
+            
+            
+            return st.executeUpdate(sql)>0;
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            
+            return false;
+        }
+    }
+    
     
     public static boolean deleteOferta(String codigo, int nSecciones, String usuario, String clave ){
         

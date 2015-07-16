@@ -213,9 +213,9 @@ public class VentanaSabana extends javax.swing.JFrame {
         jLabel7.setText("Nro. secciones:");
 
         jButton3.setText("Limpiar selección");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton3MouseReleased(evt);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -702,7 +702,34 @@ public class VentanaSabana extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2MouseReleased
 
-    private void jButton3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseReleased
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        
+        for (int i = 0; i < 16; i++) {
+            for (int j = 1; j < 14; j++) {
+                this.jTable1.setValueAt("", i, j);
+               
+            }
+        }
+       
+        
+      /*  for (int i = 0; i < padre.listaSabana.size(); i++) {
+            if( padre.listaSabana.get(i).getDia().equals(dias.get(posicionDia)) ){
+                padre.listaSabana.remove(i);
+            }
+        }*/
+        //Hay que limpiar los objetos de la lista Sabana que sean de este dia 
+ 
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        //hay que limpiar toda la lista  sabana y volver a cargar la tabla
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
         int rows[] = this.jTable1.getSelectedRows();
         int columns[] = this.jTable1.getSelectedColumns();
 
@@ -735,32 +762,8 @@ public class VentanaSabana extends javax.swing.JFrame {
                 }
             }
         */
-    }//GEN-LAST:event_jButton3MouseReleased
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
         
-        for (int i = 0; i < 16; i++) {
-            for (int j = 1; j < 14; j++) {
-                this.jTable1.setValueAt("", i, j);
-               
-            }
-        }
-       
-        
-      /*  for (int i = 0; i < padre.listaSabana.size(); i++) {
-            if( padre.listaSabana.get(i).getDia().equals(dias.get(posicionDia)) ){
-                padre.listaSabana.remove(i);
-            }
-        }*/
-        //Hay que limpiar los objetos de la lista Sabana que sean de este dia 
- 
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
-        //hay que limpiar toda la lista  sabana y volver a cargar la tabla
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     
     
