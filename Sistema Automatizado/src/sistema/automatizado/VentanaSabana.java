@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import static sistema.automatizado.Ventana.usuario;
 
 /**
  *
@@ -559,12 +558,11 @@ public class VentanaSabana extends javax.swing.JFrame {
 
             if((--posicionDia)<0){
                 posicionDia+=7;
-            }
-                
+            }      
         }else{
 
             if((++posicionDia)>6){
-                posicionDia-=6;
+                posicionDia-=7;
             }
         }
         
@@ -614,7 +612,7 @@ public class VentanaSabana extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(rootPane,"No existe oferta para esta asignatura", "ADVERTENCIA", 0);
         }
-        System.out.println(""+padre.listaSabana.size());
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
@@ -649,18 +647,46 @@ public class VentanaSabana extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenu2MouseClicked
 
+    
     private void jButton2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseReleased
-        int rows[] = this.jTable1.getSelectedRows();
-        int columns[] = this.jTable1.getSelectedColumns();
+
         
-        if ( (rows.length != 0) && (columns.length != 0) ){
-            for ( int i=rows[0]; i<=rows[rows.length-1]; i++ ){
-                for ( int j=columns[0]; j<=columns[columns.length-1]; j++ ){
-                    this.jTable1.setValueAt("HOLA", i, j);
-                }
-            }
+        try {
+            int rows[] = this.jTable1.getSelectedRows();
+            int columns[] = this.jTable1.getSelectedColumns();
+            int[] auxAula = new int[100];
             
-        }
+            int auxHoraInicial = rows[0] + 1;
+            int auxHoraFinal = rows[rows.length-1] + 1;
+            
+            if( auxHoraInicial != auxHoraFinal ){
+                
+                for (int i = 0; i < columns.length; i++) {
+                    
+                    auxAula[i] = Integer.parseInt(this.jTable1.getColumnName(columns[i]).replaceFirst("Aula ","")); 
+                    System.out.println(""+auxAula[i]);
+                    String auxDia = dias.get(posicionDia);
+                    String auxAsignatura = (String) this.jTable2.getValueAt(0, 1);
+                    String auxLapso = jLabel6.getText();
+
+                    int  auxId_seccion = jComboBox2.getSelectedIndex()+1;
+                    
+                    int auxModulo = 2;
+                    padre.listaSabana.add(new Sabana (auxAsignatura, auxLapso, auxId_seccion, 
+                                                                auxAula[i], auxModulo, auxDia, 
+                                                                auxHoraInicial, auxHoraFinal));
+                    /**OperacionesBD.addSabana(usuario.getNombre(), usuario.getClave(),
+                                                    auxAsignatura, auxLapso, auxId_seccion, 
+                                                    auxAula[i], auxModulo, auxDia, 
+                                                    auxHoraInicial, auxHoraFinal);*/
+                   cargarSabana();        
+                } 
+            }else{
+                JOptionPane.showMessageDialog(rootPane,"Seleccione más de un bloque", "ADVERTENCIA", 0);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane,"Verifique su seleccion", "ADVERTENCIA", 0);
+        }        
     }//GEN-LAST:event_jButton2MouseReleased
 
     private void jButton3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseReleased

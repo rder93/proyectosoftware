@@ -226,6 +226,26 @@ public class OperacionesBD {
         return null;
     }
     
+    public static void addSabana(String usuario, String clave, String asignatura, String lapso, int id_seccion, 
+                                    int aula, int modulo, String dia, 
+                                    int horaInicial, int horaFinal) {
+        
+        try {
+                ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
+                Connection cn = conexion.conectar();
+                Statement st = cn.createStatement();
+                String sql = "INSERT "
+                            //+ "INTO sabana values('1472209','2015-01',1,4,2,'Miercoles',2,3)";
+                           + "INTO sabana values('"+asignatura+"','"+lapso+"',"+id_seccion+","+aula+","+modulo+",'"+dia+"',"+horaInicial+","+horaFinal+")";
+                
+                st.executeUpdate(sql);
+                
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+
+            }
+    }
+    
     public static ArrayList<PlantaFisica> getAulas(String usuario, String clave){
         
         ArrayList<PlantaFisica> plantafisica = new  ArrayList<PlantaFisica>();
