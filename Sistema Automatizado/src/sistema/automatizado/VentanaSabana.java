@@ -462,10 +462,16 @@ public class VentanaSabana extends javax.swing.JFrame {
             if( buscarDia(padre.listaSabana.get(i).getDia()) == posicionDia ){
                 
                 int rows[] = {(padre.listaSabana.get(i).getHoraInicial()-1),(padre.listaSabana.get(i).getHoraFinal()-1)};
-                int columns[] = { padre.listaSabana.get(i).getAula() };
-                if ( (rows.length != 0) && (columns.length != 0) ){
+                int columns = 0;
+                if(padre.listaSabana.get(i).getAula()>6){
+                   columns  = padre.listaSabana.get(i).getAula()-2;
+                }else{
+                   columns = padre.listaSabana.get(i).getAula();
+                }
+                
+                
+                if (rows.length != 0){
                     for ( int k=rows[0]; k<=rows[rows.length-1]; k++ ){
-                        for ( int j=columns[0]; j<=columns[columns.length-1]; j++ ){
                              
                             this.jTable1.setValueAt(
                                         /*Nombre de la asignatura*/
@@ -480,9 +486,9 @@ public class VentanaSabana extends javax.swing.JFrame {
                                          * Donde la hora inicial es la fila inicial
                                          *       el dia es la columna inicial
                                          */
-                                        k,j);
+                                        k,columns);
 
-                        }
+                        
                     }
 
                 } 
