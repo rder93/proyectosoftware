@@ -182,10 +182,10 @@ public class VentanaSabana extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nivel", "Código", "UC", "Horas"
+                "Nivel", "Código", "UC", "Horas Semanales", "Horas Distribuidas"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -298,9 +298,9 @@ public class VentanaSabana extends javax.swing.JFrame {
                                     .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(76, 76, 76))
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(44, 44, 44)
@@ -741,7 +741,7 @@ public class VentanaSabana extends javax.swing.JFrame {
         int column = this.jTable1.getSelectedColumn();
 
         int auxAuala = 0;
-        //try {
+        try {
              for (int i = 0; i < padre.listaSabana.size(); i++) {
 
                 if( padre.listaSabana.get(i).getDia().equals(dias.get(posicionDia)) ){
@@ -767,9 +767,9 @@ public class VentanaSabana extends javax.swing.JFrame {
                 }
             }
             
-       // } catch (Exception e) {
-        //    JOptionPane.showMessageDialog(rootPane,"Error al limpiar", "ADVERTENCIA", 0);
-        //}
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane,"Error al limpiar", "ADVERTENCIA", 0);
+        }
        
     }//GEN-LAST:event_jButton3ActionPerformed
 
