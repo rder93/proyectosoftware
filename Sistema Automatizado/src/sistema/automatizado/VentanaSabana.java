@@ -741,24 +741,36 @@ public class VentanaSabana extends javax.swing.JFrame {
         int column = this.jTable1.getSelectedColumn();
 
         int auxAuala = 0;
-        for (int i = 0; i < padre.listaSabana.size(); i++) {
+        //try {
+             for (int i = 0; i < padre.listaSabana.size(); i++) {
 
                 if( padre.listaSabana.get(i).getDia().equals(dias.get(posicionDia)) ){
 
-                            if ( padre.listaSabana.get(i).getAula()-2 == column || 
-                                padre.listaSabana.get(i).getAula() == column) {
+                    if ( padre.listaSabana.get(i).getAula()-2 == column || 
+                        padre.listaSabana.get(i).getAula() == column) {
                                 auxAuala = padre.listaSabana.get(i).getAula();
-                            }
+                    }
 
-                            if( (padre.listaSabana.get(i).getHoraInicial() == rows[0]+1) &&
-                                (padre.listaSabana.get(i).getHoraFinal() == ((rows.length-1)+(rows[0]+1))) &&
-                                padre.listaSabana.get(i).getAula() == auxAuala){
+                    if( (padre.listaSabana.get(i).getHoraInicial() == rows[0]+1) &&
+                        (padre.listaSabana.get(i).getHoraFinal() == ((rows.length-1)+(rows[0]+1))) &&
+                         padre.listaSabana.get(i).getAula() == auxAuala){
                                 
-                                padre.listaSabana.remove(i);
-                                cargarSabana();
-                            }                        
+                            
+                            OperacionesBD.deleteSabana(padre.listaSabana.get(i).getAsignatura(), 
+                                                        padre.listaSabana.get(i).getLapso(), padre.listaSabana.get(i).getId_seccion(), 
+                                                        padre.listaSabana.get(i).getAula(), padre.listaSabana.get(i).getModulo(), 
+                                                        padre.listaSabana.get(i).getDia(), padre.listaSabana.get(i).getHoraInicial(), 
+                                                        padre.listaSabana.get(i).getHoraFinal(), usuario.getNombre(), usuario.getClave());
+                            padre.listaSabana.remove(i);
+                            cargarSabana();
+                    }                        
                 }
-        }
+            }
+            
+       // } catch (Exception e) {
+        //    JOptionPane.showMessageDialog(rootPane,"Error al limpiar", "ADVERTENCIA", 0);
+        //}
+       
     }//GEN-LAST:event_jButton3ActionPerformed
 
     

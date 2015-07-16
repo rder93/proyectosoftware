@@ -497,8 +497,9 @@ public class OperacionesBD {
             String sql = "DELETE "
                         + "FROM sabana "
                         + "WHERE cod_asignatura = '"+cod_asignatura+"' AND lapso = '"+lapso+"' AND"
-                        + " n_seccion = "+n_seccion+" AND id_aula = "+id_aula+", AND"
-                        + "  id_edificio = "+id_edificio+" AND dia = '"+dia+"' AND hr_inicio = "+hr_inicio+" AND hr_final = "+hr_final+" ";
+                        + " n_seccion = "+n_seccion+" AND id_aula = "+id_aula+" AND"
+                        + "  id_edificio = "+id_edificio+" AND dia = '"+dia+"' AND "
+                        + "hr_inicio = "+hr_inicio+" AND hr_final = "+hr_final+" ";
             
             
             
