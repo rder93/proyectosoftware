@@ -670,7 +670,7 @@ public class VentanaSabana extends javax.swing.JFrame {
                 for (int i = 0; i < columns.length; i++) {
                     
                     auxAula[i] = Integer.parseInt(this.jTable1.getColumnName(columns[i]).replaceFirst("Aula ","")); 
-                    System.out.println(""+auxAula[i]);
+                    
                     String auxDia = dias.get(posicionDia);
                     String auxAsignatura = (String) this.jTable2.getValueAt(0, 1);
                     String auxLapso = jLabel6.getText();
@@ -681,10 +681,10 @@ public class VentanaSabana extends javax.swing.JFrame {
                     padre.listaSabana.add(new Sabana (auxAsignatura, auxLapso, auxId_seccion, 
                                                                 auxAula[i], auxModulo, auxDia, 
                                                                 auxHoraInicial, auxHoraFinal));
-                    /**OperacionesBD.addSabana(usuario.getNombre(), usuario.getClave(),
+                    OperacionesBD.addSabana(usuario.getNombre(), usuario.getClave(),
                                                     auxAsignatura, auxLapso, auxId_seccion, 
                                                     auxAula[i], auxModulo, auxDia, 
-                                                    auxHoraInicial, auxHoraFinal);*/
+                                                    auxHoraInicial, auxHoraFinal);
                    cargarSabana();        
                 } 
             }else{
