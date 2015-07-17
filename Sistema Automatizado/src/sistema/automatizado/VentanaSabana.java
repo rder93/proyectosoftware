@@ -577,7 +577,7 @@ public class VentanaSabana extends javax.swing.JFrame {
             auxId_seccion = padre.listaSabana.get(i).getId_seccion();
             auxHorasSemanales = buscarHorasSemanales(padre.listaSabana.get(i).getAsignatura());
             auxHorasDistribuidas = padre.listaSabana.get(i).getHoraFinal()-
-                                   padre.listaSabana.get(i).getHoraInicial();
+                                   padre.listaSabana.get(i).getHoraInicial()+1;
            
             auxRespuesta = verificarListaDistribucion(auxAsignatura , auxId_seccion);
             
@@ -599,7 +599,9 @@ public class VentanaSabana extends javax.swing.JFrame {
             
             
         }
-        
+        for (int i = 0; i < distribucion.size(); i++) {
+            System.out.println(distribucion.get(i).getAsignatura()+" "+distribucion.get(i).getId_seccion()+" "+distribucion.get(i).getHorasSemanales());
+        }
         cargarSabana();
     }
     
@@ -719,7 +721,7 @@ public class VentanaSabana extends javax.swing.JFrame {
             }
 
             if(condicion == false ){   //Si no existe en oferta 
-                jComboBox2.removeAllItems();
+                
                 this.modelo.setNumRows(0);
                 JOptionPane.showMessageDialog(rootPane,"No existe oferta para esta asignatura", "ADVERTENCIA", 0);
             }
