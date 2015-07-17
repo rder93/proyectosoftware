@@ -182,9 +182,6 @@ public class Ventana extends javax.swing.JFrame{
         btnSabana.setText("DISEÑAR SABANA");
         btnSabana.setContentAreaFilled(false);
         btnSabana.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSabanaMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnSabanaMouseEntered(evt);
             }
@@ -384,7 +381,7 @@ public class Ventana extends javax.swing.JFrame{
         listaAsignaturas = OperacionesBD.getAsignaturas(usuario.getNombre(), usuario.getClave());
         listaSeccion = OperacionesBD.getSeccion(usuario.getNombre(), usuario.getClave());
         listaDocente = OperacionesBD.getDocentes(usuario.getNombre(), usuario.getClave());
-        //JOptionPane.showMessageDialog(this, listaOferta.get(0).getAsignatura());
+        
         
         if(listaOferta!=null){
             ventanasabana.usuario = new Usuario();      
@@ -558,13 +555,6 @@ public class Ventana extends javax.swing.JFrame{
         //Se oculta el panel de ayuda
         panelAyuda.setVisible(false);
     }//GEN-LAST:event_menuPlantaFisicaMouseExited
-
-    private void btnSabanaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSabanaMouseClicked
-        // TODO add your handling code here:
-        
-        
-        
-    }//GEN-LAST:event_btnSabanaMouseClicked
 
     
     

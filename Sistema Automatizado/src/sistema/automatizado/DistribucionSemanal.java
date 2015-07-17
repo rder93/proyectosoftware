@@ -10,14 +10,14 @@ package sistema.automatizado;
  *
  * @author Irene
  */
-public class DistribubcionSemanal {
+public class DistribucionSemanal {
     
     private String asignatura;
     private int id_seccion;
     private int horasSemanales;
     private int horasDistribuidas;
 
-    public DistribubcionSemanal(String asignatura, int id_seccion, int horasSemanales, int horasDistribuidas) {
+    public DistribucionSemanal(String asignatura, int id_seccion, int horasSemanales, int horasDistribuidas) {
         this.asignatura = asignatura;
         this.id_seccion = id_seccion;
         this.horasSemanales = horasSemanales;

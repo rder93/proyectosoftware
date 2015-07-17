@@ -31,6 +31,7 @@ public class VentanaSabana extends javax.swing.JFrame {
     boolean condicionControl = false;
     ArrayList<Asignatura> asignaturas = new  ArrayList<Asignatura>();
     ArrayList<String> dias = new  ArrayList<String>();
+    ArrayList<DistribucionSemanal> distribucion = new  ArrayList<DistribucionSemanal>();
     DefaultTableModel modelo = new DefaultTableModel();
     int posicionDia = 0; //Posicion del dia selccionado
     
@@ -392,7 +393,7 @@ public class VentanaSabana extends javax.swing.JFrame {
     
     
     /**
-     * Retorna el nivel de una materia partiendo de un codigo
+     * Retorna el semestre de una materia partiendo de un codigo
      */
     
     public int buscarSemestre(String codigo){
@@ -447,6 +448,8 @@ public class VentanaSabana extends javax.swing.JFrame {
         return "";
     }
     
+    
+    
     /**
      * Carga la información que existe en la bdd sobre la sabana
      */
@@ -460,7 +463,10 @@ public class VentanaSabana extends javax.swing.JFrame {
             }
         }
         
+        
+        
         for (int i = 0; i < padre.listaSabana.size(); i++) {
+            
             if( buscarDia(padre.listaSabana.get(i).getDia()) == posicionDia ){
                 
                 int rows[] = {(padre.listaSabana.get(i).getHoraInicial()-1),(padre.listaSabana.get(i).getHoraFinal()-1)};
@@ -500,13 +506,83 @@ public class VentanaSabana extends javax.swing.JFrame {
     }
     
     /**
+     * Recibe el codigo de una asignatura y retorna las horas semanales
+     */
+    public int buscarHorasSemanales(String codigo){
+    
+        for (int i = 0; i < padre.listaAsignaturas.size(); i++) {
+            if( padre.listaAsignaturas.get(i).getCodigo().equals(codigo) ){
+                return padre.listaAsignaturas.get(i).getHoras();
+            }
+        }
+        return 1;
+    }
+    /**
+     * Verifica la existia de determinados objetos en la lista
+     * @param codigo de la asignatura a buscar
+     * @param seccion de la asignatura a buscar
+     * @return -1: No existe el objeto, i: Existe el objeto
+     * 
+     */
+    public int verificarListaDistribucion(String codigo, int seccion){
+        
+        if( distribucion.size() != 0 ){
+            for (int i = 0; i < distribucion.size(); i++) {
+                if( distribucion.get(i).getAsignatura().equals(codigo) &&
+                   distribucion.get(i).getId_seccion() == seccion ){
+                        return i;//existe el objeto
+                }else{
+                    return -1; //no existe el objeto
+                }
+            }
+        }
+        
+        return -1; //no existe el objeto
+    }
+    
+    /**
      * Agrega los item asignatura al combo
+     * y carga la lista distribucionSemanal
      */
     public void cargar(){
         
         for (int i = 0; i < padre.listaAsignaturas.size() ; i++) {
             
             jComboBox1.addItem(padre.listaAsignaturas.get(i).getNombre());
+        }
+        
+        String auxAsignatura;
+        int auxId_seccion;
+        int auxHorasSemanales;
+        int auxHorasDistribuidas = 0;
+
+        
+        for (int i = 0; i < padre.listaSabana.size(); i++){ 
+            
+            auxAsignatura = padre.listaSabana.get(i).getAsignatura();
+            auxId_seccion = padre.listaSabana.get(i).getId_seccion();
+            auxHorasSemanales = buscarHorasSemanales(padre.listaSabana.get(i).getAsignatura());
+            auxHorasDistribuidas = padre.listaSabana.get(i).getHoraFinal()-
+                                   padre.listaSabana.get(i).getHoraInicial();
+            
+            
+            if(verificarListaDistribucion(auxAsignatura , auxId_seccion) == -1){
+                
+                DistribucionSemanal auxDistribucion = new DistribucionSemanal(auxAsignatura, auxId_seccion,
+                                                                        auxHorasSemanales, auxHorasDistribuidas);
+                distribucion.add(auxDistribucion);
+                
+            }else{
+               auxHorasDistribuidas += distribucion.get(verificarListaDistribucion( auxAsignatura , auxId_seccion)).getHorasDistribuidas();
+             
+               DistribucionSemanal auxDistribucion = new DistribucionSemanal(auxAsignatura, auxId_seccion,
+                                                                        auxHorasSemanales, auxHorasDistribuidas);
+               
+               distribucion.set(verificarListaDistribucion( auxAsignatura , auxId_seccion), auxDistribucion);
+            
+            }
+            
+            
         }
         cargarSabana();
     }
