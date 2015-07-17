@@ -565,7 +565,7 @@ public class OperacionesBD {
             Statement st = cn.createStatement();
             String sql = "DELETE "
                         + "FROM secciones "
-                        + "WHERE cod_asignatura='"+cod_asignatura+"' AND"
+                        + "WHERE cod_asignatura='"+cod_asignatura+"' AND "
                         + "lapso = '"+lapso+"' AND n_seccion = "+n_seccion+" ";
             
             return st.executeUpdate(sql)>0;

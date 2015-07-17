@@ -17,6 +17,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import static sistema.automatizado.VentanaOfertaAcademica.usuario;
 
 /**
  *
@@ -56,7 +57,10 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
     private VentanaOfertaDetalle() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+    /**
+     * Limpia el modelo de la tabla
+     * @param tabla 
+     */
     public void limpiarTabla(JTable tabla){
          
         try {
@@ -76,7 +80,11 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
         
     }
     
-    
+    /**
+     * Carga los combo box 
+     * @param oferta estructura de la cual se obtiene los nombres de las asignaturas
+     *               y los numeros de las secciones
+     */
     public void cargarjComboBox2(Oferta oferta){
         this.oferta = oferta;
         jLabel2.setText(""+oferta.getCodigo());
@@ -96,30 +104,39 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
         generarColumnas();
         
     }
-
+    /**
+     * Genera las columnas de forma dinamica, dependiendo de la  cantidad de secciones ofertada
+     */
      public void generarColumnas(){
     
             limpiarTabla(jTable1);
+            if(oferta.getNroSecciones() != 0){
+                String [] secciones = new String [14];
+                modelo = (DefaultTableModel) jTable1.getModel();
+                modelo.setNumRows(0);
+                TableColumn columna;
 
-            String [] secciones = new String [14];
-            modelo = (DefaultTableModel) jTable1.getModel();
-            modelo.setNumRows(0);
-            TableColumn columna;
+                for (int i = 0 ; i < oferta.getNroSecciones(); i++) {
 
-            for (int i = 0 ; i < oferta.getNroSecciones(); i++) {
+                    secciones[i]="sección"+(i+1);
+                    modelo.addColumn(""+secciones[i]);
+                    columna = jTable1.getColumn(""+secciones[i]);
 
-                secciones[i]="sección"+(i+1);
-                modelo.addColumn(""+secciones[i]);
-                columna = jTable1.getColumn(""+secciones[i]);
-                
+                }
+
+                jTable1.setModel(modelo);
+
+                cargar();
+            }else{
+                JOptionPane.showMessageDialog(rootPane,"No existe oferta para esta materia", "ADVERTENCIA", 0);
             }
-            
-            jTable1.setModel(modelo);
-            
-            cargar();
     }
      
-     
+     /**
+      * Busca un profesor partiendo de una cedula
+      * @param cedula del profesor a buscar
+      * @return el nombre del profesor, en dado caso no exista null
+      */
      public String buscarProfesor(int cedula){
          
          for (int i = 0; i < padre.listaDocentes.size(); i++) {
@@ -128,13 +145,7 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
          }
          return null;
      }
-     
-     public void burbuja(){
-     
-         
-     
-     }
-     
+
      /**
       * Ordena el string auxProfesores en el orden correspondiente a sus secciones
       */
@@ -282,6 +293,7 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
                 "Title 1"
             }
         ));
+        jTable1.setCellSelectionEnabled(true);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -307,6 +319,11 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Presencial", "Semi-Presencial", "Virtual", "Tutorial" }));
 
         jButton2.setText("Cerrar Seccion");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -395,6 +412,49 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane,"Por favor revise la cédula introducida", "ADVERTENCIA", 0);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+         //int row = this.jTable1.getSelectedRow();
+         int column = this.jTable1.getSelectedColumn();
+         int auxColumn = 0;
+         
+         //System.out.println("Fila "+row);
+         //System.out.println("Columna "+column);
+         
+         for (int i = 0; i < padre.listaSeccion.size(); i++) {
+            
+             if(oferta.getCodigo().equals(padre.listaSeccion.get(i).getCod_asignatura())){
+                 if(auxColumn == column){
+                     System.out.println(""+padre.listaSeccion.get(i).getProfesor());
+                     //padre.listaSeccion.remove(i);
+                    /* OperacionesBD.deleteSeccion(padre.listaSeccion.get(i).getCod_asignatura(), 
+                                                 padre.listaSeccion.get(i).getLapso(), 
+                                                 padre.listaSeccion.get(i).getNro(), 
+                                                 usuario.getNombre(), usuario.getClave()); 
+                     */
+                     OperacionesBD.setOferta(oferta.getCodigo(),
+                                              (oferta.getNroSecciones()-1),
+                                             usuario.getNombre(), usuario.getClave());
+                     
+                     
+                    // setOferta(String codigo, int nSecciones, String usuario, String clave )
+                     
+                     //oferta.setNroSecciones(oferta.getNroSecciones()-1);
+                     generarColumnas();
+                     jComboBox1.removeAllItems();
+                     for (int j = 0; j < oferta.getNroSecciones(); j++) {
+                        jComboBox1.addItem(""+(j+1));
+                    }
+                     
+                 }
+                 auxColumn++;
+                 
+                 
+             }
+        }
+         
+    }//GEN-LAST:event_jButton2ActionPerformed
     
     
 
