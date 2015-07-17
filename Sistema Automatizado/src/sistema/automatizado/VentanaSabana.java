@@ -55,6 +55,8 @@ public class VentanaSabana extends javax.swing.JFrame {
         jButton6.setContentAreaFilled(false);
         jButton6.setBorderPainted(false);
         
+        
+        
         cargarDias();
        
         jLabel2.setText(dias.get(posicionDia));
@@ -95,6 +97,7 @@ public class VentanaSabana extends javax.swing.JFrame {
         jComboBox2 = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -114,7 +117,7 @@ public class VentanaSabana extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("MIERCOLES");
 
@@ -220,6 +223,13 @@ public class VentanaSabana extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setText("Ver oferta");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         jMenu4.setText("Archivo");
 
         jMenuItem1.setText("Limpiar este día");
@@ -276,38 +286,41 @@ public class VentanaSabana extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jButton1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel7)
-                                        .addGap(5, 5, 5)
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(0, 215, Short.MAX_VALUE)
+                                .addComponent(jLabel7)
+                                .addGap(5, 5, 5)
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton4)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(44, 44, 44)
-                        .addComponent(jLabel3)
-                        .addGap(44, 44, 44)
-                        .addComponent(jLabel6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(44, 44, 44)
+                                .addComponent(jLabel3)
+                                .addGap(44, 44, 44)
+                                .addComponent(jLabel6)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -328,20 +341,23 @@ public class VentanaSabana extends javax.swing.JFrame {
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
                             .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2)
-                        .addComponent(jButton3))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(21, 21, 21)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jButton4)
+                                .addComponent(jButton2)
+                                .addComponent(jButton3)
+                                .addComponent(jButton1))
+                            .addGap(20, 20, 20))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton5))
+                    .addComponent(jButton6))
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE))
         );
 
         pack();
@@ -525,14 +541,12 @@ public class VentanaSabana extends javax.swing.JFrame {
      * 
      */
     public int verificarListaDistribucion(String codigo, int seccion){
-        
+      
         if( distribucion.size() != 0 ){
             for (int i = 0; i < distribucion.size(); i++) {
                 if( distribucion.get(i).getAsignatura().equals(codigo) &&
                    distribucion.get(i).getId_seccion() == seccion ){
                         return i;//existe el objeto
-                }else{
-                    return -1; //no existe el objeto
                 }
             }
         }
@@ -556,7 +570,7 @@ public class VentanaSabana extends javax.swing.JFrame {
         int auxHorasSemanales;
         int auxHorasDistribuidas = 0;
 
-        
+        int auxRespuesta;
         for (int i = 0; i < padre.listaSabana.size(); i++){ 
             
             auxAsignatura = padre.listaSabana.get(i).getAsignatura();
@@ -564,26 +578,28 @@ public class VentanaSabana extends javax.swing.JFrame {
             auxHorasSemanales = buscarHorasSemanales(padre.listaSabana.get(i).getAsignatura());
             auxHorasDistribuidas = padre.listaSabana.get(i).getHoraFinal()-
                                    padre.listaSabana.get(i).getHoraInicial();
+           
+            auxRespuesta = verificarListaDistribucion(auxAsignatura , auxId_seccion);
             
-            
-            if(verificarListaDistribucion(auxAsignatura , auxId_seccion) == -1){
+            if(auxRespuesta == -1){
                 
                 DistribucionSemanal auxDistribucion = new DistribucionSemanal(auxAsignatura, auxId_seccion,
                                                                         auxHorasSemanales, auxHorasDistribuidas);
                 distribucion.add(auxDistribucion);
                 
             }else{
-               auxHorasDistribuidas += distribucion.get(verificarListaDistribucion( auxAsignatura , auxId_seccion)).getHorasDistribuidas();
+               auxHorasDistribuidas += distribucion.get(auxRespuesta).getHorasDistribuidas();
              
                DistribucionSemanal auxDistribucion = new DistribucionSemanal(auxAsignatura, auxId_seccion,
                                                                         auxHorasSemanales, auxHorasDistribuidas);
                
-               distribucion.set(verificarListaDistribucion( auxAsignatura , auxId_seccion), auxDistribucion);
+               distribucion.set(auxRespuesta, auxDistribucion);
             
             }
             
             
         }
+        
         cargarSabana();
     }
     
@@ -676,27 +692,44 @@ public class VentanaSabana extends javax.swing.JFrame {
       
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         boolean condicion = false; //Variable de control
-        for (int i = 0; i < padre.listaOferta.size(); i++) {
-            if(padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getCodigo().equals(padre.listaOferta.get(i).getCodigo())){
-                cargarjComboBox2( padre.listaOferta.get(i).getNroSecciones());
-                
-                this.modelo = (DefaultTableModel) this.jTable2.getModel();
-                    this.modelo.setNumRows(0);
-                    modelo.addRow(new Object[]{
-                        padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getNivel()+"",
-                        padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getCodigo()+"",
-                        padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getUc()+"",
-                        padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getHoras()+""
-                    });
-                    condicion = true; //Si existe en oferta
-                    condicionControl = true; //Se visualizaron los detalles
+        try {
+            for (int i = 0; i < padre.listaOferta.size(); i++) {
+                if(padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getCodigo().equals(padre.listaOferta.get(i).getCodigo())){
+
+                    this.modelo = (DefaultTableModel) this.jTable2.getModel();
+                        this.modelo.setNumRows(0);
+
+                        String auxCodigo = padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getCodigo();
+                        int auxSeccion = jComboBox2.getSelectedIndex()+1;
+
+                        modelo.addRow(new Object[]{
+                            padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getNivel()+"",
+                            padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getCodigo()+"",
+                            padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getUc()+"",
+                            padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getHoras()+"",
+                            distribucion.get(verificarListaDistribucion(auxCodigo, auxSeccion)).getHorasDistribuidas()
+
+
+                           // distribucion.get().
+                        });
+                        condicion = true; //Si existe en oferta
+                        condicionControl = true; //Se visualizaron los detalles
+
+                }
             }
+
+            if(condicion == false ){   //Si no existe en oferta 
+                jComboBox2.removeAllItems();
+                this.modelo.setNumRows(0);
+                JOptionPane.showMessageDialog(rootPane,"No existe oferta para esta asignatura", "ADVERTENCIA", 0);
+            }
+            
+        } catch (Exception e) {
+            jComboBox2.removeAllItems();
+            this.modelo.setNumRows(0);
+            JOptionPane.showMessageDialog(rootPane,"No existe oferta para esta selección", "ADVERTENCIA", 0);
         }
         
-        if(condicion == false ){   //Si no existe en oferta 
-            
-            JOptionPane.showMessageDialog(rootPane,"No existe oferta para esta asignatura", "ADVERTENCIA", 0);
-        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -849,7 +882,27 @@ public class VentanaSabana extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        
+        boolean condicion = false; //Variable de control
+        for (int i = 0; i < padre.listaOferta.size(); i++) {
+            if(padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getCodigo().equals(padre.listaOferta.get(i).getCodigo())){
+                    cargarjComboBox2( padre.listaOferta.get(i).getNroSecciones());                
+                
+                    condicion = true; //Si existe en oferta
+                    condicionControl = true; //Se visualizaron los detalles
+                    
+            }
+        }
+        
+        if(condicion == false ){   //Si no existe en oferta 
+            jComboBox2.removeAllItems();
+            
+            this.modelo.setNumRows(0);
+            JOptionPane.showMessageDialog(rootPane,"No existe oferta para esta asignatura", "ADVERTENCIA", 0);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     
     /**
      * @param args the command line arguments
@@ -891,6 +944,7 @@ public class VentanaSabana extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JComboBox jComboBox1;
