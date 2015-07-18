@@ -438,27 +438,38 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
         TableColumnModel tbc = jTable1.getColumnModel();
 
          int column = this.jTable1.getSelectedColumn();
-         if(column>0){
-            TableColumn columna = tbc.getColumn(column);
+         
+         String nombreColumna = jTable1.getColumnName(jTable1.getSelectedColumn());
+         String v[] = nombreColumna.split(" ");
+         int columna; 
+         try{
+            columna = Integer.parseInt(v[1]);
+         }catch(Exception e){
+             columna = -1;
+         }
+         
+         if(columna>0){
+             
+            TableColumn columnaTabla = tbc.getColumn(columna);
             int auxColumn = 0;
-            System.out.println("Inicial"+column);
+            //System.out.println("Inicial"+column);
             for (int i = 0; i < padre.listaSeccion.size(); i++) {
 
                 if(oferta.getCodigo().equals(padre.listaSeccion.get(i).getCod_asignatura())){
                     if(auxColumn == column){
 
-                        /*System.out.println(""+ padre.listaSeccion.size());
-                        System.out.println(" "+padre.listaSeccion.get(i).getCod_asignatura());
-                        System.out.println(" "+padre.listaSeccion.get(i).getNro());
-                        System.out.println(""+ padre.listaSeccion.get(i).getLapso());
-   */
+                        //System.out.println(""+ padre.listaSeccion.size());
+                        //System.out.println(" "+padre.listaSeccion.get(i).getCod_asignatura());
+                        //System.out.println(" "+padre.listaSeccion.get(i).getNro());
+                        //System.out.println(""+ padre.listaSeccion.get(i).getLapso());
+   
 
-                        tbc.removeColumn(columna);
+                        tbc.removeColumn(columnaTabla);
 
 
                         OperacionesBD.deleteSeccion(padre.listaSeccion.get(i).getCod_asignatura(), 
                                                     padre.listaSeccion.get(i).getLapso(), 
-                                                    padre.listaSeccion.get(i).getNro(), 
+                                                    columna, 
                                                     usuario.getNombre(), usuario.getClave()); 
 
                         OperacionesBD.setOferta(oferta.getCodigo(),
