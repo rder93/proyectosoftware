@@ -481,8 +481,13 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
         // TODO add your handling code here:
         padre.listaAsignaturas = OperacionesBD.getAsignaturas(usuario.getNombre(), usuario.getClave());
+        padre.listaCarreras = OperacionesBD.getCarreras(usuario.getNombre(), usuario.getClave());
+        padre.listaDepartamentos = OperacionesBD.getDepartamentos(usuario.getNombre(), usuario.getClave());
         
         if(padre.listaAsignaturas!=null){
+            padre.ventanaAsignaturas.usuario = new Usuario();
+            padre.ventanaAsignaturas.usuario.setNombre(usuario.getNombre());
+            padre.ventanaAsignaturas.usuario.setClave(usuario.getClave());
             padre.ventanaAsignaturas.cargar();
             padre.ventanaAsignaturas.setVisible(true);
         }

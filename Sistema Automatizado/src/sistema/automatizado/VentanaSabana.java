@@ -837,6 +837,23 @@ public class VentanaSabana extends javax.swing.JFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
         //hay que limpiar toda la lista  sabana y volver a cargar la tabla
+        
+        for (int i = 0; i < padre.listaSabana.size() ; i++) {
+            
+            OperacionesBD.deleteSabana(padre.listaSabana.get(i).getAsignatura(), 
+                                            padre.listaSabana.get(i).getLapso(), 
+                                            padre.listaSabana.get(i).getId_seccion(), 
+                                            padre.listaSabana.get(i).getAula(), 
+                                            padre.listaSabana.get(i).getModulo(), 
+                                            padre.listaSabana.get(i).getDia(), 
+                                            padre.listaSabana.get(i).getHoraInicial(), 
+                                            padre.listaSabana.get(i).getHoraFinal(), 
+                                            usuario.getNombre(), usuario.getClave());
+            
+        }
+        
+        padre.listaSabana.clear();
+        cargar();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

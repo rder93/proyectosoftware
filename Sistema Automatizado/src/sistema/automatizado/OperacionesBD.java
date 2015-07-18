@@ -520,13 +520,17 @@ public class OperacionesBD {
             ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
             Connection cn = conexion.conectar();
             Connection cn2 = conexion.conectar();
+            Connection cn3 = conexion.conectar();
             Statement st = cn.createStatement();
             Statement st2 = cn2.createStatement();
+            Statement st3 = cn3.createStatement();
             String sql = "DELETE "
                        + "FROM oferta_academica "
                        + "WHERE cod_asignatura = '"+codigo+"'";
             String sql2 = "DELETE FROM secciones WHERE cod_asignatura='"+codigo+"'";
+            String sql3 = "DELETE FROM sabana WHERE cod_asignatura='"+codigo+"'";
             
+            st3.executeUpdate(sql3);
             st2.executeUpdate(sql2);
             return st.executeUpdate(sql)>0;
             
