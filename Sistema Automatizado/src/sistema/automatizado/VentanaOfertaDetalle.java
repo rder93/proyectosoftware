@@ -89,7 +89,7 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
         jLabel2.setText(""+oferta.getCodigo());
         jComboBox2.removeAllItems();
         jComboBox1.removeAllItems();
-        //System.out.println(""+listaDocentes.size());
+        
         for (int i = 0; i < padre.listaDocentes.size(); i++){
             jComboBox2.addItem(padre.listaDocentes.get(i).getNombre());
         }
@@ -98,7 +98,7 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
             jComboBox1.addItem(""+(i+1));
         }
         
-        //System.out.println(""+oferta.getNroSecciones());
+        
         
         generarColumnas();
         
@@ -114,7 +114,7 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
                 modelo = (DefaultTableModel) jTable1.getModel();
                 modelo.setNumRows(0);
                 TableColumn columna;
-
+                
                 for (int i = 0 ; i < padre.listaSeccion.size(); i++) {
                     //System.out.println(""+oferta.getCodigo());
                    
@@ -417,25 +417,31 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+<<<<<<< HEAD
         // TODO add your handling code here:
          //int row = this.jTable1.getSelectedRow();
         TableColumnModel tbc = jTable1.getColumnModel();
     
+=======
+
+>>>>>>> origin/master
          int column = this.jTable1.getSelectedColumn();
          TableColumn columna = tbc.getColumn(column);
          int auxColumn = 0;
-         
-         //System.out.println("Fila "+row);
-         //System.out.println("Columna "+column);
-         
+         System.out.println("Inicial"+column);
          for (int i = 0; i < padre.listaSeccion.size(); i++) {
             
              if(oferta.getCodigo().equals(padre.listaSeccion.get(i).getCod_asignatura())){
                  if(auxColumn == column){
+<<<<<<< HEAD
                      /*System.out.println(""+ padre.listaSeccion.size());
                      System.out.println(" "+padre.listaSeccion.get(i).getCod_asignatura());
                      System.out.println(" "+padre.listaSeccion.get(i).getNro());
                      System.out.println(""+ padre.listaSeccion.get(i).getLapso());
+=======
+                     
+                        
+>>>>>>> origin/master
                      
                      */
                      
@@ -454,8 +460,15 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
                      padre.listaSeccion = OperacionesBD.getSeccion(usuario.getNombre(), usuario.getClave());
                      //oferta = OperacionesBD.getOferta(usuario.getNombre(), usuario.getClave());
                      
+<<<<<<< HEAD
                      //cargarjComboBox2(oferta);
                      //generarColumnas();
+=======
+                     padre.listaSeccion = OperacionesBD.getSeccion(usuario.getNombre(), usuario.getClave());
+                     
+                     
+                     generarColumnas();
+>>>>>>> origin/master
                      jComboBox1.removeAllItems();
                      for (int j = 0; j < oferta.getNroSecciones(); j++) {
                         jComboBox1.addItem(""+(j+1));
@@ -466,8 +479,8 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
                  
                  
              }
+             System.out.println(""+auxColumn);
         }
-         
     }//GEN-LAST:event_jButton2ActionPerformed
     
     
