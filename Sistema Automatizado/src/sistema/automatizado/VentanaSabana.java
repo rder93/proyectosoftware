@@ -535,7 +535,7 @@ public class VentanaSabana extends javax.swing.JFrame {
         return 1;
     }
     /**
-     * Verifica la existia de determinados objetos en la lista
+     * Verifica la existencia de determinados objetos en la lista
      * @param codigo de la asignatura a buscar
      * @param seccion de la asignatura a buscar
      * @return -1: No existe el objeto, i: Existe el objeto
@@ -701,17 +701,25 @@ public class VentanaSabana extends javax.swing.JFrame {
 
                         String auxCodigo = padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getCodigo();
                         int auxSeccion = jComboBox2.getSelectedIndex()+1;
-
-                        modelo.addRow(new Object[]{
+                       // System.out.println(""+auxCodigo);
+                        if( distribucion.size()!=0 ){
+                            modelo.addRow(new Object[]{
                             padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getNivel()+"",
                             padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getCodigo()+"",
                             padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getUc()+"",
                             padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getHoras()+"",
                             distribucion.get(verificarListaDistribucion(auxCodigo, auxSeccion)).getHorasDistribuidas()
-
-
-                           // distribucion.get().
-                        });
+                             });
+                                
+                        }else{
+                            modelo.addRow(new Object[]{
+                                padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getNivel()+"",
+                                padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getCodigo()+"",
+                                padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getUc()+"",
+                                padre.listaAsignaturas.get(jComboBox1.getSelectedIndex()).getHoras()+"",
+                                0
+                            });
+                        }
                         condicion = true; //Si existe en oferta
                         condicionControl = true; //Se visualizaron los detalles
 
@@ -721,7 +729,7 @@ public class VentanaSabana extends javax.swing.JFrame {
             if(condicion == false ){   //Si no existe en oferta 
                 
                 this.modelo.setNumRows(0);
-                JOptionPane.showMessageDialog(rootPane,"No existe oferta para esta asignatura", "ADVERTENCIA", 0);
+                JOptionPane.showMessageDialog(rootPane,"asaNo existe oferta para esta asignatura", "ADVERTENCIA", 0);
             }
             
         } catch (Exception e) {
@@ -777,7 +785,7 @@ public class VentanaSabana extends javax.swing.JFrame {
                 int auxHoraInicial = rows[0] + 1;
                 int auxHoraFinal = rows[rows.length-1] + 1;
 
-                if( auxHoraInicial != auxHoraFinal ){
+                //if( auxHoraInicial != auxHoraFinal ){
 
                     for (int i = 0; i < columns.length; i++) {
 
@@ -787,19 +795,18 @@ public class VentanaSabana extends javax.swing.JFrame {
                         String auxLapso = jLabel6.getText();
                         int  auxId_seccion = jComboBox2.getSelectedIndex()+1;
                         int auxModulo = 2;
-                        
-                        padre.listaSabana.add(new Sabana (auxAsignatura, auxLapso, auxId_seccion, 
-                                                                    auxAula[i], auxModulo, auxDia, 
-                                                                    auxHoraInicial, auxHoraFinal));
+                        System.out.println(""+(String) this.jTable2.getValueAt(0, 1));
                         OperacionesBD.addSabana(usuario.getNombre(), usuario.getClave(),
                                                         auxAsignatura, auxLapso, auxId_seccion, 
                                                         auxAula[i], auxModulo, auxDia, 
                                                         auxHoraInicial, auxHoraFinal);
+                        
+                        padre.listaSabana = OperacionesBD.getSabana(usuario.getNombre(), usuario.getClave());
                        cargarSabana();        
                     } 
-                }else{
-                    JOptionPane.showMessageDialog(rootPane,"Seleccione más de un bloque", "ADVERTENCIA", 0);
-                }
+                //}else{
+                   // JOptionPane.showMessageDialog(rootPane,"Seleccione más de un bloque", "ADVERTENCIA", 0);
+               // }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(rootPane,"Verifique su seleccion", "ADVERTENCIA", 0);
             }        
