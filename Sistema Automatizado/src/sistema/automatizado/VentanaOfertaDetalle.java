@@ -438,50 +438,52 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
         TableColumnModel tbc = jTable1.getColumnModel();
 
          int column = this.jTable1.getSelectedColumn();
-         TableColumn columna = tbc.getColumn(column);
-         int auxColumn = 0;
-         System.out.println("Inicial"+column);
-         for (int i = 0; i < padre.listaSeccion.size(); i++) {
-            
-             if(oferta.getCodigo().equals(padre.listaSeccion.get(i).getCod_asignatura())){
-                 if(auxColumn == column){
+         if(column>0){
+            TableColumn columna = tbc.getColumn(column);
+            int auxColumn = 0;
+            System.out.println("Inicial"+column);
+            for (int i = 0; i < padre.listaSeccion.size(); i++) {
 
-                     /*System.out.println(""+ padre.listaSeccion.size());
-                     System.out.println(" "+padre.listaSeccion.get(i).getCod_asignatura());
-                     System.out.println(" "+padre.listaSeccion.get(i).getNro());
-                     System.out.println(""+ padre.listaSeccion.get(i).getLapso());
-*/
-                     
-                     tbc.removeColumn(columna);
-                     
-                     
-                     OperacionesBD.deleteSeccion(padre.listaSeccion.get(i).getCod_asignatura(), 
-                                                 padre.listaSeccion.get(i).getLapso(), 
-                                                 padre.listaSeccion.get(i).getNro(), 
-                                                 usuario.getNombre(), usuario.getClave()); 
-                     
-                     OperacionesBD.setOferta(oferta.getCodigo(),
-                                            (oferta.getNroSecciones()-1),
-                                            usuario.getNombre(), usuario.getClave());
-                     
-                     padre.listaSeccion = OperacionesBD.getSeccion(usuario.getNombre(), usuario.getClave());
-                     //oferta = OperacionesBD.getOferta(usuario.getNombre(), usuario.getClave());
-                     
+                if(oferta.getCodigo().equals(padre.listaSeccion.get(i).getCod_asignatura())){
+                    if(auxColumn == column){
 
-                     generarColumnas();
+                        /*System.out.println(""+ padre.listaSeccion.size());
+                        System.out.println(" "+padre.listaSeccion.get(i).getCod_asignatura());
+                        System.out.println(" "+padre.listaSeccion.get(i).getNro());
+                        System.out.println(""+ padre.listaSeccion.get(i).getLapso());
+   */
 
-                     jComboBox1.removeAllItems();
-                     for (int j = 0; j < oferta.getNroSecciones(); j++) {
-                        jComboBox1.addItem(""+(j+1));
+                        tbc.removeColumn(columna);
+
+
+                        OperacionesBD.deleteSeccion(padre.listaSeccion.get(i).getCod_asignatura(), 
+                                                    padre.listaSeccion.get(i).getLapso(), 
+                                                    padre.listaSeccion.get(i).getNro(), 
+                                                    usuario.getNombre(), usuario.getClave()); 
+
+                        OperacionesBD.setOferta(oferta.getCodigo(),
+                                               (oferta.getNroSecciones()-1),
+                                               usuario.getNombre(), usuario.getClave());
+
+                        padre.listaSeccion = OperacionesBD.getSeccion(usuario.getNombre(), usuario.getClave());
+                        //oferta = OperacionesBD.getOferta(usuario.getNombre(), usuario.getClave());
+
+
+                        generarColumnas();
+
+                        jComboBox1.removeAllItems();
+                        for (int j = 0; j < oferta.getNroSecciones(); j++) {
+                           jComboBox1.addItem(""+(j+1));
+                       }
+
                     }
-                     
-                 }
-                 auxColumn++;
-                 
-                 
-             }
-             System.out.println(""+auxColumn);
-        }
+                    auxColumn++;
+
+
+                }
+                System.out.println(""+auxColumn);
+           }
+         }
     }//GEN-LAST:event_jButton2ActionPerformed
     
     
