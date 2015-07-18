@@ -56,7 +56,7 @@ public class OperacionesBD {
             ConexionPostgreSQL conexion = new ConexionPostgreSQL(usuario, clave);
             Connection cn = conexion.conectar();
             Statement st = cn.createStatement();
-            String sql = "SELECT * FROM secciones";
+            String sql = "SELECT * FROM secciones order by cod_asignatura asc, n_seccion asc";
             ResultSet rs = st.executeQuery(sql);
             
             while (rs.next()) {

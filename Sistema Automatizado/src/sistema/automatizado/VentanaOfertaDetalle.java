@@ -116,12 +116,13 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
                 modelo.setNumRows(0);
                 TableColumn columna;
 
-                for (int i = 0 ; i < oferta.getNroSecciones(); i++) {
-
-                    secciones[i]="sección"+(i+1);
-                    modelo.addColumn(""+secciones[i]);
-                    columna = jTable1.getColumn(""+secciones[i]);
-
+                for (int i = 0 ; i < padre.listaSeccion.size(); i++) {
+                    if(  oferta.getCodigo().equals(padre.listaSeccion.get(i).getCod_asignatura() ) ){
+                        secciones[i]="sección "+padre.listaSeccion.get(i).getNro();
+                        modelo.addColumn(""+secciones[i]);
+                        columna = jTable1.getColumn(""+secciones[i]);
+                    
+                    }
                 }
 
                 jTable1.setModel(modelo);
@@ -426,21 +427,21 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
             
              if(oferta.getCodigo().equals(padre.listaSeccion.get(i).getCod_asignatura())){
                  if(auxColumn == column){
-                     System.out.println(""+padre.listaSeccion.get(i).getProfesor());
-                     //padre.listaSeccion.remove(i);
-                    /* OperacionesBD.deleteSeccion(padre.listaSeccion.get(i).getCod_asignatura(), 
+                     System.out.println(" "+padre.listaSeccion.get(i).getCod_asignatura());
+                     System.out.println(" "+padre.listaSeccion.get(i).getNro());
+                     System.out.println(""+ padre.listaSeccion.get(i).getLapso());
+                     
+                     OperacionesBD.deleteSeccion(padre.listaSeccion.get(i).getCod_asignatura(), 
                                                  padre.listaSeccion.get(i).getLapso(), 
                                                  padre.listaSeccion.get(i).getNro(), 
                                                  usuario.getNombre(), usuario.getClave()); 
-                     */
+                     
                      OperacionesBD.setOferta(oferta.getCodigo(),
                                               (oferta.getNroSecciones()-1),
                                              usuario.getNombre(), usuario.getClave());
                      
                      
-                    // setOferta(String codigo, int nSecciones, String usuario, String clave )
-                     
-                     //oferta.setNroSecciones(oferta.getNroSecciones()-1);
+                    
                      generarColumnas();
                      jComboBox1.removeAllItems();
                      for (int j = 0; j < oferta.getNroSecciones(); j++) {
