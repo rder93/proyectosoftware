@@ -88,6 +88,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -176,6 +177,13 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
             }
         });
 
+        jButton6.setText("REFRESCAR");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("Docentes");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -222,6 +230,10 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(217, 217, 217)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,9 +253,11 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
                     .addComponent(jButton5))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(122, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
@@ -341,6 +355,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
                 if(padre.listaOferta.get(i).getCodigo().equals(asignaturas.get(j).getCodigo())){
                     
                     Oferta aux = padre.listaOferta.get(i);
+                    
                     modelo.addRow(new Object[]{aux.getCodigo(),asignaturas.get(j).getNombre(),aux.getNroSecciones()});
                     
                 }
@@ -348,21 +363,6 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
             
         }
         
-    }
-    
-    /**
-     * Elimina la fila seleccionada con el mouse luego de hacer click en el boton jButton3
-     */
-    
-    public void eliminarSeleccion(){
-        
-        //Item seleccionado
-        int indiceFila = jTable1.getSelectedRow();
-        //Se borra en el jtable
-        this.modelo = (DefaultTableModel)jTable1.getModel();
-        this.modelo.removeRow(indiceFila);
-        //Se borra en la lista de objetos
-        this.padre.listaOferta.remove(indiceFila);
     }
          
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -373,7 +373,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
       
       if(condicionVacio == 0){
           //Error está vacío
-          JOptionPane.showMessageDialog(rootPane,"Campo vacío", "ADVERTENCIA", 0);
+          JOptionPane.showMessageDialog(rootPane,"Campo secciones vacío", "ADVERTENCIA", 0);
       }else{
           try {
               //Se toma el número de secciones indicado
@@ -415,9 +415,12 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
         if(padre.listaOferta.size() ==0 || jTable1.getSelectedRow()==-1 ){
              JOptionPane.showMessageDialog(rootPane,"No se puede realizar esta acción", "ADVERTENCIA", 0);
         }else{
-            eliminarSeleccion();
-            OperacionesBD.deleteOferta(asignaturas.get(jComboBox1.getSelectedIndex()).getCodigo(),
-                                        Integer.parseInt(jTextField1.getText()),usuario.getNombre(), usuario.getClave());
+            
+            OperacionesBD.deleteOferta(padre.listaOferta.get(jTable1.getSelectedRow()).getCodigo(),
+                                        padre.listaOferta.get(jTable1.getSelectedRow()).getNroSecciones(),
+                                        usuario.getNombre(), usuario.getClave());
+           padre.listaOferta = OperacionesBD.getOferta(usuario.getNombre(), usuario.getClave());
+            
             limpiar();
         } 
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -516,6 +519,13 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        
+        padre.listaOferta = OperacionesBD.getOferta(usuario.getNombre(), usuario.getClave());
+            
+        limpiar();
+    }//GEN-LAST:event_jButton6ActionPerformed
     
     
     /**
@@ -560,6 +570,7 @@ public class VentanaOfertaAcademica extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

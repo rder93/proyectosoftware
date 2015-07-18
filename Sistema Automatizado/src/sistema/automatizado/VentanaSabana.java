@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import static sistema.automatizado.Ventana.usuario;
 
 /**
  *
@@ -599,9 +600,6 @@ public class VentanaSabana extends javax.swing.JFrame {
             
             
         }
-        for (int i = 0; i < distribucion.size(); i++) {
-            System.out.println(distribucion.get(i).getAsignatura()+" "+distribucion.get(i).getId_seccion()+" "+distribucion.get(i).getHorasSemanales());
-        }
         cargarSabana();
     }
     
@@ -727,7 +725,7 @@ public class VentanaSabana extends javax.swing.JFrame {
             }
             
         } catch (Exception e) {
-            jComboBox2.removeAllItems();
+            
             this.modelo.setNumRows(0);
             JOptionPane.showMessageDialog(rootPane,"No existe oferta para esta selección", "ADVERTENCIA", 0);
         }
@@ -818,25 +816,21 @@ public class VentanaSabana extends javax.swing.JFrame {
         
         for (int i = 0; i < padre.listaSabana.size(); i++) {
             if( padre.listaSabana.get(i).getDia().equals(dias.get(posicionDia)) ){
-                padre.listaSabana.remove(i);
-            
+                OperacionesBD.deleteSabana(padre.listaSabana.get(i).getAsignatura(), 
+                                            padre.listaSabana.get(i).getLapso(), 
+                                            padre.listaSabana.get(i).getId_seccion(), 
+                                            padre.listaSabana.get(i).getAula(), 
+                                            padre.listaSabana.get(i).getModulo(), 
+                                            padre.listaSabana.get(i).getDia(), 
+                                            padre.listaSabana.get(i).getHoraInicial(), 
+                                            padre.listaSabana.get(i).getHoraFinal(), 
+                                            usuario.getNombre(), usuario.getClave());
             }
         }
         
-        for (int i = 0; i < 16; i++) {
-            for (int j = 1; j < 14; j++) {
-                this.jTable1.setValueAt("", i, j);
-               
-            }
-        }
-       
-        
-      /*  for (int i = 0; i < padre.listaSabana.size(); i++) {
-            if( padre.listaSabana.get(i).getDia().equals(dias.get(posicionDia)) ){
-                padre.listaSabana.remove(i);
-            }
-        }*/
-        //Hay que limpiar los objetos de la lista Sabana que sean de este dia 
+        padre.listaSabana.clear();
+        padre.listaSabana = OperacionesBD.getSabana(usuario.getNombre(), usuario.getClave());
+        cargar();
  
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
