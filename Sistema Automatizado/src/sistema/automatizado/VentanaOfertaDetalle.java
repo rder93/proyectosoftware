@@ -36,7 +36,7 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
   //  public ArrayList<Asignatura> listaAsignaturas = new  ArrayList<Asignatura>();
    // public ArrayList<Docente> listaDocentes = new ArrayList<Docente> ();
     
-    public Oferta oferta;
+    public static Oferta oferta;
     //public Ventana padre;
     //public static Usuario usuario;
     VentanaOfertaAcademica padre;
@@ -57,10 +57,14 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
     private VentanaOfertaDetalle() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
+    
     /**
      * Limpia el modelo de la tabla
      * @param tabla 
      */
+    
     public void limpiarTabla(JTable tabla){
          
         try {
@@ -80,11 +84,52 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
     }
     
     /**
+     * Genera las columnas de forma dinamica, dependiendo de la  cantidad de secciones ofertada
+     */
+     
+    
+    public void generarColumnas(){
+    
+            limpiarTabla(jTable1);
+            
+            
+            if(oferta.getNroSecciones() != 0){
+                int j = 0;
+                String [] secciones = new String [14];
+                modelo = (DefaultTableModel) jTable1.getModel();
+                modelo.setNumRows(0);
+                TableColumn columna;
+                
+                
+                
+                for (int i = 0 ; i < padre.listaSeccion.size(); i++) {
+                    
+                    if(oferta.getCodigo().equals(padre.listaSeccion.get(i).getCod_asignatura() )){
+                      
+                            secciones[j]="Seccion "+padre.listaSeccion.get(i).getNro();
+                            modelo.addColumn(""+secciones[j]);
+                            columna = jTable1.getColumn(""+secciones[j]);
+                            j++;
+                    
+                    }
+                }
+
+                jTable1.setModel(modelo);
+
+                cargar();
+            }else{
+                JOptionPane.showMessageDialog(rootPane,"No existe oferta para esta materia", "ADVERTENCIA", 0);
+            }
+    }
+    
+    /**
      * Carga los combo box 
      * @param oferta estructura de la cual se obtiene los nombres de las asignaturas
      *               y los numeros de las secciones
      */
+    
     public void cargarjComboBox2(Oferta oferta){
+       
         this.oferta = oferta;
         jLabel2.setText(""+oferta.getCodigo());
         jComboBox2.removeAllItems();
@@ -103,37 +148,7 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
         generarColumnas();
         
     }
-    /**
-     * Genera las columnas de forma dinamica, dependiendo de la  cantidad de secciones ofertada
-     */
-     public void generarColumnas(){
     
-            limpiarTabla(jTable1);
-            if(oferta.getNroSecciones() != 0){
-                String [] secciones = new String [14];
-                modelo = (DefaultTableModel) jTable1.getModel();
-                modelo.setNumRows(0);
-                TableColumn columna;
-                
-                for (int i = 0 ; i < padre.listaSeccion.size(); i++) {
-                    //System.out.println(""+oferta.getCodigo());
-                   
-                    if(  oferta.getCodigo().equals(padre.listaSeccion.get(i).getCod_asignatura() ) ){
-                        secciones[i]="sección "+padre.listaSeccion.get(i).getNro();
-                        modelo.addColumn(""+secciones[i]);
-                        columna = jTable1.getColumn(""+secciones[i]);
-                        
-                    
-                    }
-                }
-
-                jTable1.setModel(modelo);
-
-                cargar();
-            }else{
-                JOptionPane.showMessageDialog(rootPane,"No existe oferta para esta materia", "ADVERTENCIA", 0);
-            }
-    }
      
      /**
       * Busca un profesor partiendo de una cedula
@@ -417,14 +432,11 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-<<<<<<< HEAD
+
         // TODO add your handling code here:
          //int row = this.jTable1.getSelectedRow();
         TableColumnModel tbc = jTable1.getColumnModel();
-    
-=======
 
->>>>>>> origin/master
          int column = this.jTable1.getSelectedColumn();
          TableColumn columna = tbc.getColumn(column);
          int auxColumn = 0;
@@ -433,17 +445,12 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
             
              if(oferta.getCodigo().equals(padre.listaSeccion.get(i).getCod_asignatura())){
                  if(auxColumn == column){
-<<<<<<< HEAD
+
                      /*System.out.println(""+ padre.listaSeccion.size());
                      System.out.println(" "+padre.listaSeccion.get(i).getCod_asignatura());
                      System.out.println(" "+padre.listaSeccion.get(i).getNro());
                      System.out.println(""+ padre.listaSeccion.get(i).getLapso());
-=======
-                     
-                        
->>>>>>> origin/master
-                     
-                     */
+*/
                      
                      tbc.removeColumn(columna);
                      
@@ -460,15 +467,9 @@ public class VentanaOfertaDetalle extends javax.swing.JFrame {
                      padre.listaSeccion = OperacionesBD.getSeccion(usuario.getNombre(), usuario.getClave());
                      //oferta = OperacionesBD.getOferta(usuario.getNombre(), usuario.getClave());
                      
-<<<<<<< HEAD
-                     //cargarjComboBox2(oferta);
-                     //generarColumnas();
-=======
-                     padre.listaSeccion = OperacionesBD.getSeccion(usuario.getNombre(), usuario.getClave());
-                     
-                     
+
                      generarColumnas();
->>>>>>> origin/master
+
                      jComboBox1.removeAllItems();
                      for (int j = 0; j < oferta.getNroSecciones(); j++) {
                         jComboBox1.addItem(""+(j+1));
